@@ -19,7 +19,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
-syntax off " Vim-Plug enables vim's syntax highlighting but we use treesitter
+syntax off " Vim-Plug enables vim's syntax highlighting but we use treesitter instead
 
 """"" Options
 let mapleader = " "
