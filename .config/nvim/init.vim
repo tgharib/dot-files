@@ -276,7 +276,7 @@ let g:lightline = {
 " use autocmd to force lightline update.
 autocmd user cocstatuschange,cocdiagnosticchange call lightline#update()
 
-" coc end
+" COC END
 
 " highlight trailing whitespace (at the end after colorscheme)
 highlight extrawhitespace ctermbg=red guibg=red
