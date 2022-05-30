@@ -16,6 +16,8 @@ Plug 'phaazon/hop.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -31,17 +33,6 @@ set smartcase " Search with smart case
 set timeoutlen=0 " Immediately show which-key
 set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
 
-" Filetype-specific configuration
-autocmd filetype nix setlocal expandtab ts=2 sw=2
-autocmd filetype yml setlocal expandtab ts=2 sw=2
-autocmd filetype sh setlocal expandtab ts=2 sw=2
-autocmd filetype tex setlocal expandtab ts=4 sw=4
-autocmd filetype java setlocal expandtab ts=4 sw=4
-autocmd filetype c setlocal expandtab ts=4 sw=4
-autocmd filetype cpp setlocal expandtab ts=4 sw=4
-autocmd filetype h setlocal expandtab ts=4 sw=4
-autocmd filetype hpp setlocal expandtab ts=4 sw=4
-
 " Set colorscheme to NeoSolarized
 colorscheme NeoSolarized
 set background=dark
@@ -51,11 +42,6 @@ set termguicolors
 """"" Markdown macros
 let @i ="o![](images/.png){width=60%}\<Esc>15hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
-
-"""" Hotkeys outside of which-key
-
-let notabs = 1
-nnoremap <silent> <F8> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
 
 """"" Helper functions
 " Trim trailing whitespace function
@@ -106,17 +92,26 @@ require("which-key").setup {
 }
 local wk = require("which-key")
 wk.register({
-  t = {
-    name = "tabbing and whitespace",
+  f = {
+    name = "fzf",
+    f = { ":Files<cr>", "fzf files" },
+    g = { ":GFiles<cr>", "fzf git files" },
+    b = { ":Buffers<cr>", "fzf buffers" },
+    r = { ":Rg! ", "rg" },
+  },
+  w = {
+    name = "fix whitespace",
     r = { ":retab<cr>", "replace tabs with spaces" },
     ["2"] = { ":setlocal expandtab ts=2 sw=2<cr>", "set tabs to 2 spaces" },
     ["4"] = { ":setlocal expandtab ts=4 sw=4<cr>", "set tabs to 4 spaces" },
     t = { ":call TrimWhitespace()<cr>", "trim whitespace" },
   },
-  l = {
-    name = "line wrap/numbers",
+  m = {
+    name = "misc",
     w = { ":set wrap!<cr>", "toggle line wrap" },
     l = { ":set number!<cr>", "toggle line numbers" },
+    s = { ":SymbolsOutlineOpen<cr>", "toggle symbols outline" },
+    t = { ":tabonly<CR>", "tabs --> buffers" },
   },
   c = {
     name = "coc",
@@ -152,7 +147,6 @@ wk.register({
     r = { "<Plug>(coc-rename)", "rename symbol" },
     o = { ":call ShowDocumentation()<cr>", "show documentation" },
   },
-  s = { ":SymbolsOutlineOpen<cr>", "toggle symbols outline" },
   j = { "<cmd>lua require'hop'.hint_words()<cr>", "jump cursor to word" },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
