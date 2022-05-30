@@ -52,6 +52,11 @@ set termguicolors
 let @i ="o![](images/.png){width=60%}\<Esc>15hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
 
+"""" Hotkeys outside of which-key
+
+let notabs = 1
+nnoremap <silent> <F8> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
+
 """"" Helper functions
 " Trim trailing whitespace function
 fun! TrimWhitespace()
