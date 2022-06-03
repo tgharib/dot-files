@@ -86,6 +86,9 @@ vim.g.symbols_outline = {
 }
 EOF
 
+" fzf.nvim
+command! -bang -nargs=* Rgi call fzf#vim#grep('rg -i --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+
 " Which-key
 lua << EOF
 require("which-key").setup {
@@ -98,6 +101,7 @@ wk.register({
     g = { ":GFiles<cr>", "fzf git files" },
     b = { ":Buffers<cr>", "fzf buffers" },
     r = { ":Rg! ", "rg" },
+    i = { ":Rgi! ", "rg -i" },
   },
   w = {
     name = "fix whitespace",
