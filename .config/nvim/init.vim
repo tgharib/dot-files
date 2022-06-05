@@ -116,6 +116,7 @@ wk.register({
     l = { ":set number!<cr>", "toggle line numbers" },
     s = { ":SymbolsOutlineOpen<cr>", "toggle symbols outline" },
     t = { ":tabonly<CR>", "tabs --> buffers" },
+    o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
   },
   c = {
     name = "coc",
