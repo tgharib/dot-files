@@ -12,7 +12,7 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'overcache/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'folke/which-key.nvim'
-Plug 'ggandor/leap.nvim'
+Plug 'rlane/pounce.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -53,12 +53,14 @@ endfun
 
 """"" Plugins
 
-" Leap
-lua << EOF
-require('leap').set_default_keymaps()
-EOF
+" pounce.nvim
 
-" " Treesitter
+nmap s <cmd>Pounce<CR>
+nmap S <cmd>PounceRepeat<CR>
+vmap s <cmd>Pounce<CR>
+omap s <cmd>Pounce<CR>
+
+" nvim-treesitter
 " Fold based on treesitter
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -77,7 +79,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" symbols-outline
+" symbols-outline.nvim
 lua << EOF
 vim.g.symbols_outline = {
     highlight_hovered_item = false,
@@ -89,7 +91,7 @@ EOF
 " fzf.nvim
 command! -bang -nargs=* Rgi call fzf#vim#grep('rg -i --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
-" Which-key
+" which-key.nvim
 lua << EOF
 require("which-key").setup {
 }
