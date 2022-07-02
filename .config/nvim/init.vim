@@ -102,10 +102,15 @@ wk.register({
     f = { ":Files<cr>", "fzf files" },
     g = { ":GFiles<cr>", "fzf git files" },
     b = { ":Buffers<cr>", "fzf buffers" },
-    r = { ":Rg! ", "rg" },
-    i = { ":Rgi! ", "rg -i" },
+    r = { ":Rg! ", "fzf rg" },
+    i = { ":Rgi! ", "fzf rg -i" },
     o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
     t = { ":tabonly<CR>", "tabs --> buffers" },
+  },
+  h = {
+    name = "help",
+    c = { ":Commands<CR>", "fzf commands" },
+    h = { ":help index<CR>", "vim keybinds index" },
   },
   w = {
     name = "fix whitespace",
