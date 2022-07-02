@@ -4,7 +4,6 @@ set -o vi
 
 alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable'
 alias sc='wl-copy'
-alias vim='nvim'
 cheat() {
   curl cheat.sh/"$1"
 }
