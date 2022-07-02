@@ -98,12 +98,14 @@ require("which-key").setup {
 local wk = require("which-key")
 wk.register({
   f = {
-    name = "fzf",
+    name = "fzf/buffers",
     f = { ":Files<cr>", "fzf files" },
     g = { ":GFiles<cr>", "fzf git files" },
     b = { ":Buffers<cr>", "fzf buffers" },
     r = { ":Rg! ", "rg" },
     i = { ":Rgi! ", "rg -i" },
+    o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
+    t = { ":tabonly<CR>", "tabs --> buffers" },
   },
   w = {
     name = "fix whitespace",
@@ -117,8 +119,6 @@ wk.register({
     w = { ":set wrap!<cr>", "toggle line wrap" },
     l = { ":set number!<cr>", "toggle line numbers" },
     s = { ":SymbolsOutlineOpen<cr>", "toggle symbols outline" },
-    t = { ":tabonly<CR>", "tabs --> buffers" },
-    o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
   },
   c = {
     name = "coc",
