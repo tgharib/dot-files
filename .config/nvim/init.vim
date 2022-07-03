@@ -18,6 +18,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets' " Snippets database
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -36,8 +38,7 @@ set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
 " Set colorscheme to NeoSolarized
 colorscheme NeoSolarized
 set background=dark
-" Force colorscheme colors with 24-bit support
-set termguicolors
+set termguicolors " Force colorscheme colors with 24-bit support
 
 """"" Markdown macros
 let @i ="o![](images/.png){width=60%}\<Esc>15hi"
@@ -52,6 +53,13 @@ fun! TrimWhitespace()
 endfun
 
 """"" Plugins
+
+" Ultisnips
+
+" Trigger configuration. You need to change this to something other than <tab> if you use YouCompleteMe or completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " pounce.nvim
 
@@ -101,11 +109,19 @@ wk.register({
     name = "fzf/buffers",
     f = { ":Files<cr>", "fzf files" },
     g = { ":GFiles<cr>", "fzf git files" },
-    b = { ":Buffers<cr>", "fzf buffers" },
+    b = { ":Buffers<cr>", "fzf all buffers list" },
+    c = { ":BCommits<cr>", "fzf current buffer commits" },
+    v = { ":Colors<cr>", "fzf color schemes" },
+    l = { ":Lines<cr>", "fzf lines in all buffers" },
+    L = { ":BLines<cr>", "fzf lines in current buffer" },
+    t = { ":Tags<cr>", "fzf tags in project" },
+    T = { ":BTags<cr>", "fzf tags in current buffer" },
+    s = { ":Snippets<cr>", "fzf snippets" },
+    a = { ":Ag! ", "fzf ag" },
     r = { ":Rg! ", "fzf rg" },
-    i = { ":Rgi! ", "fzf rg -i" },
+    R = { ":Rgi! ", "fzf rg -i" },
     o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
-    t = { ":tabonly<CR>", "tabs --> buffers" },
+    O = { ":tabonly<CR>", "tabs --> buffers" },
   },
   h = {
     name = "help",
@@ -278,6 +294,6 @@ autocmd user cocstatuschange,cocdiagnosticchange call lightline#update()
 
 " COC END
 
-" highlight trailing whitespace (at the end after colorscheme)
+" highlight trailing whitespace (after colorscheme is set)
 highlight extrawhitespace ctermbg=red guibg=red
 match extrawhitespace /\s\+$\| \+\ze\t/
