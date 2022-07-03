@@ -76,7 +76,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 lua << EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "vim", "bash", "latex", "nix", "c", "cmake", "cpp", "rust", "verilog", "python", "xml" },
+  ensure_installed = { "vim", "bash", "latex", "nix", "c", "cmake", "cpp", "rust", "verilog", "python" },
   sync_install = false,
   highlight = {
     enable = true,
