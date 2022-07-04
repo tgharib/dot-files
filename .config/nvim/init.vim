@@ -126,7 +126,7 @@ wk.register({
   h = {
     name = "help",
     c = { ":Commands<CR>", "fzf commands" },
-    h = { ":help index<CR>", "vim keybinds index" },
+    k = { ":help index<CR>", "vim keybinds index" },
   },
   w = {
     name = "fix whitespace",
