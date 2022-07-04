@@ -61,13 +61,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" pounce.nvim
-
-nmap s <cmd>Pounce<CR>
-nmap S <cmd>PounceRepeat<CR>
-vmap s <cmd>Pounce<CR>
-omap s <cmd>Pounce<CR>
-
 " nvim-treesitter
 " Fold based on treesitter
 set foldmethod=expr
@@ -98,6 +91,13 @@ EOF
 
 " fzf.nvim
 command! -bang -nargs=* Rgi call fzf#vim#grep('rg -i --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+
+" pounce.nvim
+
+nmap s <cmd>Pounce<CR>
+nmap S <cmd>PounceRepeat<CR>
+vmap s <cmd>Pounce<CR>
+omap s <cmd>Pounce<CR>
 
 " which-key.nvim
 lua << EOF
