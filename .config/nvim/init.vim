@@ -195,7 +195,8 @@ wk.register({
 EOF
 
 " COC START
-" TextEdit might fail if hidden is not set.
+" TextEdit might fail if hidden is not set. Also, hidden needs to be set so
+" that we can switch to another buffer without writing the current one.
 set hidden
 
 " Some servers have issues with backup files, see #649.
