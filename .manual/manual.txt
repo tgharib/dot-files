@@ -1,0 +1,8 @@
+Append to .bashrc on non-nixos linux machine (nixos machine uses `shells.nix`):
+  alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,gitui,du-dust,bat,btop,libqalculate,neovim,gcc,nodejs,rnix-lsp}'
+  # github:nixos/nixpkgs/nixos-unstable
+  alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
+  source ~/.dev-bashrc
+
+Append to .bashrc on windows machine:
+  source ~/.dev-bashrc
