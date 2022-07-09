@@ -105,44 +105,8 @@ require("which-key").setup {
 }
 local wk = require("which-key")
 wk.register({
-  f = {
-    name = "fzf/buffers",
-    f = { ":Files<cr>", "fzf files" },
-    g = { ":GFiles<cr>", "fzf git files" },
-    b = { ":Buffers<cr>", "fzf all buffers list" },
-    c = { ":BCommits<cr>", "fzf current buffer commits" },
-    v = { ":Colors<cr>", "fzf color schemes" },
-    l = { ":Lines<cr>", "fzf lines in all buffers" },
-    L = { ":BLines<cr>", "fzf lines in current buffer" },
-    t = { ":Tags<cr>", "fzf tags in project" },
-    T = { ":BTags<cr>", "fzf tags in current buffer" },
-    s = { ":Snippets<cr>", "fzf snippets" },
-    a = { ":Ag! ", "fzf ag" },
-    r = { ":Rg! ", "fzf rg" },
-    R = { ":Rgi! ", "fzf rg -i" },
-    o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
-    O = { ":tabonly<CR>", "tabs --> buffers" },
-  },
-  h = {
-    name = "help",
-    c = { ":Commands<CR>", "fzf commands" },
-    k = { ":help index<CR>", "vim keybinds index" },
-  },
-  w = {
-    name = "fix whitespace",
-    r = { ":retab<cr>", "replace tabs with spaces" },
-    ["2"] = { ":setlocal expandtab ts=2 sw=2<cr>", "set tabs to 2 spaces" },
-    ["4"] = { ":setlocal expandtab ts=4 sw=4<cr>", "set tabs to 4 spaces" },
-    t = { ":call TrimWhitespace()<cr>", "trim whitespace" },
-  },
-  m = {
-    name = "misc",
-    w = { ":set wrap!<cr>", "toggle line wrap" },
-    l = { ":set number!<cr>", "toggle line numbers" },
-    s = { ":SymbolsOutlineOpen<cr>", "toggle symbols outline" },
-  },
   c = {
-    name = "coc",
+    name = "smart code (coc)",
     n = {
       name = "navigation",
       d = { "<Plug>(coc-definition)", "go to definition" },
@@ -175,10 +139,46 @@ wk.register({
     r = { "<Plug>(coc-rename)", "rename symbol" },
     o = { ":call ShowDocumentation()<cr>", "show documentation" },
   },
+  d = {
+    name = "dumb code",
+    l = { ":Lines<cr>", "lines in all buffers" },
+    L = { ":BLines<cr>", "lines in current buffer" },
+    t = { ":Tags<cr>", "tags in project" },
+    T = { ":BTags<cr>", "tags in current buffer" },
+    a = { ":Ag! ", "ag" },
+    r = { ":Rg! ", "rg" },
+    R = { ":Rgi! ", "rg -i" },
+    s = { ":Snippets<cr>", "snippets" },
+  },
+  b = {
+    name = "buffers",
+    g = { ":GFiles<cr>", "open git file" },
+    f = { ":Files<cr>", "open file" },
+    b = { ":Buffers<cr>", "select open buffer" },
+    o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
+    O = { ":tabonly<CR>", "tabs -> buffers" },
+  },
+  w = {
+    name = "fix whitespace",
+    r = { ":retab<cr>", "replace tabs with spaces" },
+    ["2"] = { ":setlocal expandtab ts=2 sw=2<cr>", "set tabs to 2 spaces" },
+    ["4"] = { ":setlocal expandtab ts=4 sw=4<cr>", "set tabs to 4 spaces" },
+    t = { ":call TrimWhitespace()<cr>", "trim whitespace" },
+  },
+  m = {
+    name = "misc",
+    w = { ":set wrap!<cr>", "toggle line wrap" },
+    l = { ":set number!<cr>", "toggle line numbers" },
+    s = { ":SymbolsOutlineOpen<cr>", "toggle symbols outline" },
+    c = { ":Commands<CR>", "vim commands" },
+    k = { ":help index<CR>", "vim keybinds" },
+    v = { ":Colors<cr>", "vim color schemes" },
+    g = { ":BCommits<cr>", "git log" },
+  },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
   c = {
-    name = "coc",
+    name = "smart code (coc)",
     s = {
       name = "select",
       i = { "<Plug>(coc-funcobj-i)", "select inner function" },
