@@ -57,9 +57,9 @@ endfun
 " Ultisnips
 
 " Trigger configuration. You need to change this to something other than <tab> if you use YouCompleteMe or completion-nvim
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " nvim-treesitter
 " Fold based on treesitter
