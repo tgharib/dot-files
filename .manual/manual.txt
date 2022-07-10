@@ -1,8 +1,15 @@
-Append to .bashrc on non-nixos linux machine (nixos machine uses `shells.nix`):
-  alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,gitui,du-dust,bat,btop,libqalculate,neovim,gcc,nodejs,rnix-lsp}'
-  # github:nixos/nixpkgs/nixos-unstable
-  alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
-  source ~/.dev-bashrc
+NixOS machine uses `shells.nix`.
 
-Append to .bashrc on windows machine:
-  source ~/.dev-bashrc
+On non-nixos machine:
+* Install nix-portable (github) to ~/bin/.
+* Append to .bashrc:
+    PATH="${PATH:+${PATH}:}~/bin"
+    alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,gitui,du-dust,bat,btop,libqalculate,neovim,gcc,nodejs,rnix-lsp}'
+    # github:nixos/nixpkgs/nixos-unstable
+    alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
+    source ~/.dev-bashrc
+
+On windows machine:
+* Install git bash (uses cygwin so Windows-only binaries) and install neovim for windows (install vim-plug, nodejs for coc, python for snippets and follow nvim-treesitter docs to install compiler). Create a symbolic link into %localappdata%/nvim/init.vim. Install sd, rg, fzf, gsudo in neovim binary directory.
+* Append to .bashrc on windows machine:
+    source ~/.dev-bashrc
