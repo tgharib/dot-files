@@ -141,8 +141,8 @@ wk.register({
   },
   d = {
     name = "dumb code",
-    l = { ":Lines<cr>", "lines in all buffers" },
-    L = { ":BLines<cr>", "lines in current buffer" },
+    l = { ":BLines<cr>", "lines in current buffer" },
+    L = { ":Lines<cr>", "lines in all buffers" },
     t = { ":Tags<cr>", "tags in project" },
     T = { ":BTags<cr>", "tags in current buffer" },
     a = { ":Ag! ", "ag" },
