@@ -1,3 +1,5 @@
+""""" Plugins Manager
+
 " Automatically install Vim-Plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
