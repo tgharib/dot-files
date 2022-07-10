@@ -11,5 +11,3 @@ On non-nixos machine:
 
 On windows machine:
 * Install git bash (uses cygwin so Windows-only binaries) and install neovim for windows (install vim-plug, nodejs for coc, python for snippets and follow nvim-treesitter docs to install compiler). Create a symbolic link into %localappdata%/nvim/init.vim. Install sd, rg, fzf, gsudo in neovim binary directory.
-* Append to .bashrc on windows machine:
-    source ~/.dev-bashrc
