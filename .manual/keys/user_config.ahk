@@ -1,0 +1,45 @@
+#SingleInstance Force
+#NoEnv
+SendMode Input
+
+!`::
+WinGetClass, ActiveClass, A
+WinGet, WinClassCount, Count, ahk_class %ActiveClass%
+IF WinClassCount = 1
+    Return
+Else
+WinSet, Bottom,, A
+WinActivate, ahk_class %ActiveClass%
+return
+
+!+`::
+WinGetClass, ActiveClass, A
+WinActivateBottom, ahk_class %ActiveClass%
+return
+
+#if GetKeyState("F24")
+`::#Tab
+; 2::^#Left
+; 3::^#Right
+!Q::WinClose A
+M::Run, %userprofile%\.manual\msteams-workaround\fix1.bat, %userprofile%\.manual\msteams-workaround\
+
+1::switchDesktopByNumber(1)
+2::switchDesktopByNumber(2)
+3::switchDesktopByNumber(3)
+4::switchDesktopByNumber(4)
+5::switchDesktopByNumber(5)
+6::switchDesktopByNumber(6)
+7::switchDesktopByNumber(7)
+8::switchDesktopByNumber(8)
+9::switchDesktopByNumber(9)
+
+!1::MoveCurrentWindowToDesktop(1)
+!2::MoveCurrentWindowToDesktop(2)
+!3::MoveCurrentWindowToDesktop(3)
+!4::MoveCurrentWindowToDesktop(4)
+!5::MoveCurrentWindowToDesktop(5)
+!6::MoveCurrentWindowToDesktop(6)
+!7::MoveCurrentWindowToDesktop(7)
+!8::MoveCurrentWindowToDesktop(8)
+!9::MoveCurrentWindowToDesktop(9)

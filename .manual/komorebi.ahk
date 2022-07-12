@@ -1,5 +1,8 @@
-;;;;;;;;;;;;;; Config ;;;;;;;;;;;;;;
 #SingleInstance Force
+#NoEnv
+SendMode Input
+
+;;;;;;;;;;;;;; Config ;;;;;;;;;;;;;;
 Run, komorebic.exe ensure-workspaces 0 6, , Hide ; Ensure there are 6 workspaces created on monitor 0
 #Include %A_ScriptDir%\komorebi.generated.ahk
 
