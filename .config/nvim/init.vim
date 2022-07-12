@@ -177,6 +177,7 @@ wk.register({
     v = { ":Colors<cr>", "vim color schemes" },
     g = { ":BCommits<cr>", "git log" },
     f = { ":echo expand('%:p')<cr>", "show file path" },
+    h = { ":set hlsearch!<cr>", "toggle search highlight" },
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
