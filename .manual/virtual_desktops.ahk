@@ -16,15 +16,19 @@ WinActivateBottom, ahk_class %ActiveClass%
 return
 
 #if GetKeyState("F24")
+`::#Tab
+return
+
 2::^#Left
 return
 
 3::^#Right
 return
 
-1::#Tab
-return
-
 !Q::
 WinClose A
+return
+
+!M::
+Run, "%userprofile%\.manual\msteams-workaround\fix1.bat"
 return
