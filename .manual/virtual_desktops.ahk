@@ -16,11 +16,15 @@ WinActivateBottom, ahk_class %ActiveClass%
 return
 
 #if GetKeyState("F24")
-w::^#Left
+2::^#Left
 return
 
-e::^#Right
+3::^#Right
 return
 
-Tab::#Tab
+1::#Tab
+return
+
+!Q::
+WinClose A
 return
