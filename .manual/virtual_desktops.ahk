@@ -29,6 +29,6 @@ return
 WinClose A
 return
 
-!M::
-Run, "%userprofile%\.manual\msteams-workaround\fix1.bat"
+M::
+Run, %userprofile%\.manual\msteams-workaround\fix1.bat, %userprofile%\.manual\msteams-workaround\
 return
