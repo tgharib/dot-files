@@ -18,12 +18,6 @@ WinActivateBottom, ahk_class %ActiveClass%
 return
 
 #if GetKeyState("F24")
-`::#Tab
-; 2::^#Left
-; 3::^#Right
-!Q::WinClose A
-M::Run, %userprofile%\.manual\msteams-workaround\fix1.bat, %userprofile%\.manual\msteams-workaround\
-
 1::switchDesktopByNumber(1)
 2::switchDesktopByNumber(2)
 3::switchDesktopByNumber(3)
@@ -43,3 +37,7 @@ M::Run, %userprofile%\.manual\msteams-workaround\fix1.bat, %userprofile%\.manual
 !7::MoveCurrentWindowToDesktop(7)
 !8::MoveCurrentWindowToDesktop(8)
 !9::MoveCurrentWindowToDesktop(9)
+
+!Q::WinClose A
+M::Run, %A_Desktop%\..\.manual\msteams-workaround\fix1.bat, %A_Desktop%\..\.manual\msteams-workaround\
+
