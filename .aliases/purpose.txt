@@ -1,1 +1,0 @@
-Aliases used by applications go here e.g. vim, abduco, etc
