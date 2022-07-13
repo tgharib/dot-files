@@ -7,6 +7,7 @@ On non-nixos machine:
     alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,gitui,du-dust,bat,btop,libqalculate,neovim,gcc,nodejs,rnix-lsp}'
     # github:nixos/nixpkgs/nixos-unstable
     alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
+    alias vim='nvim'
     source ~/.dev-bashrc
 
 On windows machine:
