@@ -14,7 +14,7 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'overcache/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'folke/which-key.nvim'
-Plug 'rlane/pounce.nvim'
+Plug 'phaazon/hop.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -56,6 +56,12 @@ endfun
 
 """"" Plugins
 
+" hop.nvim
+
+lua << EOF
+require'hop'.setup()
+EOF
+
 " Ultisnips
 
 " Trigger configuration. You need to change this to something other than <tab> if you use YouCompleteMe or completion-nvim
@@ -93,13 +99,6 @@ EOF
 
 " fzf.nvim
 command! -bang -nargs=* Rgi call fzf#vim#grep('rg -i --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
-
-" pounce.nvim
-
-nmap s <cmd>Pounce<CR>
-nmap S <cmd>PounceRepeat<CR>
-vmap s <cmd>Pounce<CR>
-omap s <cmd>Pounce<CR>
 
 " which-key.nvim
 lua << EOF
@@ -179,6 +178,7 @@ wk.register({
     f = { ":echo expand('%:p')<cr>", "show file path" },
     h = { ":set hlsearch!<cr>", "toggle search highlight" },
   },
+  j = { "<cmd>lua require'hop'.hint_words()<cr>", "jump cursor to word" },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
   c = {
@@ -195,7 +195,17 @@ wk.register({
       s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
     },
   },
+  j = { "<cmd>lua require'hop'.hint_words()<cr>", "jump cursor to word" },
 }, { prefix = "<leader>", mode = "o" })
+
+wk.register({
+  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
+  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
+}, { prefix = "", mode = "n" })
+wk.register({
+  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
+  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
+}, { prefix = "", mode = "o" })
 EOF
 
 " COC START
