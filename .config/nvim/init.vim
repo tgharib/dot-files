@@ -36,6 +36,7 @@ set ignorecase " Search with smart case
 set smartcase " Search with smart case
 set timeoutlen=0 " Immediately show which-key
 set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
+let $BASH_ENV = "~/.bash-aliases"
 
 " Set colorscheme to NeoSolarized
 colorscheme NeoSolarized

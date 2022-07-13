@@ -3,13 +3,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
 set -o vi
 
-alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable'
-alias sc='wl-copy'
-alias asciify="perl -pe 's/[^[:ascii:]]//g'"
-cheat() {
-  curl cheat.sh/"$1"
-}
-
+source .bash-aliases
 # What follows is a copy+paste of fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`) and fzf's completion.bash
 
 #     ____      ____
