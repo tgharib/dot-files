@@ -179,7 +179,6 @@ wk.register({
     f = { ":echo expand('%:p')<cr>", "show file path" },
     h = { ":set hlsearch!<cr>", "toggle search highlight" },
   },
-  j = { "<cmd>lua require'hop'.hint_words()<cr>", "jump cursor to word" },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
   c = {
@@ -196,12 +195,13 @@ wk.register({
       s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
     },
   },
-  j = { "<cmd>lua require'hop'.hint_words()<cr>", "jump cursor to word" },
 }, { prefix = "<leader>", mode = "o" })
 
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
   F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
+  ["<C-j>"] = { "2j", "move cursor down two lines" },
+  ["<C-k>"] = { "2k", "move cursor up two lines" },
 }, { prefix = "", mode = "n" })
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
