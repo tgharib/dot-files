@@ -207,7 +207,12 @@ wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
   F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
 }, { prefix = "", mode = "o" })
+wk.register({
+  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
+  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
+}, { prefix = "", mode = "v" })
 EOF
+" n = normal mode, o = deletion mode (d), v = line-selection mode (v)
 
 " COC START
 " TextEdit might fail if hidden is not set. Also, hidden needs to be set so
