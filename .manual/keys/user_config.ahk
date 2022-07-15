@@ -40,8 +40,13 @@ return
 
 !Q::WinClose A
 Enter::Run, wt
-Tab::!Tab
 D::Send {LWin}
 I::Run, wt nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %A_Desktop%\..\vim-temp.txt
 M::Run, %A_Desktop%\..\.manual\msteams-workaround\fix1.bat, %A_Desktop%\..\.manual\msteams-workaround\
+
+Tab::
+Send {Alt down}{Tab}
+Keywait F24
+Send {Alt up}
+return
 
