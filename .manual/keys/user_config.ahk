@@ -45,8 +45,18 @@ I::Run, wt nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %A_
 M::Run, %A_Desktop%\..\.manual\msteams-workaround\fix1.bat, %A_Desktop%\..\.manual\msteams-workaround\
 
 Tab::
-Send {Alt down}{Tab}
-Keywait F24
-Send {Alt up}
-return
+win := windows()
+WinActivate, % "ahk_id " win[win.Count()]
+Return
+
+windows() {
+ program := []
+ WinGet, wins, List
+ Loop, %wins% {
+  WinGet, style, Style, % "ahk_id " wins%A_Index%
+  If !(style ~= "0x(9|16)")
+   program.Push(wins%A_Index%)
+ }
+ Return program
+}
 
