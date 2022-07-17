@@ -107,7 +107,7 @@ require("which-key").setup {
 }
 local wk = require("which-key")
 wk.register({
-  c = {
+  s = {
     name = "smart code (coc)",
     n = {
       name = "navigation",
