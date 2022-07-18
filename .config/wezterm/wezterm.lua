@@ -38,3 +38,4 @@ return {
 -- Scrollback mode: Control+Shift+F
 -- Quick select mode: Control+Shift+Space
 -- Copy mode: Control+Shift+X
+-- Font from ttf-iosevka-term-15.6.0.zip
