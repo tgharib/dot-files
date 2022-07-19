@@ -42,7 +42,6 @@ return
 Enter::Run, wezterm-gui
 D::Send {LWin}
 I::Run, wezterm-gui start -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %A_Desktop%\..\vim-temp.txt
-M::Run, %A_Desktop%\..\.manual\msteams-workaround\fix1.bat, %A_Desktop%\..\.manual\msteams-workaround\
 
 Tab::
 win := windows()
