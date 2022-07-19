@@ -14,9 +14,9 @@ return {
     top = 0,
     bottom = 0,
   },
+  window_decorations = "RESIZE",
   enable_tab_bar = false,
   keys = {
-    {key="C", mods="CTRL", action=wezterm.action.CopyTo("Clipboard")},
     {key="U", mods="CTRL", action=act.ScrollByPage(-0.5)},
     {key="D", mods="CTRL", action=act.ScrollByPage(0.5)},
     {key="K", mods="CTRL", action=act.ScrollByLine(-1)},
