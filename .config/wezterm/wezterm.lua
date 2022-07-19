@@ -2,6 +2,7 @@ local wezterm = require 'wezterm';
 local act = wezterm.action
 
 return {
+  enable_wayland = false, -- temporary for working clipboard between two wezterm instances in linux
   font = wezterm.font("Iosevka Term", {weight="Medium", stretch="Expanded"}),
   font_size = 13,
   font_dirs = {"fonts"},
@@ -15,6 +16,7 @@ return {
   },
   enable_tab_bar = false,
   keys = {
+    {key="C", mods="CTRL", action=wezterm.action.CopyTo("Clipboard")},
     {key="U", mods="CTRL", action=act.ScrollByPage(-0.5)},
     {key="D", mods="CTRL", action=act.ScrollByPage(0.5)},
     {key="K", mods="CTRL", action=act.ScrollByLine(-1)},
