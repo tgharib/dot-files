@@ -3,6 +3,7 @@ local act = wezterm.action
 
 return {
   enable_wayland = false, -- temporary for working clipboard between two wezterm instances in linux
+  -- Font from ttf-iosevka-term-15.6.0.zip
   font = wezterm.font("Iosevka Term", {weight="Medium", stretch="Expanded"}),
   font_size = 13,
   font_dirs = {"fonts"},
@@ -22,25 +23,23 @@ return {
     {key="K", mods="CTRL", action=act.ScrollByLine(-1)},
     {key="J", mods="CTRL", action=act.ScrollByLine(1)},
     {key="E", mods="CTRL",
-     action=wezterm.action.QuickSelectArgs{
-         label = "open url",
-         patterns={
-            "https?://\\S+"
-         },
-         action = wezterm.action_callback(function(window, pane)
-            local url = window:get_selection_text_for_pane(pane)
-            wezterm.log_info("opening: " .. url)
-            wezterm.open_with(url)
-         end)
-       }
-     },
+      action=wezterm.action.QuickSelectArgs{
+        label = "open url",
+        patterns={
+          "https?://\\S+"
+        },
+        action = wezterm.action_callback(function(window, pane)
+          local url = window:get_selection_text_for_pane(pane)
+          wezterm.log_info("opening: " .. url)
+          wezterm.open_with(url)
+        end)
+      }
+    },
+    -- Scrollback mode: Control+Shift+F
+    -- Quick select mode: Control+Shift+Space
+    -- Copy mode: Control+Shift+X
   },
   -- performance
   cursor_blink_ease_in = "Constant",
   cursor_blink_ease_out = "Constant",
 }
-
--- Scrollback mode: Control+Shift+F
--- Quick select mode: Control+Shift+Space
--- Copy mode: Control+Shift+X
--- Font from ttf-iosevka-term-15.6.0.zip
