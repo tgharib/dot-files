@@ -9,22 +9,16 @@ return {
   font_dirs = {"fonts"},
   font_locator = "ConfigDirsOnly",
   color_scheme = "Solarized Dark Higher Contrast",
-  window_padding = {
-    left = 0,
-    right = 0,
-    top = 0,
-    bottom = 0,
-  },
+  window_padding = {left=0, right=0, top=0, bottom=0},
   window_decorations = "RESIZE",
   enable_tab_bar = false,
   keys = {
-    {key="U", mods="CTRL", action=act.ScrollByPage(-0.5)},
-    {key="D", mods="CTRL", action=act.ScrollByPage(0.5)},
-    {key="K", mods="CTRL", action=act.ScrollByLine(-1)},
-    {key="J", mods="CTRL", action=act.ScrollByLine(1)},
-    {key="E", mods="CTRL",
+    {key="U",mods="CTRL",action=act.ScrollByPage(-0.5)},
+    {key="D",mods="CTRL",action=act.ScrollByPage(0.5)},
+    {key="K",mods="CTRL",action=act.ScrollByLine(-1)},
+    {key="J",mods="CTRL",action=act.ScrollByLine(1)},
+    {key="E", mods="CTRL", -- open url
       action=wezterm.action.QuickSelectArgs{
-        label = "open url",
         patterns={
           "https?://\\S+"
         },
@@ -35,9 +29,20 @@ return {
         end)
       }
     },
-    -- Scrollback mode: Control+Shift+F
-    -- Quick select mode: Control+Shift+Space
-    -- Copy mode: Control+Shift+X
+    {key="P",mods="CTRL",action=act.QuickSelect,}, -- select path
+    {key="L",mods="CTRL",action=act.QuickSelectArgs{patterns={"^.+$"},},}, -- select line
+    {key="F",mods="CTRL",action=act.Search{Regex="",},}, -- search regex
+    {key="G",mods="CTRL",action=act.ActivateCopyMode}, -- copy mode
+  },
+  key_tables = {
+    search_mode = {
+      {key="Escape",mods='NONE',action=act.Multiple{act.CopyMode'Close',act.CopyMode'ClearPattern'}},
+      {key="Enter",mods='NONE',action=act.Multiple{act.CopyTo'Clipboard',act.CopyMode'Close',act.CopyMode'ClearPattern'}},
+      {key="p",mods='CTRL',action=act.CopyMode'PriorMatch'},
+      {key="n",mods='CTRL',action=act.CopyMode'NextMatch'},
+      {key="r",mods='CTRL',action=act.CopyMode'CycleMatchType'},
+      {key="u",mods='CTRL',action=act.CopyMode'ClearPattern'},
+    },
   },
   -- performance
   cursor_blink_ease_in = "Constant",
