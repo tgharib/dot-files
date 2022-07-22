@@ -83,6 +83,9 @@ require'nvim-treesitter.configs'.setup {
   sync_install = false,
   highlight = {
     enable = true,
+    disable = function(lang, bufnr) -- Disable in large buffers
+      return vim.api.nvim_buf_line_count(bufnr) > 50000
+    end,
   },
   indent = {
     enable = true,
