@@ -35,6 +35,9 @@ return {
        }
      },
   },
+  -- performance
+  cursor_blink_ease_in = "Constant",
+  cursor_blink_ease_out = "Constant",
 }
 
 -- Scrollback mode: Control+Shift+F
