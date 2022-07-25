@@ -1,3 +1,9 @@
+Workflow:
+* Tiling wm in windows and Linux with 1 tab per terminal
+* CLI tools like `rg`/`ag`, `fd`, `fzf`, `nnn` for CLI
+* Abduco for decoupling from ssh
+* Vim has buffers
+
 NixOS machine uses `shells.nix`.
 
 On non-nixos machine:

@@ -1,3 +1,6 @@
+" For editing multiple lines in vim, use a combination of `V:! sd`, `V:norm` and `V:norm@a` (a is a macro).
+" Vim motion options: f/F for horizontal, C-j/C-k for veritcal, /n*, dumb code navigation, smart code navigation
+
 """"" Plugins Manager
 
 " Automatically install Vim-Plug
@@ -147,13 +150,16 @@ wk.register({
   },
   d = {
     name = "dumb code",
-    l = { ":BLines<cr>", "lines in current buffer" },
-    L = { ":Lines<cr>", "lines in all buffers" },
-    t = { ":Tags<cr>", "tags in project" },
-    T = { ":BTags<cr>", "tags in current buffer" },
-    a = { ":Ag! ", "ag" },
-    r = { ":Rg! ", "rg" },
-    R = { ":Rgi! ", "rg -i" },
+    n  = {
+      name = "navigation",
+      a = { ":Ag! ", "ag" },
+      r = { ":Rg! ", "rg" },
+      R = { ":Rgi! ", "rg -i" },
+      t = { ":BTags<cr>", "tags in current buffer" },
+      T = { ":Tags<cr>", "tags in project" },
+      l = { ":BLines<cr>", "lines in current buffer" },
+      L = { ":Lines<cr>", "lines in all buffers" },
+    },
     s = { ":Snippets<cr>", "snippets" },
   },
   b = {
