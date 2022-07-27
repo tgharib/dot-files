@@ -17,4 +17,5 @@ On non-nixos machine:
     source ~/.dev-bashrc
 
 On windows machine:
+* Checkout windows branch
 * Install wezterm, git bash (uses cygwin so Windows-only binaries) and install neovim for windows (install vim-plug, nodejs for coc, python for snippets and follow nvim-treesitter docs to install compiler). Create a symbolic link into %localappdata%/nvim/init.vim. Install sd, rg, fd, fzf, lazygit, gsudo in neovim binary directory.
