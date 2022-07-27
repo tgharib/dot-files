@@ -39,9 +39,9 @@ return
 !9::MoveCurrentWindowToDesktop(9)
 
 !Q::WinClose A
-Enter::Run, wezterm-gui
+Enter::Run, wezterm-gui start --always-new-process
 D::Send {LWin}
-I::Run, wezterm-gui start -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %A_Desktop%\..\vim-temp.txt
+I::Run, wezterm-gui start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %A_Desktop%\..\vim-temp.txt
 
 Tab::
 win := windows()
