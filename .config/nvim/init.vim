@@ -41,6 +41,7 @@ set smartcase " Search with smart case
 set timeoutlen=0 " Immediately show which-key
 set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
 let $BASH_ENV = "~/.bash-aliases"
+set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 
 " Set colorscheme to NeoSolarized
 colorscheme NeoSolarized
