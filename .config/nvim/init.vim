@@ -177,6 +177,8 @@ wk.register({
     b = { ":Buffers<cr>", "select open buffer" },
     o = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "close all buffers except current" },
     O = { ":tabonly<CR>", "tabs -> buffers" },
+    l = { ":SessionsLoad ", "load session" },
+    s = { ":SessionsSave ", "save session" },
   },
   w = {
     name = "fix whitespace",
