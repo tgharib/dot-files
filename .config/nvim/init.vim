@@ -127,11 +127,11 @@ wk.register({
     n = {
       name = "navigation",
       d = { "<Plug>(coc-definition)", "go to definition" },
-      t = { "<Plug>(coc-type-definition)", "go to type definition" },
-      i = { "<Plug>(coc-implementation)", "go to implementation" },
-      r = { "<Plug>(coc-references)", "go to references" },
+      D = { "<Plug>(coc-implementation)", "go to implementation" },
       o = { ":<C-u>CocList outline<cr>", "go to symbol in document outline" },
-      w = { ":<C-u>CocList -I symbols<cr>", "go to symbol in workspace" },
+      O = { ":<C-u>CocList -I symbols<cr>", "go to symbol in workspace" },
+      r = { "<Plug>(coc-references)", "go to references" },
+      t = { "<Plug>(coc-type-definition)", "go to type definition" },
     },
     a = {
       name = "actions",
