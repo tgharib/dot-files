@@ -25,6 +25,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " Snippets database
+Plug 'natecraddock/sessions.nvim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -59,6 +60,12 @@ fun! TrimWhitespace()
 endfun
 
 """"" Plugins
+
+" sessions.nvim
+
+lua << EOF
+require("sessions").setup()
+EOF
 
 " hop.nvim
 
