@@ -87,7 +87,7 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 " Unfold all by default
 set foldlevel=99
-" install all languages for treesitter except for markdown, rnoweb, phpdoc
+" install all languages for treesitter except for rnoweb, phpdoc
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "astro", "bash", "beancount", "bibtex", "c", "c_sharp", "clojure", "cmake", "comment", "commonlisp", "cooklang", "cpp", "css", "cuda", "d", "dart", "devicetree", "dockerfile", "dot", "eex", "elixir", "elm", "elvish", "embedded_template", "erlang", "fennel", "fish", "foam", "fortran", "fusion", "gdscript", "gleam", "glimmer", "glsl", "go", "godot_resource", "gomod", "gowork", "graphql", "hack", "haskell", "hcl", "heex", "help", "hjson", "hocon", "html", "http", "java", "javascript", "jsdoc", "json", "json5", "jsonc", "julia", "kotlin", "lalrpop", "latex", "ledger", "llvm", "lua", "m68k", "make", "markdown", "ninja", "nix", "norg", "ocaml", "ocaml_interface", "ocamllex", "org", "pascal", "perl", "php", "pioasm", "prisma", "proto", "pug", "python", "ql", "qmljs", "query", "r", "rasi", "regex", "rego", "rst", "ruby", "rust", "scala", "scheme", "scss", "slint", "solidity", "sparql", "sql", "supercollider", "surface", "svelte", "swift", "teal", "tiger", "tlaplus", "todotxt", "toml", "tsx", "turtle", "typescript", "v", "vala", "verilog", "vim", "vue", "wgsl", "yaml", "yang", "zig" },
@@ -97,6 +97,16 @@ require'nvim-treesitter.configs'.setup {
     disable = function(lang, bufnr) -- Disable in large buffers
       return vim.api.nvim_buf_line_count(bufnr) > 50000
     end,
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<cr>",
+      node_incremental = "<cr>",
+      scope_incremental = "<tab>",
+      node_decremental = "<s-tab>",
+    },
   },
   indent = {
     enable = true,
@@ -146,13 +156,13 @@ wk.register({
       ["["] = { "<Plug>(coc-diagnostic-prev)", "quick-navigate previous diagnostic" },
       ["]"] = { "<Plug>(coc-diagnostic-next)", "quick-navigate next diagnostic" },
     },
-    s = {
-      name = "select",
-      i = { "<Plug>(coc-funcobj-i)", "select inner function" },
-      f = { "<Plug>(coc-funcobj-a)", "select all function" },
-      n = { "<Plug>(coc-classobj-i)", "select inner class" },
-      c = { "<Plug>(coc-classobj-a)", "select all class" },
-    },
+    -- s = {
+      -- name = "select",
+      -- i = { "<Plug>(coc-funcobj-i)", "select inner function" },
+      -- f = { "<Plug>(coc-funcobj-a)", "select all function" },
+      -- n = { "<Plug>(coc-classobj-i)", "select inner class" },
+      -- c = { "<Plug>(coc-classobj-a)", "select all class" },
+    -- },
     r = { "<Plug>(coc-rename)", "rename symbol" },
     o = { ":call ShowDocumentation()<cr>", "show documentation" },
   },
