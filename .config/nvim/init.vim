@@ -20,6 +20,7 @@ Plug 'folke/which-key.nvim'
 Plug 'phaazon/hop.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -104,13 +105,52 @@ require'nvim-treesitter.configs'.setup {
     keymaps = {
       init_selection = "<cr>",
       node_incremental = "<cr>",
-      scope_incremental = "<tab>",
-      node_decremental = "<s-tab>",
+      -- scope_incremental = "<tab>",
+      node_decremental = "<bs>",
     },
   },
   indent = {
     enable = true,
   },
+}
+EOF
+
+" nvim-treesitter-context
+lua << EOF
+require'treesitter-context'.setup {
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+    patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        -- For all filetypes
+        default = {
+            'class',
+            'function',
+            'method',
+            'for',
+            'while',
+            'if',
+            'switch',
+            'case',
+        },
+        -- Example for a specific filetype.
+        -- If a pattern is missing, *open a PR* so everyone can benefit.
+        --   rust = {
+        --       'impl_item',
+        --   },
+    },
+    exact_patterns = {
+        -- Example for a specific filetype with Lua patterns
+        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+        -- exactly match "impl_item" only)
+        -- rust = true,
+    },
+
+    -- [!] The options below are exposed but shouldn't require your attention,
+    --     you can safely ignore them.
+
+    zindex = 20, -- The Z-index of the context window
+    mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
 }
 EOF
 
@@ -179,6 +219,7 @@ wk.register({
       L = { ":Lines<cr>", "lines in all buffers" },
     },
     s = { ":Snippets<cr>", "snippets" },
+    c = { ":TSContextToggle<cr>", "toggle context" },
   },
   b = {
     name = "buffers",
@@ -202,11 +243,10 @@ wk.register({
     name = "misc",
     w = { ":set wrap!<cr>", "toggle line wrap" },
     l = { ":set number!<cr>", "toggle line numbers" },
-    s = { ":SymbolsOutlineOpen<cr>", "toggle symbols outline" },
+    s = { ":SymbolsOutlineOpen<cr>", "toggle markdown symbols outline" },
     c = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
     v = { ":Colors<cr>", "vim color schemes" },
-    g = { ":BCommits<cr>", "git log" },
     f = { ":echo expand('%:p')<cr>", "show file path" },
     h = { ":set hlsearch!<cr>", "toggle search highlight" },
   },
