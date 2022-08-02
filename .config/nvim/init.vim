@@ -206,10 +206,9 @@ wk.register({
     },
     a = {
       name = "actions",
+      q = { "<Plug>(coc-fix-current)", "quick fix on current line" },
       s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
       b = { "<Plug>(coc-codeaction)", "code action on current buffer" },
-      q = { "<Plug>(coc-fix-current)", "quick fix on current line" },
-      l = { "<Plug>(coc-codelens-action)", "codelens action on current line" },
     },
     l = { ":<C-u>CocList diagnostics<CR>", "list diagnostics" },
     r = { "<Plug>(coc-rename)", "rename symbol" },
