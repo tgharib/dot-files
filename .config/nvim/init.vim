@@ -219,6 +219,7 @@ wk.register({
     },
     r = { "<Plug>(coc-rename)", "rename symbol" },
     o = { ":call ShowDocumentation()<CR>", "show documentation" },
+    i = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports" },
   },
   d = {
     name = "dumb code",
