@@ -4,14 +4,14 @@
 " Plugins Manager
 
 "" Automatically install Vim-Plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = stdpath('data') . '/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 "" Plugins will be downloaded under the specified directory.
-call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 
 "" Plugin List
 """ Cosmetic
@@ -313,7 +313,7 @@ EOF
 set nobackup " Some servers have issues with backup files, see #649.
 set nowritebackup
 set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
-set signcolumn=yes " Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved.
+set signcolumn=number " Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved.
 
 """ Use tab for trigger completion with characters ahead and navigate. NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
@@ -331,11 +331,7 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-if has('nvim') " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh() " Use <c-space> to trigger completion
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
