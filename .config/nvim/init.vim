@@ -258,7 +258,7 @@ wk.register({
     s = { ":SymbolsOutlineOpen<CR>", "toggle markdown symbols outline" },
     c = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
-    K = { ":help index<CR>", "vim keybinds 2" },
+    K = { ":map<CR>", "vim mapped keybinds" },
     v = { ":Colors<CR>", "vim color schemes" },
     f = { ":echo expand('%:p')<CR>", "show file path" },
     h = { ":set hlsearch!<CR>", "toggle search highlight" },
@@ -289,8 +289,8 @@ wk.register({
   ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>", "start code selection" },
   ["<A-0>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_next_usage(0)<CR>", "go to next symbol usage" },
   ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(0)<CR>", "go to previous symbol usage" },
-  ["<C-0>"] = { "<Plug>(coc-diagnostic-prev)", "go to previous diagnostic" },
-  ["<C-9>"] = { "<Plug>(coc-diagnostic-next)", "go to next diagnostic" },
+  [")"] = { "<Plug>(coc-diagnostic-next)", "go to next diagnostic" },
+  ["("] = { "<Plug>(coc-diagnostic-prev)", "go to previous diagnostic" },
 }, { prefix = "", mode = "n" })
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
