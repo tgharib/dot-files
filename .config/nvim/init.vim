@@ -211,15 +211,10 @@ wk.register({
       q = { "<Plug>(coc-fix-current)", "quick fix on current line" },
       l = { "<Plug>(coc-codelens-action)", "codelens action on current line" },
     },
-    d = {
-      name = "diagnostics",
-      d = { ":<C-u>CocList diagnostics<CR>", "show all diagnostics" },
-      ["["] = { "<Plug>(coc-diagnostic-prev)", "quick-navigate previous diagnostic" },
-      ["]"] = { "<Plug>(coc-diagnostic-next)", "quick-navigate next diagnostic" },
-    },
+    l = { ":<C-u>CocList diagnostics<CR>", "list diagnostics" },
     r = { "<Plug>(coc-rename)", "rename symbol" },
-    o = { ":call ShowDocumentation()<CR>", "show documentation" },
-    i = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports" },
+    s = { ":call ShowDocumentation()<CR>", "show documentation" },
+    o = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports" },
   },
   d = {
     name = "dumb code",
@@ -294,6 +289,8 @@ wk.register({
   ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>", "start code selection" },
   ["<A-0>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_next_usage(0)<CR>", "go to next symbol usage" },
   ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(0)<CR>", "go to previous symbol usage" },
+  ["<C-0>"] = { "<Plug>(coc-diagnostic-prev)", "go to previous diagnostic" },
+  ["<C-9>"] = { "<Plug>(coc-diagnostic-next)", "go to next diagnostic" },
 }, { prefix = "", mode = "n" })
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
