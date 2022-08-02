@@ -50,6 +50,7 @@ set timeoutlen=0 " Immediately show which-key
 set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
 let $BASH_ENV = "~/.bash-aliases"
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
+set hidden " Allow buffers to be hidden without saving
 
 "" Set colorscheme to NeoSolarized
 colorscheme NeoSolarized
@@ -309,30 +310,25 @@ wk.register({
 EOF
 
 "" COC START
-set hidden " TextEdit might fail if hidden is not set. Also, hidden needs to be set so that we can switch to another buffer without writing the current one.
 set nobackup " Some servers have issues with backup files, see #649.
 set nowritebackup
-set cmdheight=2 " Give more space for displaying messages.
 set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
-set shortmess+=c " Don't pass messages to |ins-completion-menu|.
-
-if has("nvim-0.5.0") || has("patch-8.1.1564") " Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved.
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=yes " Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved.
 
 """ Use tab for trigger completion with characters ahead and navigate. NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
- coc#pum#visible() ? coc#pum#next(1):
- <SID>check_back_space() ? "\<Tab>" :
- coc#refresh()
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+""" Make <CR> to accept selected completion item or notify coc.nvim to format. <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 if has('nvim') " Use <c-space> to trigger completion.
@@ -341,16 +337,11 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-""" Use <CR> to confirm completion
-inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
-
 function! ShowDocumentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
+  if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
