@@ -1,38 +1,45 @@
 " For editing multiple lines in vim, use a combination of `V:! sd`, `V:norm` and `V:norm@a` (a is a macro).
 " Vim motion options: f/F for horizontal, C-j/C-k for veritcal, /n*, dumb code navigation, smart code navigation
 
-""""" Plugins Manager
+" Plugins Manager
 
-" Automatically install Vim-Plug
+"" Automatically install Vim-Plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Plugins will be downloaded under the specified directory.
+"" Plugins will be downloaded under the specified directory.
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
-" Declare the list of plugins.
+"" Plugin List
+""" Cosmetic
 Plug 'overcache/NeoSolarized'
 Plug 'itchyny/lightline.vim'
+
+""" Regular
 Plug 'folke/which-key.nvim'
 Plug 'phaazon/hop.nvim'
-Plug 'simrat39/symbols-outline.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'simrat39/symbols-outline.nvim' " for markdown
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " Snippets database
 Plug 'natecraddock/sessions.nvim'
 
-" List ends here. Plugins become visible to Vim after this call.
+""" Dumb code
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+
+""" Smart code
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 syntax off " Vim-Plug enables vim's syntax highlighting but we use treesitter instead
 
-""""" Options
+" Options
 let mapleader = " "
 set nowrap " Turn off line wrap
 set nohlsearch " Turn off search highlighting
@@ -44,53 +51,54 @@ set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
 let $BASH_ENV = "~/.bash-aliases"
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 
-" Set colorscheme to NeoSolarized
+"" Set colorscheme to NeoSolarized
 colorscheme NeoSolarized
 set background=dark
 set termguicolors " Force colorscheme colors with 24-bit support
 
-""""" Markdown macros
+"" Markdown macros
 let @i ="o![](images/.png){width=60%}\<Esc>15hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
 
-""""" Helper functions
-" Trim trailing whitespace function
+" Helper functions
+"" Trim trailing whitespace function
 fun! TrimWhitespace()
   let l:save = winsaveview()
   keeppatterns %s/\s\+$//e
   call winrestview(l:save)
 endfun
 
-""""" Plugins
+" Plugins
 
-" sessions.nvim
+"" sessions.nvim
 
 lua << EOF
 require("sessions").setup()
 EOF
 
-" hop.nvim
+"" hop.nvim
 
 lua << EOF
 require'hop'.setup()
 EOF
 
-" Ultisnips
+"" Ultisnips
 
-" Trigger configuration. You need to change this to something other than <tab> if you use YouCompleteMe or completion-nvim
+""" Trigger configuration. You need to change this to something other than <tab> if you use YouCompleteMe or completion-nvim
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" nvim-treesitter
-" Fold based on treesitter
+"" nvim-treesitter
+""" Fold based on treesitter
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-" Unfold all by default
+""" Unfold all by default
 set foldlevel=99
-" install all languages for treesitter except for rnoweb, phpdoc
+
 lua << EOF
 require'nvim-treesitter.configs'.setup {
+  -- Install all languages for treesitter except for rnoweb, phpdoc
   ensure_installed = { "astro", "bash", "beancount", "bibtex", "c", "c_sharp", "clojure", "cmake", "comment", "commonlisp", "cooklang", "cpp", "css", "cuda", "d", "dart", "devicetree", "dockerfile", "dot", "eex", "elixir", "elm", "elvish", "embedded_template", "erlang", "fennel", "fish", "foam", "fortran", "fusion", "gdscript", "gleam", "glimmer", "glsl", "go", "godot_resource", "gomod", "gowork", "graphql", "hack", "haskell", "hcl", "heex", "help", "hjson", "hocon", "html", "http", "java", "javascript", "jsdoc", "json", "json5", "jsonc", "julia", "kotlin", "lalrpop", "latex", "ledger", "llvm", "lua", "m68k", "make", "markdown", "ninja", "nix", "norg", "ocaml", "ocaml_interface", "ocamllex", "org", "pascal", "perl", "php", "pioasm", "prisma", "proto", "pug", "python", "ql", "qmljs", "query", "r", "rasi", "regex", "rego", "rst", "ruby", "rust", "scala", "scheme", "scss", "slint", "solidity", "sparql", "sql", "supercollider", "surface", "svelte", "swift", "teal", "tiger", "tlaplus", "todotxt", "toml", "tsx", "turtle", "typescript", "v", "vala", "verilog", "vim", "vue", "wgsl", "yaml", "yang", "zig" },
   sync_install = false,
   highlight = {
@@ -102,12 +110,6 @@ require'nvim-treesitter.configs'.setup {
   },
   incremental_selection = {
     enable = true,
-    keymaps = {
-      init_selection = "<cr>",
-      node_incremental = "<cr>",
-      -- scope_incremental = "<tab>",
-      node_decremental = "<bs>",
-    },
   },
   indent = {
     enable = true,
@@ -115,7 +117,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" nvim-treesitter-context
+"" nvim-treesitter-context
 lua << EOF
 require'treesitter-context'.setup {
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -154,7 +156,25 @@ require'treesitter-context'.setup {
 }
 EOF
 
-" symbols-outline.nvim
+"" nvim-treesitter-refactor
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  refactor = {
+    highlight_definitions = {
+      enable = true,
+      clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+    },
+    smart_rename = {
+      enable = true,
+    },
+    navigation = {
+      enable = true,
+    },
+  },
+}
+EOF
+
+"" symbols-outline.nvim
 lua << EOF
 vim.g.symbols_outline = {
     highlight_hovered_item = false,
@@ -163,10 +183,10 @@ vim.g.symbols_outline = {
 }
 EOF
 
-" fzf.nvim
+"" fzf.nvim
 command! -bang -nargs=* Rgi call fzf#vim#grep('rg -i --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
-" which-key.nvim
+"" which-key.nvim
 lua << EOF
 require("which-key").setup {
 }
@@ -178,8 +198,8 @@ wk.register({
       name = "navigation",
       d = { "<Plug>(coc-definition)", "go to definition" },
       D = { "<Plug>(coc-implementation)", "go to implementation" },
-      o = { ":<C-u>CocList outline<cr>", "go to symbol in document outline" },
-      O = { ":<C-u>CocList -I symbols<cr>", "go to symbol in workspace" },
+      o = { ":<C-u>CocList outline<CR>", "go to symbol in document outline" },
+      O = { ":<C-u>CocList -I symbols<CR>", "go to symbol in workspace" },
       r = { "<Plug>(coc-references)", "go to references" },
       t = { "<Plug>(coc-type-definition)", "go to type definition" },
     },
@@ -192,63 +212,59 @@ wk.register({
     },
     d = {
       name = "diagnostics",
-      d = { ":<C-u>CocList diagnostics<cr>", "show all diagnostics" },
+      d = { ":<C-u>CocList diagnostics<CR>", "show all diagnostics" },
       ["["] = { "<Plug>(coc-diagnostic-prev)", "quick-navigate previous diagnostic" },
       ["]"] = { "<Plug>(coc-diagnostic-next)", "quick-navigate next diagnostic" },
     },
-    -- s = {
-      -- name = "select",
-      -- i = { "<Plug>(coc-funcobj-i)", "select inner function" },
-      -- f = { "<Plug>(coc-funcobj-a)", "select all function" },
-      -- n = { "<Plug>(coc-classobj-i)", "select inner class" },
-      -- c = { "<Plug>(coc-classobj-a)", "select all class" },
-    -- },
     r = { "<Plug>(coc-rename)", "rename symbol" },
-    o = { ":call ShowDocumentation()<cr>", "show documentation" },
+    o = { ":call ShowDocumentation()<CR>", "show documentation" },
   },
   d = {
     name = "dumb code",
     n  = {
       name = "navigation",
+      d = { ":lua require'nvim-treesitter-refactor.navigation'.goto_definition(1)<CR>", "go to definition" },
       a = { ":Ag! ", "ag" },
       r = { ":Rg! ", "rg" },
       R = { ":Rgi! ", "rg -i" },
-      t = { ":BTags<cr>", "tags in current buffer" },
-      T = { ":Tags<cr>", "tags in project" },
-      l = { ":BLines<cr>", "lines in current buffer" },
-      L = { ":Lines<cr>", "lines in all buffers" },
+      t = { ":BTags<CR>", "tags in current buffer" },
+      T = { ":Tags<CR>", "tags in project" },
+      l = { ":BLines<CR>", "lines in current buffer" },
+      L = { ":Lines<CR>", "lines in all buffers" },
     },
-    s = { ":Snippets<cr>", "snippets" },
-    c = { ":TSContextToggle<cr>", "toggle context" },
+    s = { ":Snippets<CR>", "snippets" },
+    c = { ":TSContextToggle<CR>", "toggle context" },
+    r = { ":lua require'nvim-treesitter-refactor.smart_rename'.smart_rename(1)<CR>", "rename symbol" },
   },
   b = {
     name = "buffers",
-    g = { ":GFiles<cr>", "open git file" },
-    f = { ":Files<cr>", "open file" },
-    b = { ":Buffers<cr>", "select buffer" },
-    c = { ":bw<cr>", "close current buffer :bw" },
-    C = { ":bufdo bw<cr>", "close all buffers :bufdo bw" },
-    t = { ":tabonly<cr>", "tabs -> buffers" },
+    g = { ":GFiles<CR>", "open git file" },
+    f = { ":Files<CR>", "open file" },
+    b = { ":Buffers<CR>", "select buffer" },
+    c = { ":bw<CR>", "close current buffer :bw" },
+    C = { ":bufdo bw<CR>", "close all buffers :bufdo bw" },
+    t = { ":tabonly<CR>", "tabs -> buffers" },
     l = { ":SessionsLoad ", "load session" },
     s = { ":SessionsSave ", "save session" },
   },
   w = {
     name = "fix whitespace",
-    r = { ":retab<cr>", "replace tabs with spaces" },
-    ["2"] = { ":setlocal expandtab ts=2 sw=2<cr>", "set tabs to 2 spaces" },
-    ["4"] = { ":setlocal expandtab ts=4 sw=4<cr>", "set tabs to 4 spaces" },
-    t = { ":call TrimWhitespace()<cr>", "trim whitespace" },
+    r = { ":retab<CR>", "replace tabs with spaces" },
+    ["2"] = { ":setlocal expandtab ts=2 sw=2<CR>", "set tabs to 2 spaces" },
+    ["4"] = { ":setlocal expandtab ts=4 sw=4<CR>", "set tabs to 4 spaces" },
+    t = { ":call TrimWhitespace()<CR>", "trim whitespace" },
   },
   m = {
     name = "misc",
-    w = { ":set wrap!<cr>", "toggle line wrap" },
-    l = { ":set number!<cr>", "toggle line numbers" },
-    s = { ":SymbolsOutlineOpen<cr>", "toggle markdown symbols outline" },
+    w = { ":set wrap!<CR>", "toggle line wrap" },
+    l = { ":set number!<CR>", "toggle line numbers" },
+    s = { ":SymbolsOutlineOpen<CR>", "toggle markdown symbols outline" },
     c = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
-    v = { ":Colors<cr>", "vim color schemes" },
-    f = { ":echo expand('%:p')<cr>", "show file path" },
-    h = { ":set hlsearch!<cr>", "toggle search highlight" },
+    K = { ":help index<CR>", "vim keybinds 2" },
+    v = { ":Colors<CR>", "vim color schemes" },
+    f = { ":echo expand('%:p')<CR>", "show file path" },
+    h = { ":set hlsearch!<CR>", "toggle search highlight" },
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
@@ -269,53 +285,45 @@ wk.register({
 }, { prefix = "<leader>", mode = "o" })
 
 wk.register({
-  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
-  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
+  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
+  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
+  ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>", "start code selection" },
+  ["<A-0>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_next_usage(1)<CR>", "go to next symbol usage" },
+  ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(1)<CR>", "go to previous symbol usage" },
 }, { prefix = "", mode = "n" })
 wk.register({
-  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
-  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
+  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
+  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
 }, { prefix = "", mode = "o" })
 wk.register({
-  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", "jump in line (after cursor)" },
-  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", "jump in line (before cursor)" },
+  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
+  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
 }, { prefix = "", mode = "v" })
+wk.register({
+  ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_incremental()<CR>", "expand code selection" },
+  ["<BS>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_decremental()<CR>", "shrink code selection" },
+}, { prefix = "", mode = "x" })
+-- n = normal mode, o = deletion mode (d), v = v-line mode = line-selection mode (V), x = visual mode = char-selection mode (v)
 EOF
-" n = normal mode, o = deletion mode (d), v = line-selection mode (v)
 
-" COC START
-" TextEdit might fail if hidden is not set. Also, hidden needs to be set so
-" that we can switch to another buffer without writing the current one.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
+"" COC START
+set hidden " TextEdit might fail if hidden is not set. Also, hidden needs to be set so that we can switch to another buffer without writing the current one.
+set nobackup " Some servers have issues with backup files, see #649.
 set nowritebackup
+set cmdheight=2 " Give more space for displaying messages.
+set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
+set shortmess+=c " Don't pass messages to |ins-completion-menu|.
 
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
+if has("nvim-0.5.0") || has("patch-8.1.1564") " Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved.
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
 endif
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+""" Use tab for trigger completion with characters ahead and navigate. NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -327,17 +335,15 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-if has('nvim')
+if has('nvim') " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Make <cr> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<cr>\<c-r>=coc#on_enter()\<cr>"
+""" Make <CR> auto-select the first completion item and notify coc.nvim to format on enter, <CR> could be remapped by other vim plugin
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! ShowDocumentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -349,23 +355,17 @@ function! ShowDocumentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 augroup mygroup
   autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp') " Update signature help on jump placeholder
+  autocmd user cocstatuschange,cocdiagnosticchange call lightline#update() " Use autocmd to force lightline update
 augroup end
 
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
+if has('nvim-0.4.0') || has('patch-8.2.0750') " Remap <C-f> and <C-b> for scroll float windows/popups.
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
@@ -381,11 +381,8 @@ let g:lightline = {
 \ },
 \ }
 
-" use autocmd to force lightline update.
-autocmd user cocstatuschange,cocdiagnosticchange call lightline#update()
+"" COC END
 
-" COC END
-
-" highlight trailing whitespace (after colorscheme is set)
+" Highlight trailing whitespace (at the end after colorscheme is set)
 highlight extrawhitespace ctermbg=red guibg=red
 match extrawhitespace /\s\+$\| \+\ze\t/
