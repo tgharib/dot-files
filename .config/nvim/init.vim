@@ -224,7 +224,7 @@ wk.register({
     name = "dumb code",
     n  = {
       name = "navigation",
-      d = { ":lua require'nvim-treesitter-refactor.navigation'.goto_definition(1)<CR>", "go to definition" },
+      d = { ":lua require'nvim-treesitter-refactor.navigation'.goto_definition(0)<CR>", "go to definition" },
       a = { ":Ag! ", "ag" },
       r = { ":Rg! ", "rg" },
       R = { ":Rgi! ", "rg -i" },
@@ -235,7 +235,7 @@ wk.register({
     },
     s = { ":Snippets<CR>", "snippets" },
     c = { ":TSContextToggle<CR>", "toggle context" },
-    r = { ":lua require'nvim-treesitter-refactor.smart_rename'.smart_rename(1)<CR>", "rename symbol" },
+    r = { ":lua require'nvim-treesitter-refactor.smart_rename'.smart_rename(0)<CR>", "rename symbol" },
   },
   b = {
     name = "buffers",
@@ -291,8 +291,8 @@ wk.register({
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
   ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>", "start code selection" },
-  ["<A-0>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_next_usage(1)<CR>", "go to next symbol usage" },
-  ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(1)<CR>", "go to previous symbol usage" },
+  ["<A-0>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_next_usage(0)<CR>", "go to next symbol usage" },
+  ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(0)<CR>", "go to previous symbol usage" },
 }, { prefix = "", mode = "n" })
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
