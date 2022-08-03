@@ -80,7 +80,7 @@ augroup blocklargefile
 
      if getfsize(file) > g:LargeFile
        bw
-       echoerr "Blocked large file from loading"
+       echoerr "Blocked large file from loading:"expand("<afile>")
      else
        exe "edit" file
        exe "doautocmd BufReadPost" file
