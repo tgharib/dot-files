@@ -79,6 +79,7 @@ augroup blocklargefile
      let file = expand("<afile>")
 
      if getfsize(file) > g:LargeFile
+       bw
        echoerr "Blocked large file from loading"
      else
        exe "edit" file
