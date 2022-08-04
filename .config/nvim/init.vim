@@ -274,7 +274,7 @@ wk.register({
   m = {
     name = "misc",
     w = { ":set wrap!<CR>", "toggle line wrap" },
-    l = { ":set number!<CR>", "toggle line numbers" },
+    l = { ":tabdo windo bufdo set number!<CR>", "toggle line numbers" },
     s = { ":SymbolsOutlineOpen<CR>", "toggle markdown symbols outline" },
     c = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
