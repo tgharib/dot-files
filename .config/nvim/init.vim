@@ -73,28 +73,11 @@ augroup helpers
     call winrestview(l:save)
   endfunction
 
-  "" Block large files from loading
-  let g:LargeFile = 1024 * 1024 * 5 " 5 MiB
-
-  function! BlockReadingLargeFile()
-     let file = expand("<afile>")
-
-     if getfsize(file) > g:LargeFile
-       bw
-       echoerr "Blocked large file from loading:"expand("<afile>")
-     else
-       exe "edit" file
-       exe "doautocmd BufReadPost" file
-     endif
-  endfunction
-
-  autocmd BufReadCmd * call BlockReadingLargeFile()
-
   "" Toggle line numbers for all buffers/windows/tabs
   function! ToggleLineNumbers()
-      let current_buffer = bufnr()
-      tabdo windo bufdo set number!
-      execute 'buffer' current_buffer
+    let current_buffer = bufnr()
+    tabdo windo bufdo set number!
+    execute 'buffer' current_buffer
   endfunction
 augroup end
 
