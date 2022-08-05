@@ -63,16 +63,17 @@ let @i ="o![](images/.png){width=60%}\<Esc>15hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
 
 " Helper functions
-"" Trim trailing whitespace function
-fun! TrimWhitespace()
-  let l:save = winsaveview()
-  keeppatterns %s/\s\+$//e
-  call winrestview(l:save)
-endfun
 
-" Block large files from loading
-augroup blocklargefile
+augroup helpers
   autocmd!
+  "" Trim trailing whitespace function
+  function! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+  endfunction
+
+  "" Block large files from loading
   let g:LargeFile = 1024 * 1024 * 5 " 5 MiB
 
   function! BlockReadingLargeFile()
@@ -88,6 +89,13 @@ augroup blocklargefile
   endfunction
 
   autocmd BufReadCmd * call BlockReadingLargeFile()
+
+  "" Toggle line numbers for all buffers/windows/tabs
+  function! ToggleLineNumbers()
+      let current_buffer = bufnr()
+      tabdo windo bufdo set number!
+      execute 'buffer' current_buffer
+  endfunction
 augroup end
 
 " Plugins
@@ -274,7 +282,7 @@ wk.register({
   m = {
     name = "misc",
     w = { ":set wrap!<CR>", "toggle line wrap" },
-    l = { ":tabdo windo bufdo set number!<CR>", "toggle line numbers" },
+    l = { ":call ToggleLineNumbers()<CR>", "toggle line numbers" },
     s = { ":SymbolsOutlineOpen<CR>", "toggle markdown symbols outline" },
     c = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
