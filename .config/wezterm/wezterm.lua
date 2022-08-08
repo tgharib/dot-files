@@ -2,6 +2,7 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 
 return {
+  check_for_updates = false,
   enable_wayland = false, -- temporary for working clipboard between two wezterm instances in linux
   -- Font from ttf-iosevka-term-15.6.0.zip
   font = wezterm.font("Iosevka Term", {weight="Medium", stretch="Expanded"}),
