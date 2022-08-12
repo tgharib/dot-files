@@ -1,7 +1,7 @@
 theme = "solarized_dark"
 
-[editor]
-gutters = [ "diagnostics" ]
+# [editor]
+# gutters = [ "diagnostics" ] No way to toggle line-numbers at runtime so leave them on
 
 [keys.normal]
 C-j = ["move_line_down", "move_line_down"]
