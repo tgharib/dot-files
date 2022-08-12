@@ -22,7 +22,6 @@ Plug 'itchyny/lightline.vim'
 """ Regular
 Plug 'folke/which-key.nvim'
 Plug 'phaazon/hop.nvim'
-Plug 'simrat39/symbols-outline.nvim' " for markdown
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
@@ -103,85 +102,73 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "" nvim-treesitter
-""" Fold based on treesitter
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-""" Unfold all by default
-set foldlevel=99
+""" Do NOT use treesitter for folding as it cannot be disabled for large files
 
 lua << EOF
+disable_for_large_files = function(lang, bufnr) -- Disable in large buffers
+  return vim.api.nvim_buf_line_count(bufnr) > 50000
+end
+
 require'nvim-treesitter.configs'.setup {
   -- Install all languages for treesitter except for rnoweb, phpdoc
   ensure_installed = { "astro", "bash", "beancount", "bibtex", "c", "c_sharp", "clojure", "cmake", "comment", "commonlisp", "cooklang", "cpp", "css", "cuda", "d", "dart", "devicetree", "dockerfile", "dot", "eex", "elixir", "elm", "elvish", "embedded_template", "erlang", "fennel", "fish", "foam", "fortran", "fusion", "gdscript", "gleam", "glimmer", "glsl", "go", "godot_resource", "gomod", "gowork", "graphql", "hack", "haskell", "hcl", "heex", "help", "hjson", "hocon", "html", "http", "java", "javascript", "jsdoc", "json", "json5", "jsonc", "julia", "kotlin", "lalrpop", "latex", "ledger", "llvm", "lua", "m68k", "make", "markdown", "ninja", "nix", "norg", "ocaml", "ocaml_interface", "ocamllex", "org", "pascal", "perl", "php", "pioasm", "prisma", "proto", "pug", "python", "ql", "qmljs", "query", "r", "rasi", "regex", "rego", "rst", "ruby", "rust", "scala", "scheme", "scss", "slint", "solidity", "sparql", "sql", "supercollider", "surface", "svelte", "swift", "teal", "tiger", "tlaplus", "todotxt", "toml", "tsx", "turtle", "typescript", "v", "vala", "verilog", "vim", "vue", "wgsl", "yaml", "yang", "zig" },
   sync_install = false,
   highlight = {
     enable = true,
-    disable = function(lang, bufnr) -- Disable in large buffers
-      return vim.api.nvim_buf_line_count(bufnr) > 50000
-    end,
+    disable = disable_for_large_files,
     additional_vim_regex_highlighting = false,
   },
   incremental_selection = {
     enable = true,
+    disable = disable_for_large_files,
   },
   indent = {
     enable = true,
+    disable = disable_for_large_files,
   },
 }
-EOF
 
-"" nvim-treesitter-context
-lua << EOF
+-- nvim-treesitter-context
 require'treesitter-context'.setup {
-    enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
-    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-    trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-    patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-        -- For all filetypes
-        default = {
-            'class',
-            'function',
-            'method',
-            'for',
-            'while',
-            'if',
-            'switch',
-            'case',
-        },
-        -- Example for a specific filetype.
-        -- If a pattern is missing, *open a PR* so everyone can benefit.
-        --   rust = {
-        --       'impl_item',
-        --   },
-    },
-    exact_patterns = {
-        -- Example for a specific filetype with Lua patterns
-        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
-        -- exactly match "impl_item" only)
-        -- rust = true,
-    },
+  enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
+  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+    -- For all filetypes
+    default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case' },
+    -- Example for a specific filetype.
+    -- If a pattern is missing, *open a PR* so everyone can benefit.
+    --   rust = {
+    --       'impl_item',
+    --   },
+  },
+  exact_patterns = {
+    -- Example for a specific filetype with Lua patterns
+    -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+    -- exactly match "impl_item" only)
+    -- rust = true,
+  },
 
-    -- [!] The options below are exposed but shouldn't require your attention,
-    --     you can safely ignore them.
-
-    zindex = 20, -- The Z-index of the context window
-    mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+  -- The options below are exposed but shouldn't require your attention, you can safely ignore them.
+  zindex = 20, -- The Z-index of the context window
+  mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
 }
-EOF
 
-"" nvim-treesitter-refactor
-lua << EOF
+-- nvim-treesitter-refactor
 require'nvim-treesitter.configs'.setup {
   refactor = {
     highlight_definitions = {
       enable = true,
+      disable = disable_for_large_files,
       clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
     },
     smart_rename = {
       enable = true,
+      disable = disable_for_large_files,
     },
     navigation = {
       enable = true,
+      disable = disable_for_large_files,
     },
   },
 }
