@@ -162,14 +162,6 @@ require'nvim-treesitter.configs'.setup {
       disable = disable_for_large_files,
       clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
     },
-    smart_rename = {
-      enable = true,
-      disable = disable_for_large_files,
-    },
-    navigation = {
-      enable = true,
-      disable = disable_for_large_files,
-    },
   },
 }
 EOF
@@ -182,9 +174,6 @@ vim.g.symbols_outline = {
     position = 'left',
 }
 EOF
-
-"" fzf.nvim
-command! -bang -nargs=* Rgi call fzf#vim#grep('rg -i --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
 "" which-key.nvim
 lua << EOF
@@ -218,22 +207,15 @@ wk.register({
     name = "dumb code",
     n  = {
       name = "navigation",
-      d = { ":lua require'nvim-treesitter-refactor.navigation'.goto_definition(0)<CR>", "go to definition" },
-      a = { ":Ag! ", "ag" },
       r = { ":Rg! ", "rg" },
-      R = { ":Rgi! ", "rg -i" },
-      t = { ":BTags<CR>", "tags in current buffer" },
-      T = { ":Tags<CR>", "tags in project" },
       l = { ":BLines<CR>", "lines in current buffer" },
       L = { ":Lines<CR>", "lines in all buffers" },
     },
     s = { ":Snippets<CR>", "snippets" },
     c = { ":TSContextToggle<CR>", "toggle context" },
-    r = { ":lua require'nvim-treesitter-refactor.smart_rename'.smart_rename(0)<CR>", "rename symbol" },
   },
   b = {
     name = "buffers",
-    g = { ":GFiles<CR>", "open git file" },
     f = { ":Files<CR>", "open file" },
     b = { ":Buffers<CR>", "select buffer" },
     c = { ":bw<CR>", "close current buffer :bw" },
@@ -253,8 +235,7 @@ wk.register({
     name = "misc",
     w = { ":set wrap!<CR>", "toggle line wrap" },
     l = { ":call ToggleLineNumbers()<CR>", "toggle line numbers" },
-    s = { ":SymbolsOutlineOpen<CR>", "toggle markdown symbols outline" },
-    c = { ":Commands<CR>", "vim commands" },
+    ["?"] = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
     K = { ":map<CR>", "vim mapped keybinds" },
     v = { ":Colors<CR>", "vim color schemes" },
@@ -282,6 +263,8 @@ wk.register({
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
   F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
+  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
+  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
   ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>", "start code selection" },
@@ -289,20 +272,23 @@ wk.register({
   ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(0)<CR>", "go to previous symbol usage" },
   [")"] = { "<Plug>(coc-diagnostic-next)", "go to next diagnostic" },
   ["("] = { "<Plug>(coc-diagnostic-prev)", "go to previous diagnostic" },
-}, { prefix = "", mode = "n" })
+}, { prefix = "", mode = "n" }) -- normal mode
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
   F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-}, { prefix = "", mode = "o" })
+  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
+  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
+}, { prefix = "", mode = "o" }) -- deletion mode (d)
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
   F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-}, { prefix = "", mode = "v" })
+  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
+  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
+}, { prefix = "", mode = "v" }) -- v-line mode / line-selection move (V)
 wk.register({
   ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_incremental()<CR>", "expand code selection" },
   ["<BS>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_decremental()<CR>", "shrink code selection" },
-}, { prefix = "", mode = "x" })
--- n = normal mode, o = deletion mode (d), v = v-line mode = line-selection mode (V), x = visual mode = char-selection mode (v)
+}, { prefix = "", mode = "x" }) -- visual mode / char-selection mode (v)
 EOF
 
 "" COC START
