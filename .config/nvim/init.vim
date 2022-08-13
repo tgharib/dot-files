@@ -27,6 +27,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " Snippets database
 Plug 'natecraddock/sessions.nvim'
+Plug 'machakann/vim-sandwich'
 
 """ Dumb code
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -87,6 +88,19 @@ augroup end
 lua << EOF
 require("sessions").setup()
 EOF
+
+"" vim-sandwich
+
+let g:sandwich_no_default_key_mappings = 1
+silent! nmap <unique><silent> md <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+silent! nmap <unique><silent> mr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+silent! nmap <unique><silent> mdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+silent! nmap <unique><silent> mrb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+
+let g:operator_sandwich_no_default_key_mappings = 1
+silent! map <unique> ma <Plug>(operator-sandwich-add)
+silent! xmap <unique> md <Plug>(operator-sandwich-delete)
+silent! xmap <unique> mr <Plug>(operator-sandwich-replace)
 
 "" hop.nvim
 
