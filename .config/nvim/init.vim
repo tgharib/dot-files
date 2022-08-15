@@ -1,6 +1,5 @@
-
 " For editing multiple lines in vim, use a combination of `V:! sd`, `V:norm` and `V:norm@a` (a is a macro).
-" Vim motion options: f/F for horizontal, C-j/C-k for veritcal, /n*, dumb code navigation, smart code navigation
+" Vim motion options: f/F for horizontal, C-j/C-k for vertical, /n*, dumb code navigation, smart code navigation
 
 " Plugins Manager
 
