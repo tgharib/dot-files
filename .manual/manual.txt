@@ -10,7 +10,7 @@ On non-nixos machine:
 * Install nix-portable (github) to ~/bin/.
 * Append to .bashrc:
     PATH="${PATH:+${PATH}:}~/bin"
-    alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,helix,neovim,tree-sitter,gcc,nodejs}'
+    alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,helix,neovim,tree-sitter,nodejs}'
     # github:nixos/nixpkgs/nixos-unstable
     alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
     alias vim='nvim'
