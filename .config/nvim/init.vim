@@ -57,6 +57,13 @@ colorscheme NeoSolarized
 set background=dark
 set termguicolors " Force colorscheme colors with 24-bit support
 
+"" Auto-reload file changes outside of vim
+""" trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+""" notification after file change
+autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
 "" Markdown macros
 let @i ="o![](images/.png){width=60%}\<Esc>15hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
