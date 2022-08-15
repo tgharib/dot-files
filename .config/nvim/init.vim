@@ -241,8 +241,8 @@ wk.register({
     c = { ":bw<CR>", "close current buffer :bw" },
     C = { ":bufdo bw<CR>", "close all buffers :bufdo bw" },
     t = { ":tabonly<CR>", "tabs -> buffers" },
-    l = { ":SessionsLoad ", "load session" },
-    s = { ":SessionsSave ", "save session" },
+    l = { ":SessionsLoad! ", "load session" },
+    s = { ":SessionsSave! ", "save session" },
   },
   w = {
     name = "fix whitespace",
