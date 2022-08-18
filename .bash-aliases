@@ -5,4 +5,7 @@ alias asciify="perl -pe 's/[^[:ascii:]]//g'"
 cheat() {
   curl cheat.sh/"$1"
 }
+a() {
+  abduco -A "$1" "$1"
+}
 
