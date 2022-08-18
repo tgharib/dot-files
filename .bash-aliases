@@ -6,6 +6,11 @@ cheat() {
   curl cheat.sh/"$1"
 }
 a() {
+  if [ $# -eq 0 ]; then
+    abduco
+    return
+  fi
+
   abduco -A "$1" "$1"
 }
 
