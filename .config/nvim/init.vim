@@ -51,6 +51,7 @@ set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
 let $BASH_ENV = "~/.bash-aliases"
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 set hidden " Allow buffers to be hidden without saving
+set number " Enable line numbers by default
 
 "" Set colorscheme to NeoSolarized
 colorscheme NeoSolarized
@@ -77,13 +78,6 @@ augroup helpers
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
-  endfunction
-
-  "" Toggle line numbers for all buffers/windows/tabs
-  function! ToggleLineNumbers()
-    let current_buffer = bufnr()
-    tabdo windo bufdo set number!
-    execute 'buffer' current_buffer
   endfunction
 augroup end
 
@@ -254,7 +248,6 @@ wk.register({
   m = {
     name = "misc",
     w = { ":set wrap!<CR>", "toggle line wrap" },
-    l = { ":call ToggleLineNumbers()<CR>", "toggle line numbers" },
     ["?"] = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
     K = { ":map<CR>", "vim mapped keybinds" },
