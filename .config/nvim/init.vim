@@ -82,7 +82,7 @@ augroup helpers
   "" Toggle line numbers for all buffers/windows/tabs
   function! ToggleLineNumbers()
     let current_buffer = bufnr()
-    bufdo set number!
+    tabdo windo bufdo set number!
     execute 'buffer' current_buffer
   endfunction
 augroup end
