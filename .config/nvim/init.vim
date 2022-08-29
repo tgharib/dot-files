@@ -78,13 +78,6 @@ augroup helpers
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
   endfunction
-
-  "" Toggle line numbers for all buffers/windows/tabs
-  function! ToggleLineNumbers()
-    let current_buffer = bufnr()
-    tabdo windo set number!
-    execute 'buffer' current_buffer
-  endfunction
 augroup end
 
 " Plugins
@@ -254,7 +247,7 @@ wk.register({
   m = {
     name = "misc",
     w = { ":set wrap!<CR>", "toggle line wrap" },
-    l = { ":call ToggleLineNumbers()<CR>", "toggle line numbers" },
+    l = { ":tabdo windo bufdo set number!<CR>", "toggle line numbers" },
     ["?"] = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
     K = { ":map<CR>", "vim mapped keybinds" },
