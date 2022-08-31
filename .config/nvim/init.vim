@@ -248,6 +248,7 @@ wk.register({
   m = {
     name = "misc",
     w = { ":set wrap!<CR>", "toggle line wrap" },
+    l = { ":set number!<CR>", "toggle line numbers" },
     ["?"] = { ":Commands<CR>", "vim commands" },
     k = { ":help index<CR>", "vim keybinds" },
     K = { ":map<CR>", "vim mapped keybinds" },
