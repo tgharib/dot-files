@@ -4,6 +4,17 @@ export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
 set -o vi
 
 source .bash-aliases
+
+c() {
+	clifm "--cd-on-quit" "$@"
+	dir="$(grep "^\*" "${XDG_CONFIG_HOME:=${HOME}/.config}/clifm/.last" 2>/dev/null | cut -d':' -f2)";
+	if [ -d "$dir" ]; then
+		cd -- "$dir" || return 1
+	else
+		printf "No directory specified\n" >&2
+	fi
+}
+
 # What follows is a copy+paste of fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`) and fzf's completion.bash
 
 #     ____      ____

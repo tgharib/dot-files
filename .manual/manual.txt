@@ -1,6 +1,6 @@
 Workflow:
 * Tiling wm in windows and Linux with 1 tab per terminal
-* CLI tools like rg, fd, fzf, nnn for CLI
+* CLI tools like rg, fd, fzf, clifm for CLI
 * Abduco for decoupling from ssh
 * Vim has buffers
 
@@ -10,7 +10,7 @@ On non-nixos machine:
 * Install nix-portable (github) to ~/bin/.
 * Append to .bashrc:
     PATH="${PATH:+${PATH}:}~/bin"
-    alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,helix,neovim,tree-sitter,nodejs}'
+    alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,clifm,helix,neovim,tree-sitter,nodejs}'
     # github:nixos/nixpkgs/nixos-unstable
     alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
     alias vim='nvim'
