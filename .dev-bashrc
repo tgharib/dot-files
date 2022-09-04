@@ -15,6 +15,33 @@ c() {
 	fi
 }
 
+p() {
+	# Options to be passed to clifm
+	CLIFM_OPTIONS=""
+
+	# shellcheck disable=SC2086
+	clifm $CLIFM_OPTIONS
+	sel_file="$(find "${XDG_CONFIG_HOME:=${HOME}/.config}/clifm" -name 'selbox*')"
+	if [ -z "$sel_file" ]; then
+		sel_file="$(find /tmp/clifm -name 'selbox*')"
+	fi
+
+	if [ -f "$sel_file" ]; then
+		cmd=""
+		while [ -z "$cmd" ]; do
+			printf "Enter command ('q' to quit): "
+			read -r cmd
+		done
+		# shellcheck disable=SC2086
+		[ "$cmd" != "q" ] && sed 's/ /\\ /g' "$sel_file" | xargs $cmd
+		rm -- "$sel_file"
+	else
+		printf "No selected files\n" >&2
+	fi
+}
+
+[ -n "$CLIFM" ] && PS1="$PS1"'(clifm) '
+
 # What follows is a copy+paste of fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`) and fzf's completion.bash
 
 #     ____      ____
