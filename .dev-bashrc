@@ -3,7 +3,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
 set -o vi
 
-source .bash-aliases
+source ~/.bash-aliases
 
 c() {
 	clifm "--cd-on-quit" "--no-tips" "--no-restore-last-path" "$@"
