@@ -31,7 +31,6 @@ Plug 'machakann/vim-sandwich'
 """ Dumb code
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
 """ Smart code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
