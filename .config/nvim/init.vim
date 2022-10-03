@@ -211,6 +211,7 @@ wk.register({
       s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
       b = { "<Plug>(coc-codeaction)", "code action on current buffer" },
     },
+    f = { ":call CocActionAsync('format')<CR>", "format buffer" },
     l = { ":<C-u>CocList diagnostics<CR>", "list diagnostics" },
     r = { "<Plug>(coc-rename)", "rename symbol" },
     s = { ":call ShowDocumentation()<CR>", "show documentation" },
@@ -257,21 +258,11 @@ wk.register({
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
-  c = {
+  s = {
     name = "smart code (coc)",
-    s = {
-      name = "select",
-      i = { "<Plug>(coc-funcobj-i)", "select inner function" },
-      f = { "<Plug>(coc-funcobj-a)", "select all function" },
-      n = { "<Plug>(coc-classobj-i)", "select inner class" },
-      c = { "<Plug>(coc-classobj-a)", "select all class" },
-    },
-    a = {
-      name = "actions",
-      s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
-    },
+    f = { "<Plug>(coc-format-selected)", "format buffer" },
   },
-}, { prefix = "<leader>", mode = "o" })
+}, { prefix = "<leader>", mode = "x" })
 
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
@@ -285,24 +276,30 @@ wk.register({
   ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(0)<CR>", "go to previous symbol usage" },
   [")"] = { "<Plug>(coc-diagnostic-next)", "go to next diagnostic" },
   ["("] = { "<Plug>(coc-diagnostic-prev)", "go to previous diagnostic" },
-}, { prefix = "", mode = "n" }) -- normal mode
+}, { prefix = "", mode = "n" })
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
   F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
   t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
   T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
-}, { prefix = "", mode = "o" }) -- deletion mode (d)
-wk.register({
-  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
-  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
-  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
-}, { prefix = "", mode = "v" }) -- v-line mode / line-selection move (V)
+}, { prefix = "", mode = "o" })
 wk.register({
   ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_incremental()<CR>", "expand code selection" },
   ["<BS>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_decremental()<CR>", "shrink code selection" },
-}, { prefix = "", mode = "x" }) -- visual mode / char-selection mode (v)
+  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
+  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
+  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
+  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
+}, { prefix = "", mode = "x" })
 EOF
+
+" :nmap - Display normal mode maps
+" :imap - Display insert mode maps
+" :vmap - Display visual and select mode maps
+" :smap - Display select mode maps <-- select mode is never used
+" :xmap - Display visual mode maps
+" :cmap - Display command-line mode maps i.e. after pressing :
+" :omap - Display operator pending mode maps e.g. deletion after pressing d
 
 "" COC START
 set nobackup " Some servers have issues with backup files, see #649.
@@ -339,7 +336,6 @@ endfunction
 augroup mygroup
   autocmd!
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp') " Update signature help on jump placeholder
-  autocmd user cocstatuschange,cocdiagnosticchange call lightline#update() " Use autocmd to force lightline update
 augroup end
 
 if has('nvim-0.4.0') || has('patch-8.2.0750') " Remap <C-f> and <C-b> for scroll float windows/popups.
