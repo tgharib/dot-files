@@ -8,18 +8,25 @@ NixOS machine uses `shells.nix` and `dev-tools.nix`.
 
 On non-nixos machine:
 * Install nix-portable (github) to ~/bin/:
-    mkdir ~/bin
-    cd ~/bin
-    wget nix-portable
-    chmod +x nix-portable
-    ln -s ./nix-portable ./nix
+
+```
+mkdir ~/bin
+cd ~/bin
+wget nix-portable
+chmod +x nix-portable
+ln -s ./nix-portable ./nix
+```
+
 * Append to .bashrc:
-    PATH="${PATH:+${PATH}:}~/bin"
-    alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,clifm,helix,neovim,tree-sitter,nodejs}'
-    # github:nixos/nixpkgs/nixos-unstable
-    alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
-    alias vim='nvim'
-    source ~/.dev-bashrc
+
+```
+PATH="${PATH:+${PATH}:}~/bin"
+alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,clifm,helix,neovim,tree-sitter,nodejs}'
+# github:nixos/nixpkgs/nixos-unstable
+alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
+alias vim='nvim'
+source ~/.dev-bashrc
+```
 
 On windows machine:
 * Checkout windows branch
