@@ -4,7 +4,7 @@ Workflow:
 * Abduco for decoupling from ssh
 * Vim has buffers
 
-NixOS machine uses `shells.nix`.
+NixOS machine uses `shells.nix` and `dev-tools.nix`.
 
 On non-nixos machine:
 * Install nix-portable (github) to ~/bin/.
