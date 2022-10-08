@@ -9,7 +9,7 @@ ln -s ./nix-portable ./nix
 cat << 'EOF' > ~/.bashrc
 
 PATH="${PATH:+${PATH}:}~/bin"
-alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,clifm,neovim,tree-sitter,nodejs}'
+alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,clifm,watchexec,neovim,tree-sitter,nodejs}'
 # github:nixos/nixpkgs/nixos-unstable
 alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
 alias vim='nvim'
