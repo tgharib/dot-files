@@ -18,11 +18,8 @@ EOF
 cat << 'EOF' >> ~/.gitconfig
 
 [core]
-  pager = "delta"
+  pager = "less -XF"
 
-[delta]
-  syntax-theme = "zenburn"
-
-[interactive]
-  diffFilter = "delta --color-only"
+[diff]
+  external = "difft --color auto --background dark --display inline"
 EOF

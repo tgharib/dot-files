@@ -1,4 +1,5 @@
 shopt -s expand_aliases
+shopt -s dotglob
 alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable'
 alias sc='wl-copy'
 alias asciify="perl -pe 's/[^[:ascii:]]//g'"
@@ -14,4 +15,3 @@ a() {
 
   abduco -A "$1" "$1"
 }
-
