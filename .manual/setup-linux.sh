@@ -15,3 +15,14 @@ alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
 alias vim='nvim'
 source ~/.dev-bashrc
 EOF
+
+cat << 'EOF' > ~/.gitconfig
+[core]
+  pager = "delta"
+
+[delta]
+  syntax-theme = "zenburn"
+
+[interactive]
+  diffFilter = "delta --color-only"
+EOF
