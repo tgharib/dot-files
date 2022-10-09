@@ -6,7 +6,7 @@ wget https://github.com/DavHau/nix-portable/releases/download/v009/nix-portable
 chmod +x nix-portable
 ln -s ./nix-portable ./nix
 
-cat << 'EOF' > ~/.bashrc
+cat << 'EOF' >> ~/.bashrc
 
 PATH="${PATH:+${PATH}:}~/bin"
 alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-22.05#{ripgrep,sd,fd,fzf,abduco,lazygit,du-dust,bat,btop,libqalculate,clifm,delta,neovim,tree-sitter,nodejs}'
@@ -16,7 +16,7 @@ alias vim='nvim'
 source ~/.dev-bashrc
 EOF
 
-cat << 'EOF' > ~/.gitconfig
+cat << 'EOF' >> ~/.gitconfig
 [core]
   pager = "delta"
 
