@@ -17,6 +17,7 @@ source ~/.dev-bashrc
 EOF
 
 cat << 'EOF' >> ~/.gitconfig
+
 [core]
   pager = "delta"
 
