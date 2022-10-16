@@ -176,10 +176,6 @@ require'nvim-treesitter.configs'.setup {
       disable = disable_for_large_files,
       clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
     },
-    highlight_current_scope = {
-      enable = true,
-      disable = disable_for_large_files,
-    },
   },
 }
 EOF
