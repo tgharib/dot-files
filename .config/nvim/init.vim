@@ -31,6 +31,7 @@ Plug 'machakann/vim-sandwich'
 """ Dumb code
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
 """ Smart code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -174,6 +175,10 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       disable = disable_for_large_files,
       clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+    },
+    highlight_current_scope = {
+      enable = true,
+      disable = disable_for_large_files,
     },
   },
 }
