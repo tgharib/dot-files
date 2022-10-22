@@ -60,19 +60,21 @@ set background=dark
 set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Auto-reload file changes outside of vim
-""" trigger `autoread` when files changes on disk
-set autoread
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-""" notification after file change
-autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+augroup autoreload
+  autocmd!
+  """ trigger `autoread` when files changes on disk
+  set autoread
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+  """ notification after file change
+  autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+augroup end
 
 "" Markdown macros
 let @i ="o![](images/.png){width=60%}\<Esc>15hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
 
 " Helper functions
-
-augroup helpers
+augroup helper_funcs
   autocmd!
   "" Trim trailing whitespace function
   function! TrimWhitespace()
@@ -85,16 +87,17 @@ augroup end
 " Plugins
 
 "" vim-oscyank
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+augroup ssh_yank
+  autocmd!
+  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+augroup end
 
 "" sessions.nvim
-
 lua << EOF
 require("sessions").setup()
 EOF
 
 "" vim-sandwich
-
 let g:sandwich_no_default_key_mappings = 1
 silent! nmap <unique><silent> md <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 silent! nmap <unique><silent> mr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
@@ -107,13 +110,11 @@ silent! xmap <unique> md <Plug>(operator-sandwich-delete)
 silent! xmap <unique> mr <Plug>(operator-sandwich-replace)
 
 "" hop.nvim
-
 lua << EOF
 require'hop'.setup()
 EOF
 
 "" Ultisnips
-
 """ Trigger configuration. You need to change this to something other than <tab> if you use YouCompleteMe or completion-nvim
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -121,7 +122,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "" nvim-treesitter
 """ Do NOT use treesitter for folding as it cannot be disabled for large files
-
 lua << EOF
 disable_for_large_files = function(lang, bufnr) -- Disable in large buffers
   return vim.api.nvim_buf_line_count(bufnr) > 50000
@@ -338,7 +338,7 @@ function! ShowDocumentation()
   endif
 endfunction
 
-augroup mygroup
+augroup coc_signature
   autocmd!
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp') " Update signature help on jump placeholder
 augroup end
