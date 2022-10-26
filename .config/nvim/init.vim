@@ -89,7 +89,7 @@ augroup end
 "" vim-oscyank
 augroup ssh_yank
   autocmd!
-  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+  autocmd TextYankPost * if v:event.operator is 'y' || v:event.operator is 'd' | execute 'OSCYankReg "' | endif
 augroup end
 
 "" sessions.nvim
