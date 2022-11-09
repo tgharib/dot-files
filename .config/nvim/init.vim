@@ -209,6 +209,7 @@ wk.register({
       O = { ":<C-u>CocList -I symbols<CR>", "go to symbol in workspace" },
       r = { "<Plug>(coc-references)", "go to references" },
       t = { "<Plug>(coc-type-definition)", "go to type definition" },
+      n = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header" },
     },
     a = {
       name = "actions",
