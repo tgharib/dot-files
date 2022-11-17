@@ -1,5 +1,4 @@
 {
-  "codeLens.enable": true,
   "languageserver": {
     "nix": {
       "command": "rnix-lsp",
