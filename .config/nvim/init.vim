@@ -194,6 +194,9 @@ vim.g.symbols_outline = {
 EOF
 
 "" which-key.nvim
+" Some coc commands can be found in:
+" https://github.com/neoclide/coc.nvim/blob/master/data/schema.json
+" https://github.com/neoclide/coc.nvim/blob/master/doc/coc-config.txt
 lua << EOF
 require("which-key").setup {
 }
@@ -222,6 +225,7 @@ wk.register({
     r = { "<Plug>(coc-rename)", "rename symbol" },
     s = { ":call ShowDocumentation()<CR>", "show documentation" },
     o = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports" },
+    t = { ":CocCommand document.toggleInlayHint<CR>", "toggle inlay hints" },
   },
   d = {
     name = "dumb code",
