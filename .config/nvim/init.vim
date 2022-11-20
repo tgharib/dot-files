@@ -26,7 +26,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' " Snippets database
 Plug 'natecraddock/sessions.nvim'
-Plug 'machakann/vim-sandwich'
+Plug 'machakann/vim-sandwich' " Replace surrounding brackets/parentheses
 Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 """ Dumb code
