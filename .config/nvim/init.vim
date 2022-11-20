@@ -99,15 +99,7 @@ EOF
 
 "" vim-sandwich
 let g:sandwich_no_default_key_mappings = 1
-silent! nmap <unique><silent> md <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-silent! nmap <unique><silent> mr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-silent! nmap <unique><silent> mdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
-silent! nmap <unique><silent> mrb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
-
 let g:operator_sandwich_no_default_key_mappings = 1
-silent! map <unique> ma <Plug>(operator-sandwich-add)
-silent! xmap <unique> md <Plug>(operator-sandwich-delete)
-silent! xmap <unique> mr <Plug>(operator-sandwich-replace)
 
 "" hop.nvim
 lua << EOF
@@ -265,6 +257,11 @@ wk.register({
     v = { ":Colors<CR>", "vim color schemes" },
     f = { ":echo expand('%:p')<CR>", "show file path" },
     h = { ":set hlsearch!<CR>", "toggle search highlight" },
+    a = { "<Plug>(operator-sandwich-add)", "add surroundings" },
+    d = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "delete surroundings" },
+    D = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "delete surroundings (automatic)" },
+    r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
+    R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
