@@ -130,6 +130,14 @@ require'nvim-treesitter.configs'.setup {
     disable = disable_for_large_files,
     additional_vim_regex_highlighting = false,
   },
+  -- nvim-treesitter-cpp-tools
+  nt_cpp_tools = {
+      enable = true,
+      preview = {
+          quit = 'q', -- optional keymapping for quit preview
+          accept = '<tab>' -- optional keymapping for accept preview
+      },
+  }
 }
 
 -- nvim-treesitter-context
@@ -157,20 +165,6 @@ require'treesitter-context'.setup {
   zindex = 20, -- The Z-index of the context window
   mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
 }
-EOF
-
-"" nvim-treesitter-cpp-tools
-lua << EOF
-require('nvim-treesitter.configs').setup({
-    -- ...
-    nt_cpp_tools = {
-        enable = true,
-        preview = {
-            quit = 'q', -- optional keymapping for quit preview
-            accept = '<tab>' -- optional keymapping for accept preview
-        },
-    }
-})
 EOF
 
 "" symbols-outline.nvim
