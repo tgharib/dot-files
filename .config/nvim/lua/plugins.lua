@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
   -- Dumb code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/nvim-treesitter-context' }
+  use { 'nvim-treesitter/nvim-treesitter-refactor' } -- used for treesitter highlight
   use { 'ThePrimeagen/refactoring.nvim', requires = { {'nvim-lua/plenary.nvim'}, {'nvim-treesitter/nvim-treesitter'} }
 }
 
