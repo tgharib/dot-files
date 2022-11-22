@@ -227,6 +227,15 @@ wk.register({
     s = { ":Snippets<CR>", "snippets" },
     c = { ":TSContextToggle<CR>", "toggle context" },
   },
+  c = {
+    name = "c++ refactor",
+    ["1"] = { ":TSCppDefineClassFunc<CR>", "Implement out of class member functions" },
+    ["2"] = { ":TSCppMakeConcreteClass<CR>", "Implement all the pure virtual functions" },
+    ["3"] = { ":TSCppRuleOf3<CR>", "Modify class to obey Rule of 3" },
+    ["4"] = { ":TSCppRuleOf5<CR>", "Modify class to obey Rule of 5" },
+    r = { "<Plug>(coc-rename)", "rename symbol (repeat)" },
+    s = { "<Plug>(coc-codeaction-selected)", "code action on selected (repeat)" },
+  },
   b = {
     name = "buffers",
     f = { ":Files<CR>", "open file" },
