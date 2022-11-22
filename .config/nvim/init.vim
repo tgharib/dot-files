@@ -36,6 +36,9 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 """ Smart code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+""" C++
+Plug 'Badhi/nvim-treesitter-cpp-tools'
+
 call plug#end()
 syntax off " Vim-Plug enables vim's syntax highlighting but we use treesitter instead
 
@@ -154,6 +157,20 @@ require'treesitter-context'.setup {
   zindex = 20, -- The Z-index of the context window
   mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
 }
+EOF
+
+"" nvim-treesitter-cpp-tools
+lua << EOF
+require('nvim-treesitter.configs').setup({
+    -- ...
+    nt_cpp_tools = {
+        enable = true,
+        preview = {
+            quit = 'q', -- optional keymapping for quit preview
+            accept = '<tab>' -- optional keymapping for accept preview
+        },
+    }
+})
 EOF
 
 "" symbols-outline.nvim
