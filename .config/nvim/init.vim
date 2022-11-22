@@ -32,7 +32,6 @@ Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 """ Dumb code
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
 """ Smart code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -128,13 +127,9 @@ require'nvim-treesitter.configs'.setup {
     disable = disable_for_large_files,
     additional_vim_regex_highlighting = false,
   },
-  incremental_selection = {
-    enable = true,
-    disable = disable_for_large_files,
-  },
   indent = {
-    enable = true,
-    disable = disable_for_large_files,
+    enable = false,
+    disable = false,
   },
 }
 
@@ -163,17 +158,6 @@ require'treesitter-context'.setup {
   zindex = 20, -- The Z-index of the context window
   mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
 }
-
--- nvim-treesitter-refactor
-require'nvim-treesitter.configs'.setup {
-  refactor = {
-    highlight_definitions = {
-      enable = true,
-      disable = disable_for_large_files,
-      clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
-    },
-  },
-}
 EOF
 
 "" symbols-outline.nvim
@@ -184,6 +168,11 @@ vim.g.symbols_outline = {
     position = 'left',
 }
 EOF
+
+" Remap keys for refactor code actions.
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 
 "" which-key.nvim
 " Some coc commands can be found in:
@@ -270,9 +259,7 @@ wk.register({
     f = { "<Plug>(coc-format-selected)", "format buffer" },
     a = {
       name = "actions",
-      l = { "<Plug>(coc-fix-current)", "quick fix on current line" },
       s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
-      b = { "<Plug>(coc-codeaction)", "code action on current buffer" },
     },
   },
 }, { prefix = "<leader>", mode = "x" })
@@ -284,11 +271,6 @@ wk.register({
   T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
-  ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>", "start code selection" },
-  ["<A-0>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_next_usage(0)<CR>", "go to next symbol usage" },
-  ["<A-9>"] = { ":lua require'nvim-treesitter-refactor.navigation'.goto_previous_usage(0)<CR>", "go to previous symbol usage" },
-  [")"] = { "<Plug>(coc-diagnostic-next)", "go to next diagnostic" },
-  ["("] = { "<Plug>(coc-diagnostic-prev)", "go to previous diagnostic" },
 }, { prefix = "", mode = "n" })
 wk.register({
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
@@ -297,8 +279,6 @@ wk.register({
   T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
 }, { prefix = "", mode = "o" })
 wk.register({
-  ["<CR>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_incremental()<CR>", "expand code selection" },
-  ["<BS>"] = { ":lua require'nvim-treesitter.incremental_selection'.node_decremental()<CR>", "shrink code selection" },
   f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
   F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
   t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
