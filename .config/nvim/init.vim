@@ -153,6 +153,17 @@ require'treesitter-context'.setup {
   zindex = 20, -- The Z-index of the context window
   mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
 }
+
+-- nvim-treesitter-refactor (used for treesitter highlight)
+require'nvim-treesitter.configs'.setup {
+  refactor = {
+    highlight_definitions = {
+      enable = true,
+      disable = disable_for_large_files,
+      clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+    },
+  },
+}
 EOF
 
 "" symbols-outline.nvim
