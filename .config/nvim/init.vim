@@ -127,10 +127,6 @@ require'nvim-treesitter.configs'.setup {
     disable = disable_for_large_files,
     additional_vim_regex_highlighting = false,
   },
-  indent = {
-    enable = false,
-    disable = false,
-  },
 }
 
 -- nvim-treesitter-context
@@ -169,11 +165,6 @@ vim.g.symbols_outline = {
 }
 EOF
 
-" Remap keys for refactor code actions.
-nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
-xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-
 "" which-key.nvim
 " Some coc commands can be found in:
 " https://github.com/neoclide/coc.nvim/blob/master/data/schema.json
@@ -189,8 +180,8 @@ wk.register({
       name = "navigation",
       d = { "<Plug>(coc-definition)", "go to definition" },
       D = { "<Plug>(coc-implementation)", "go to implementation" },
-      o = { ":<C-u>CocList outline<CR>", "go to symbol in document outline" },
-      O = { ":<C-u>CocList -I symbols<CR>", "go to symbol in workspace" },
+      o = { ":<C-u>CocList outline<CR>", "search symbol in document outline" },
+      O = { ":<C-u>CocList -I symbols<CR>", "search symbol in workspace" },
       r = { "<Plug>(coc-references)", "go to references" },
       t = { "<Plug>(coc-type-definition)", "go to type definition" },
       n = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header" },
@@ -213,8 +204,8 @@ wk.register({
     n  = {
       name = "navigation",
       r = { ":Rg! ", "rg" },
-      l = { ":BLines<CR>", "lines in current buffer" },
-      L = { ":Lines<CR>", "lines in all buffers" },
+      b = { ":BLines<CR>", "search in current buffer" },
+      B = { ":Lines<CR>", "search in all buffers" },
     },
     s = { ":Snippets<CR>", "snippets" },
     c = { ":TSContextToggle<CR>", "toggle context" },
