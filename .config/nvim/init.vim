@@ -1,6 +1,5 @@
 " For editing multiple lines in vim, use a combination of `V:! sd` and macros. Occasionally, use `V:norm` and `V:norm@a` (a is a macro) but they do not work well when new lines are added. For scripts, use sd from CLI.
 " Vim motion options: f/F for horizontal, C-j/C-k for vertical, /n*, dumb code navigation, smart code navigation
-syntax off " Vim-Plug enables vim's syntax highlighting but we use treesitter instead
 
 " Options
 let mapleader = " "
@@ -15,6 +14,7 @@ let $BASH_ENV = "~/.bash-aliases"
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 set hidden " Allow buffers to be hidden without saving
 set number " Enable line numbers by default
+syntax off " Rely on treesitter only for syntax highlighting
 
 "" Set colorscheme to NeoSolarized
 colorscheme NeoSolarized
@@ -49,6 +49,26 @@ augroup end
 " Plugins
 
 "" packer.nvim
+""" Bootstrap
+lua << EOF
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
+return require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
+end)
+EOF
+""" Enable packer
 lua require('plugins')
 
 "" vim-oscyank
