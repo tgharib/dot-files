@@ -227,6 +227,12 @@ wk.register({
     B = { "<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>", "extract block to file (refactoring.nvim)" },
     v = { "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
   },
+  d = {
+    name = "debug",
+    l = { ":lua require('refactoring').debug.printf({below = false})<CR>", "printf line (refactoring.nvim)" },
+    v = { ":lua require('refactoring').debug.print_var({ normal = true })<CR>", "printf variable (refactoring.nvim)" },
+    c = { ":lua require('refactoring').debug.cleanup({})<CR>", "cleanup (refactoring.nvim)" },
+  },
   w = {
     name = "whitespace",
     r = { ":retab<CR>", "replace tabs with spaces" },
@@ -257,6 +263,10 @@ wk.register({
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
+  d = {
+    name = "debug",
+    s = { ":lua require('refactoring').debug.print_var({})<CR>", "printf selection (refactoring.nvim)" },
+  },
   r = {
     name = "refactor/transform",
     f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
