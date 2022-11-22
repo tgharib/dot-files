@@ -1,45 +1,5 @@
 " For editing multiple lines in vim, use a combination of `V:! sd` and macros. Occasionally, use `V:norm` and `V:norm@a` (a is a macro) but they do not work well when new lines are added. For scripts, use sd from CLI.
 " Vim motion options: f/F for horizontal, C-j/C-k for vertical, /n*, dumb code navigation, smart code navigation
-
-" Plugins Manager
-
-"" Automatically install Vim-Plug
-let data_dir = stdpath('data') . '/site'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-"" Plugins will be downloaded under the specified directory.
-call plug#begin(stdpath('data') . '/plugged')
-
-"" Plugin List
-""" Cosmetic
-Plug 'overcache/NeoSolarized'
-Plug 'itchyny/lightline.vim'
-
-""" Regular
-Plug 'folke/which-key.nvim'
-Plug 'phaazon/hop.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets' " Snippets database
-Plug 'natecraddock/sessions.nvim'
-Plug 'machakann/vim-sandwich' " Replace surrounding brackets/parentheses
-Plug 'ojroques/vim-oscyank', {'branch': 'main'}
-
-""" Dumb code
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-context'
-
-""" Smart code
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-""" C++
-Plug 'Badhi/nvim-treesitter-cpp-tools'
-
-call plug#end()
 syntax off " Vim-Plug enables vim's syntax highlighting but we use treesitter instead
 
 " Options
@@ -87,6 +47,9 @@ augroup helper_funcs
 augroup end
 
 " Plugins
+
+"" packer.nvim
+lua require('plugins')
 
 "" vim-oscyank
 augroup ssh_yank
