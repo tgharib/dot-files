@@ -19,10 +19,12 @@ return require('packer').startup(function(use)
   -- Dumb code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/nvim-treesitter-context' }
+  use { 'ThePrimeagen/refactoring.nvim', requires = { {'nvim-lua/plenary.nvim'}, {'nvim-treesitter/nvim-treesitter'} }
+}
 
   -- Smart code
   use { 'neoclide/coc.nvim', branch = 'release' }
 
   -- C++
-  use { requires = { "nvim-treesitter/nvim-treesitter" }, "Badhi/nvim-treesitter-cpp-tools", }
+  use { requires = { 'nvim-treesitter/nvim-treesitter' }, 'Badhi/nvim-treesitter-cpp-tools', }
 end)

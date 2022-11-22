@@ -71,6 +71,11 @@ EOF
 """ Enable packer
 lua require('plugins')
 
+"" refactoring.nvim
+lua << EOF
+require('refactoring').setup({})
+EOF
+
 "" vim-oscyank
 augroup ssh_yank
   autocmd!
@@ -236,10 +241,10 @@ wk.register({
     f = { ":echo expand('%:p')<CR>", "show file path" },
     h = { ":set hlsearch!<CR>", "toggle search highlight" },
     a = { "<Plug>(operator-sandwich-add)", "add surroundings" },
-    d = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "delete surroundings" },
-    D = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "delete surroundings (automatic)" },
-    r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
-    R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
+    d = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "delete surroundings (automatic)" },
+    D = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "delete surroundings" },
+    r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
+    R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
