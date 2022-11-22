@@ -208,7 +208,7 @@ wk.register({
     },
     a = {
       name = "actions",
-      q = { "<Plug>(coc-fix-current)", "quick fix on current line" },
+      l = { "<Plug>(coc-fix-current)", "quick fix on current line" },
       s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
       b = { "<Plug>(coc-codeaction)", "code action on current buffer" },
     },
@@ -268,6 +268,12 @@ wk.register({
   s = {
     name = "smart code (coc)",
     f = { "<Plug>(coc-format-selected)", "format buffer" },
+    a = {
+      name = "actions",
+      l = { "<Plug>(coc-fix-current)", "quick fix on current line" },
+      s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
+      b = { "<Plug>(coc-codeaction)", "code action on current buffer" },
+    },
   },
 }, { prefix = "<leader>", mode = "x" })
 
