@@ -208,10 +208,12 @@ wk.register({
     },
     s = { ":Snippets<CR>", "snippets" },
     c = { ":TSContextToggle<CR>", "toggle context" },
+    R = { ":lua require('refactoring').select_refactor()<CR>", "refactoring.nvim" },
   },
   c = {
     name = "c++ refactor",
     r = { "<Plug>(coc-rename)", "rename symbol (repeat)" },
+    R = { ":lua require('refactoring').select_refactor()<CR>", "refactoring.nvim" },
   },
   b = {
     name = "buffers",
@@ -256,6 +258,10 @@ wk.register({
       s = { "<Plug>(coc-codeaction-selected)", "code action on selected" },
     },
   },
+  d = {
+    name = "dumb code",
+    R = { ":lua require('refactoring').select_refactor()<CR>", "refactoring.nvim" },
+  },
   c = {
     name = "c++ refactor",
     ["1"] = { ":TSCppDefineClassFunc<CR>", "Implement out of class member functions" },
@@ -263,6 +269,7 @@ wk.register({
     ["3"] = { ":TSCppRuleOf3<CR>", "Modify class to obey Rule of 3" },
     ["4"] = { ":TSCppRuleOf5<CR>", "Modify class to obey Rule of 5" },
     s = { "<Plug>(coc-codeaction-selected)", "code action on selected (repeat)" },
+    R = { ":lua require('refactoring').select_refactor()<CR>", "refactoring.nvim" },
   },
 }, { prefix = "<leader>", mode = "x" })
 
