@@ -1,4 +1,4 @@
-" For editing multiple lines in vim, use a combination of `V:! sd` and macros. Occasionally, use `V:norm` and `V:norm@a` (a is a macro) but they do not work well when new lines are added. For scripts, use sd from CLI.
+" or editing multiple lines in vim, use a combination of `V:! sd` and macros. Occasionally, use `V:norm` and `V:norm@a` (a is a macro) but they do not work well when new lines are added. For scripts, use sd from CLI.
 " Vim motion options: f/F for horizontal, C-j/C-k for vertical, /n*, dumb code navigation, smart code navigation
 
 " Options
@@ -14,6 +14,8 @@ let $BASH_ENV = "~/.bash-aliases"
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 set hidden " Allow buffers to be hidden without saving
 set number " Enable line numbers by default
+set expandtab " Spaces-only indenation https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
+set softtabstop=-1 " Spaces-only indenation
 syntax off " Rely on treesitter only for syntax highlighting
 
 "" Set colorscheme to NeoSolarized
@@ -195,61 +197,61 @@ wk.register({
     l = { ":SessionsLoad! ", "load session" },
     s = { ":SessionsSave! ", "save session" },
   },
-  n = {
-    name = "navigate",
+  g = {
+    name = "go to",
     d = { "<Plug>(coc-definition)", "go to definition (coc)" },
     D = { "<Plug>(coc-implementation)", "go to implementation (coc)" },
     r = { "<Plug>(coc-references)", "go to references (coc)" },
     t = { "<Plug>(coc-type-definition)", "go to type definition (coc)" },
     n = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header (coc)" },
   },
-  s = {
+  ["/"] = {
     name = "search",
-    o = { ":<C-u>CocList outline<CR>", "search symbol in document outline (coc)" },
-    O = { ":<C-u>CocList -I symbols<CR>", "search symbol in workspace (coc)" },
+    s = { ":<C-u>CocList outline<CR>", "search symbol in document outline (coc)" },
+    S = { ":<C-u>CocList -I symbols<CR>", "search symbol in workspace (coc)" },
+    t = { ":BLines<CR>", "search text in current buffer" },
+    T = { ":Lines<CR>", "search text in all buffers" },
     r = { ":Rg! ", "rg text" },
-    b = { ":BLines<CR>", "search text in current buffer" },
-    B = { ":Lines<CR>", "search text in all buffers" },
   },
-  a = {
-    name = "action/errors",
+  f = {
+    name = "fix error",
     e = { ":<C-u>CocList diagnostics<CR>", "list errors/diagnostics (coc)" },
-    l = { "<Plug>(coc-fix-current)", "code action on current line (coc)" },
-    b = { "<Plug>(coc-codeaction)", "code action on current buffer (coc)" },
+    l = { "<Plug>(coc-fix-current)", "fix error on current line (coc)" },
+    b = { "<Plug>(coc-codeaction)", "fix error on current buffer (coc)" },
   },
   r = {
     name = "refactor/transform",
-    s = { ":Snippets<CR>", "snippets" },
     f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
     o = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports (coc)" },
     r = { "<Plug>(coc-rename)", "rename symbol (coc)" },
     b = { "<Cmd>lua require('refactoring').refactor('Extract Block')<CR>", "extract block (refactoring.nvim)" },
     B = { "<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>", "extract block to file (refactoring.nvim)" },
     v = { "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
+    p = {
+      name = "printf",
+      l = { ":lua require('refactoring').debug.printf({below = false})<CR>", "printf line (refactoring.nvim)" },
+      v = { ":lua require('refactoring').debug.print_var({ normal = true })<CR>", "printf variable (refactoring.nvim)" },
+      c = { ":lua require('refactoring').debug.cleanup({})<CR>", "cleanup (refactoring.nvim)" },
+    },
+    w = {
+      name = "whitespace",
+      r = { ":retab<CR>", "replace tabs with spaces" },
+      ["2"] = { ":set tabstop=2 shiftwidth=2<CR>", "set tabs to 2 spaces" },
+      ["4"] = { ":set tabstop=4 shiftwidth=4<CR>", "set tabs to 4 spaces" },
+      t = { ":call TrimWhitespace()<CR>", "trim whitespace" },
+    },
+    s = {
+      name = "surroundings",
+      a = { "<Plug>(operator-sandwich-add)", "add surroundings" },
+      d = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "delete surroundings (automatic)" },
+      D = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "delete surroundings" },
+      r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
+      R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
+    },
+    S = { ":Snippets<CR>", "snippets" },
   },
-  d = {
-    name = "debug",
-    l = { ":lua require('refactoring').debug.printf({below = false})<CR>", "printf line (refactoring.nvim)" },
-    v = { ":lua require('refactoring').debug.print_var({ normal = true })<CR>", "printf variable (refactoring.nvim)" },
-    c = { ":lua require('refactoring').debug.cleanup({})<CR>", "cleanup (refactoring.nvim)" },
-  },
-  w = {
-    name = "whitespace",
-    r = { ":retab<CR>", "replace tabs with spaces" },
-    ["2"] = { ":setlocal expandtab ts=2 sw=2<CR>", "set tabs to 2 spaces" },
-    ["4"] = { ":setlocal expandtab ts=4 sw=4<CR>", "set tabs to 4 spaces" },
-    t = { ":call TrimWhitespace()<CR>", "trim whitespace" },
-  },
-  p = {
-    name = "parentheses edit",
-    a = { "<Plug>(operator-sandwich-add)", "add surroundings" },
-    d = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "delete surroundings (automatic)" },
-    D = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "delete surroundings" },
-    r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
-    R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
-  },
-  o = {
-    name = "options",
+  t = {
+    name = "toggles",
     w = { ":set wrap!<CR>", "toggle line wrap" },
     l = { ":set number!<CR>", "toggle line numbers" },
     ["?"] = { ":Commands<CR>", "vim commands" },
