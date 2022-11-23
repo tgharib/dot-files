@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
   use 'natecraddock/sessions.nvim'
   use 'machakann/vim-sandwich' -- Replace surrounding brackets/parentheses
   use { 'ojroques/vim-oscyank', branch = 'main' }
+  use 'Darazaki/indent-o-matic'
 
   -- Dumb code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
