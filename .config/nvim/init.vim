@@ -34,7 +34,7 @@ augroup autoreload
 augroup end
 
 "" Markdown macros
-let @i ="o![](images/.png){width=60%}\<Esc>15hi"
+let @i ="o![](images/){width=60%}\<Esc>11hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
 
 " Helper functions
