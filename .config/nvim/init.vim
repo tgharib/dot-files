@@ -204,7 +204,7 @@ wk.register({
     t = { "<Plug>(coc-type-definition)", "go to type definition (coc)" },
     n = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header (coc)" },
   },
-  ["/"] = {
+  ["s"] = {
     name = "search",
     s = { ":<C-u>CocList outline<CR>", "search symbol in document outline (coc)" },
     S = { ":<C-u>CocList -I symbols<CR>", "search symbol in workspace (coc)" },
