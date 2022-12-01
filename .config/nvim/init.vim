@@ -210,7 +210,7 @@ wk.register({
     S = { ":<C-u>CocList -I symbols<CR>", "search symbol in workspace (coc)" },
     t = { ":BLines<CR>", "search text in current buffer" },
     T = { ":Lines<CR>", "search text in all buffers" },
-    r = { ":Rg! ", "rg text" },
+    r = { ":Rg! ", "rg text in current working directory" },
   },
   f = {
     name = "fix error",
