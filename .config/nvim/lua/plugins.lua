@@ -10,8 +10,6 @@ return require('packer').startup(function(use)
   use 'phaazon/hop.nvim'
   use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
   use 'junegunn/fzf.vim'
-  use 'SirVer/ultisnips'
-  use 'honza/vim-snippets' -- Snippets database
   use 'natecraddock/sessions.nvim'
   use 'machakann/vim-sandwich' -- Replace surrounding brackets/parentheses
   use { 'ojroques/vim-oscyank', branch = 'main' }
@@ -21,8 +19,8 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/nvim-treesitter-context' }
   use { 'nvim-treesitter/nvim-treesitter-refactor' } -- used for treesitter highlight
-  use { 'ThePrimeagen/refactoring.nvim', requires = { {'nvim-lua/plenary.nvim'}, {'nvim-treesitter/nvim-treesitter'} }
-}
+  use { 'ThePrimeagen/refactoring.nvim', requires = { {'nvim-lua/plenary.nvim'}, {'nvim-treesitter/nvim-treesitter'} } }
+  use 'honza/vim-snippets' -- Snippets database
 
   -- Smart code
   use { 'neoclide/coc.nvim', branch = 'release' }

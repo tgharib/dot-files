@@ -50,7 +50,18 @@ augroup end
 
 " Plugins
 
+"" coc-snippets
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 "" packer.nvim
+let g:coc_global_extensions = ['coc-snippets', 'coc-clangd']
 """ Bootstrap
 lua << EOF
 local ensure_packer = function()
@@ -97,12 +108,6 @@ let g:operator_sandwich_no_default_key_mappings = 1
 lua << EOF
 require'hop'.setup()
 EOF
-
-"" Ultisnips
-""" Trigger configuration. You need to change this to something other than <tab> if you use YouCompleteMe or completion-nvim
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "" nvim-treesitter
 """ Do NOT use treesitter for folding as it cannot be disabled for large files
@@ -248,7 +253,6 @@ wk.register({
       r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
       R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
     },
-    S = { ":Snippets<CR>", "snippets" },
   },
   t = {
     name = "toggles",
