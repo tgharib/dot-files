@@ -247,6 +247,7 @@ wk.register({
       r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
       R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
     },
+    S = { ":CocList snippets<CR>", "snippets" },
   },
   t = {
     name = "toggles",
