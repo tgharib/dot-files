@@ -50,6 +50,11 @@ augroup end
 
 " Plugins
 
+"" symbols-outline.nvim
+lua << EOF
+require("symbols-outline").setup()
+EOF
+
 "" coc-snippets
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
@@ -211,6 +216,8 @@ wk.register({
     t = { ":BLines<CR>", "search text in current buffer" },
     T = { ":Lines<CR>", "search text in all buffers" },
     r = { ":Rg! ", "rg text in current working directory" },
+    d = { ":CocOutline<CR>", "open document outline in split window (coc)" },
+    D = { ":SymbolsOutline<CR>", "open document outline in split window" },
   },
   f = {
     name = "fix error",
