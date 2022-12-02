@@ -235,7 +235,7 @@ wk.register({
     v = { "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
     p = {
       name = "printf",
-      l = { ":lua require('refactoring').debug.printf({below = false})<CR>", "printf line (refactoring.nvim)" },
+      l = { ":lua require('refactoring').debug.printf({below = true})<CR>", "printf line (refactoring.nvim)" },
       v = { ":lua require('refactoring').debug.print_var({ normal = true })<CR>", "printf variable (refactoring.nvim)" },
       c = { ":lua require('refactoring').debug.cleanup({})<CR>", "cleanup (refactoring.nvim)" },
     },
