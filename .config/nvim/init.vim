@@ -128,8 +128,8 @@ require'nvim-treesitter.configs'.setup {
   nt_cpp_tools = {
       enable = true,
       preview = {
-          quit = 'q', -- optional keymapping for quit preview
-          accept = '<tab>' -- optional keymapping for accept preview
+          quit = '<Esc>',
+          accept = '<CR>'
       },
   }
 }
