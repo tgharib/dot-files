@@ -32,7 +32,7 @@ return {
     },
     {key="P",mods="CTRL",action=act.QuickSelect,}, -- select path
     {key="L",mods="CTRL",action=act.QuickSelectArgs{patterns={"^.+$"},},}, -- select line
-    {key="F",mods="CTRL",action=act.Search{Regex="",},}, -- search regex
+    {key="S",mods="CTRL",action=act.Search{Regex="",},}, -- search mode
     {key="G",mods="CTRL",action=act.ActivateCopyMode}, -- copy mode
   },
   key_tables = {
