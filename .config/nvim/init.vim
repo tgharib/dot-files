@@ -207,7 +207,7 @@ wk.register({
     D = { "<Plug>(coc-implementation)", "go to implementation (coc)" },
     r = { "<Plug>(coc-references)", "go to references (coc)" },
     t = { "<Plug>(coc-type-definition)", "go to type definition (coc)" },
-    n = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header (coc)" },
+    g = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header (coc)" },
   },
   ["s"] = {
     name = "search",
