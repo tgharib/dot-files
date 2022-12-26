@@ -1,5 +1,6 @@
-" or editing multiple lines in vim, use a combination of `V:! sd` and macros. Occasionally, use `V:norm` and `V:norm@a` (a is a macro) but they do not work well when new lines are added. For scripts, use sd from CLI.
-" Vim motion options: f/F for horizontal, C-j/C-k for vertical, /n*, dumb code navigation, smart code navigation
+" For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
+" Vim motion options: f/F for horizontal, C-j/C-k for vertical, /n*, search/goto hotkeys
+" Paste text vertically using visual block mode https://stackoverflow.com/a/27542895
 
 " Options
 let mapleader = " "
