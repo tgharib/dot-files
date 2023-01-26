@@ -246,8 +246,8 @@ wk.register({
     w = {
       name = "whitespace",
       r = { ":retab<CR>", "replace tabs with spaces" },
-      ["2"] = { ":set tabstop=2 shiftwidth=2<CR>", "set tabs to 2 spaces" },
-      ["4"] = { ":set tabstop=4 shiftwidth=4<CR>", "set tabs to 4 spaces" },
+      ["2"] = { ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", "set tabs to 2 spaces" },
+      ["4"] = { ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", "set tabs to 4 spaces" },
       t = { ":call TrimWhitespace()<CR>", "trim whitespace" },
     },
     s = {
