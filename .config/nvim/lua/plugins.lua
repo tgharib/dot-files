@@ -20,6 +20,7 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/nvim-treesitter-context' }
   use { 'nvim-treesitter/nvim-treesitter-refactor' } -- used for treesitter highlight
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
   use { 'ThePrimeagen/refactoring.nvim', requires = { {'nvim-lua/plenary.nvim'}, {'nvim-treesitter/nvim-treesitter'} } }
   use 'honza/vim-snippets' -- snippets database
   use 'simrat39/symbols-outline.nvim'
