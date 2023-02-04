@@ -64,7 +64,6 @@ EOF
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 "" packer.nvim
-let g:coc_global_extensions = ['coc-snippets', 'coc-clangd']
 """ Bootstrap
 lua << EOF
 local ensure_packer = function()
@@ -91,12 +90,6 @@ lua require('plugins')
 lua << EOF
 require('refactoring').setup({})
 EOF
-
-"" vim-oscyank
-augroup ssh_yank
-  autocmd!
-  autocmd TextYankPost * if v:event.operator is 'y' || v:event.operator is 'd' | execute 'OSCYankReg "' | endif
-augroup end
 
 "" sessions.nvim
 lua << EOF
@@ -367,6 +360,7 @@ EOF
 " :cmap - Display command-line mode maps i.e. after pressing :
 " :omap - Display operator pending mode maps e.g. deletion after pressing d
 
+let g:coc_global_extensions = ['coc-snippets', 'coc-clangd']
 "" COC START
 set nobackup " Some servers have issues with backup files, see #649.
 set nowritebackup

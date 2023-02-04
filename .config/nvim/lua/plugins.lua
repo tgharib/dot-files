@@ -12,7 +12,6 @@ return require('packer').startup(function(use)
   use 'junegunn/fzf.vim'
   use 'natecraddock/sessions.nvim'
   use 'machakann/vim-sandwich' -- replace surrounding brackets/parentheses
-  use { 'ojroques/vim-oscyank', branch = 'main' }
   use { 'nmac427/guess-indent.nvim', config = function() require('guess-indent').setup {} end }
   use 'tpope/vim-eunuch'
 
