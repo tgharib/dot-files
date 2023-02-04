@@ -30,11 +30,8 @@ set termguicolors " Force colorscheme colors with 24-bit support
 "" Auto-reload file changes outside of vim
 augroup autoreload
   autocmd!
-  """ trigger `autoread` when files changes on disk
-  set autoread
-  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
   """ notification after file change
-  autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+  autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk!!!" | echohl None
 augroup end
 
 "" Markdown macros
