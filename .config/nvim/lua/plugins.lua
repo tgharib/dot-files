@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
   use { 'ojroques/vim-oscyank', branch = 'main' }
   use { 'nmac427/guess-indent.nvim', config = function() require('guess-indent').setup {} end }
   use 'tpope/vim-eunuch'
+  use 'voldikss/vim-browser-search'
 
   -- Dumb code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
