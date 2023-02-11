@@ -306,6 +306,7 @@ wk.register({
     h = { ":set hlsearch!<CR>", "toggle search highlight" },
     c = { ":TSContextToggle<CR>", "toggle context" },
     t = { ":CocCommand document.toggleInlayHint<CR>", "toggle inlay hints (coc)" },
+    d = { ":windo :diffthis<CR>", "diff between two splits" },
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
