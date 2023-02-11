@@ -4,5 +4,6 @@
       "command": "rnix-lsp",
       "filetypes": [ "nix" ]
     }
-  }
+  },
+  "list.maxPreviewHeight": 30,
 }
