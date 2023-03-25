@@ -41,7 +41,7 @@ return
 !Q::WinClose A
 Enter::Run, C:\Users\Owner\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process
 D::Send {LWin}
-I::Run, wezterm-gui start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %A_Desktop%\..\Files\vim-temp.md
+I::Run, C:\Users\Owner\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %A_Desktop%\..\Files\vim-temp.md
 ; ` is escape character for AHK
 
 Tab::
