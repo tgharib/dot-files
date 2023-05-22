@@ -6,4 +6,5 @@
     }
   },
   "list.maxPreviewHeight": 30,
+  "snippets.ultisnips.pythonPrompt": false,
 }
