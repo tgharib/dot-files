@@ -4,7 +4,7 @@ SendMode Input
 
 ; for laptop
 Capslock::Esc
-^!i::Run, C:\Users\tahag_science\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %UserProfile%\Documents\Files\vim-temp.md
+^!i::Run, C:\Users\tahag_science\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %UserProfile%\Documents\Files\Drive\vim-temp.md
 
 !`::
 WinGetClass, ActiveClass, A
@@ -63,4 +63,4 @@ c::Run, komorebic.exe reload-configuration, , Hide
 !q::WinClose A
 enter::Run, C:\Users\tahag_science\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process
 d::Send {LWin}
-i::Run, C:\Users\tahag_science\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %UserProfile%\Documents\Files\vim-temp.md
+i::Run, C:\Users\tahag_science\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %UserProfile%\Documents\Files\Drive\vim-temp.md
