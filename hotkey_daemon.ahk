@@ -2,10 +2,6 @@
 #NoEnv
 SendMode Input
 
-; for laptop
-Capslock::Esc
-^!i::Run, C:\Users\tahag_science\scoop\apps\wezterm\current\wezterm-gui.exe start --always-new-process -- nvim -c "autocmd TextChanged`,TextChangedI <buffer> silent write" %UserProfile%\Documents\Files\Drive\vim-temp.md
-
 !`::
 WinGetClass, ActiveClass, A
 WinGet, WinClassCount, Count, ahk_class %ActiveClass%
