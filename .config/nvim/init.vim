@@ -36,38 +36,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  -- Cosmetic
-  "tjdevries/colorbuddy.nvim",
-  "svrana/neosolarized.nvim",
-  { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-
-  -- Regular
-  "folke/which-key.nvim",
-  "phaazon/hop.nvim",
-  { "junegunn/fzf", build = function() vim.fn["fzf#install"]() end },
-  "junegunn/fzf.vim",
-  "natecraddock/sessions.nvim",
-  "machakann/vim-sandwich", -- replace surrounding brackets/parentheses
-  "nmac427/guess-indent.nvim",
-  "tpope/vim-eunuch",
-  "dstein64/vim-startuptime",
-  "nathom/filetype.nvim",
-
-  -- Dumb code
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  "nvim-treesitter/nvim-treesitter-context",
-  "nvim-treesitter/nvim-treesitter-refactor", -- used for treesitter highlight
-  "nvim-treesitter/nvim-treesitter-textobjects",
-  { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
-  "honza/vim-snippets", -- snippets database
-  "simrat39/symbols-outline.nvim",
-
-  -- Smart code
-  { "neoclide/coc.nvim", branch = "release" },
-
-  -- C++
-  { "Badhi/nvim-treesitter-cpp-tools", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+require("lazy").setup("plugins", {
+  defaults = {
+    lazy = true, -- should plugins be lazy-loaded?
+  },
 })
 EOF
 
@@ -132,10 +104,6 @@ EOF
 lua << EOF
 require("sessions").setup()
 EOF
-
-"" vim-sandwich
-let g:sandwich_no_default_key_mappings = 1
-let g:operator_sandwich_no_default_key_mappings = 1
 
 "" hop.nvim
 lua << EOF
@@ -287,7 +255,7 @@ wk.register({
     t = { "<Plug>(coc-type-definition)", "go to type definition (coc)" },
     g = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header (coc)" },
   },
-  ["s"] = {
+  s = {
     name = "search",
     s = { ":<C-u>CocList outline<CR>", "search symbol in document outline (coc)" },
     S = { ":<C-u>CocList -I symbols<CR>", "search symbol in workspace (coc)" },
@@ -323,14 +291,6 @@ wk.register({
       ["2"] = { ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", "set tabs to 2 spaces" },
       ["4"] = { ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", "set tabs to 4 spaces" },
       t = { ":call TrimWhitespace()<CR>", "trim whitespace" },
-    },
-    s = {
-      name = "surroundings",
-      a = { "<Plug>(operator-sandwich-add)", "add surroundings" },
-      d = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "delete surroundings (automatic)" },
-      D = { "<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "delete surroundings" },
-      r = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)", "replace surroundings (automatic)" },
-      R = { "<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)", "replace surroundings" },
     },
     S = { ":CocList snippets<CR>", "snippets" },
   },
