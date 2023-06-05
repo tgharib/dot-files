@@ -10,7 +10,6 @@ set clipboard=unnamedplus " Use system clipboard for copy and paste
 set ignorecase " Search with smart case
 set smartcase " Search with smart case
 set timeoutlen=0 " Immediately show which-key
-set noshowmode " Hide mode prompt (insert, etc) since we are using lightline
 let $BASH_ENV = "~/.bash-aliases"
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 set hidden " Allow buffers to be hidden without saving
@@ -21,6 +20,56 @@ syntax off " Rely on treesitter only for syntax highlighting
 
 " Don't touch unnamed register when pasting over visual selection
 xnoremap <expr> p 'pgv"' . v:register . 'y'
+
+" bootstrap lazy.nvim
+lua << EOF
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  -- Cosmetic
+  "tjdevries/colorbuddy.nvim",
+  "svrana/neosolarized.nvim",
+  { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+
+  -- Regular
+  "folke/which-key.nvim",
+  "phaazon/hop.nvim",
+  { "junegunn/fzf", build = function() vim.fn["fzf#install"]() end },
+  "junegunn/fzf.vim",
+  "natecraddock/sessions.nvim",
+  "machakann/vim-sandwich", -- replace surrounding brackets/parentheses
+  "nmac427/guess-indent.nvim",
+  "tpope/vim-eunuch",
+  "dstein64/vim-startuptime",
+  "nathom/filetype.nvim",
+
+  -- Dumb code
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  "nvim-treesitter/nvim-treesitter-context",
+  "nvim-treesitter/nvim-treesitter-refactor", -- used for treesitter highlight
+  "nvim-treesitter/nvim-treesitter-textobjects",
+  { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
+  "honza/vim-snippets", -- snippets database
+  "simrat39/symbols-outline.nvim",
+
+  -- Smart code
+  { "neoclide/coc.nvim", branch = "release" },
+
+  -- C++
+  { "Badhi/nvim-treesitter-cpp-tools", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+})
+EOF
 
 "" Set colorscheme to NeoSolarized
 lua << EOF
@@ -55,6 +104,11 @@ augroup end
 
 " Plugins
 
+"" guess-indent.nvim
+lua << EOF
+require('guess-indent').setup()
+EOF
+
 "" impatient.nvim
 lua << EOF
 vim.loader.enable()
@@ -68,29 +122,6 @@ EOF
 "" coc-snippets
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-"" packer.nvim
-""" Bootstrap
-lua << EOF
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
-end
-
-local packer_bootstrap = ensure_packer()
-
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-end)
-EOF
-""" Enable packer
-lua require('plugins')
 
 "" refactoring.nvim
 lua << EOF
@@ -414,16 +445,48 @@ inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
-let g:lightline = {
-\ 'colorscheme': 'solarized',
-\ 'active': {
-\   'left': [ [ 'mode', 'paste' ],
-\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-\ },
-\ 'component_function': {
-\   'cocstatus': 'coc#status'
-\ },
-\ }
+lua << END
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'solarized_dark',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
+END
 
 "" COC END
 
