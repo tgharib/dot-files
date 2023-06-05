@@ -2,7 +2,8 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Cosmetic
-  use 'overcache/NeoSolarized'
+  use 'tjdevries/colorbuddy.nvim'
+  use 'svrana/neosolarized.nvim'
   use 'itchyny/lightline.vim'
 
   -- Regular
@@ -14,6 +15,8 @@ return require('packer').startup(function(use)
   use 'machakann/vim-sandwich' -- replace surrounding brackets/parentheses
   use { 'nmac427/guess-indent.nvim', config = function() require('guess-indent').setup {} end }
   use 'tpope/vim-eunuch'
+  use 'dstein64/vim-startuptime'
+  use 'nathom/filetype.nvim'
 
   -- Dumb code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
