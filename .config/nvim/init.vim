@@ -81,11 +81,6 @@ lua << EOF
 require('guess-indent').setup()
 EOF
 
-"" impatient.nvim
-lua << EOF
-vim.loader.enable()
-EOF
-
 "" symbols-outline.nvim
 lua << EOF
 require("symbols-outline").setup()
