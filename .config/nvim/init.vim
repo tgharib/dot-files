@@ -114,7 +114,7 @@ end
 
 require'nvim-treesitter.configs'.setup {
   -- Install all languages for treesitter except for rnoweb, phpdoc
-  ensure_installed = { "bash", "beancount", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "ninja", "nix", "rust", "verilog" },
+  ensure_installed = { "bash", "beancount", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog" },
   sync_install = false,
   highlight = {
     enable = true,
