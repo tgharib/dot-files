@@ -1,7 +1,11 @@
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
 
-# What follows is a copy+paste of fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`) and fzf's completion.bash
+# What follows is:
+# 1. fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`)
+# 2. fzf's completion.bash
+# 3. pazi's bash init with a modification to echo the directory:
+# 91) cd "${res}" && echo "${res}";;
 
 #     ____      ____
 #    / __/___  / __/
@@ -477,3 +481,32 @@ _fzf_setup_completion 'alias' unalias
 _fzf_setup_completion 'host'  ssh telnet
 
 fi
+
+
+__pazi_add_dir() {
+    # TODO: should pazi keep track of this itself in its datadir?
+    if [[ "${__PAZI_LAST_PWD:-}" != "${PWD}" ]]; then
+        pazi visit "${PWD}"
+    fi
+    __PAZI_LAST_PWD="${PWD}"
+}
+
+case "${PROMPT_COMMAND:-}" in
+    *__pazi_add_dir\;*) ;;
+    *) PROMPT_COMMAND="__pazi_add_dir;${PROMPT_COMMAND:-}" ;;
+esac
+
+pazi_cd() {
+    if [ "$#" -eq 0 ]; then pazi view; return $?; fi
+    local res;
+    res="$(__PAZI_EXTENDED_EXITCODES=1 pazi jump "$@")"
+    local ret=$?
+    case $ret in
+    90) echo "${res}";;
+    91) cd "${res}" && echo "${res}";;
+    92) echo "${res}" && return 1;;
+    93) return 1;;
+    *) echo "${res}" && return $ret;;
+    esac
+}
+alias z='pazi_cd'
