@@ -83,7 +83,11 @@ EOF
 
 "" symbols-outline.nvim
 lua << EOF
-require("symbols-outline").setup()
+local opts = {
+  highlight_hovered_item = false,
+  position = 'left',
+}
+require("symbols-outline").setup(opts)
 EOF
 
 "" coc-snippets
@@ -210,15 +214,6 @@ require'nvim-treesitter.configs'.setup {
       }
     },
   },
-}
-EOF
-
-"" symbols-outline.nvim
-lua << EOF
-vim.g.symbols_outline = {
-    highlight_hovered_item = false,
-    auto_preview = false,
-    position = 'left',
 }
 EOF
 
