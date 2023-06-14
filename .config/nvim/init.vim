@@ -76,6 +76,11 @@ augroup end
 
 " Plugins
 
+"" mini.cursorword
+lua << EOF
+require('mini.cursorword').setup()
+EOF
+
 "" guess-indent.nvim
 lua << EOF
 require('guess-indent').setup()
@@ -120,6 +125,7 @@ require'nvim-treesitter.configs'.setup {
   -- Install all languages for treesitter except for rnoweb, phpdoc
   ensure_installed = { "bash", "beancount", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog" },
   sync_install = false,
+  auto_install = false,
   highlight = {
     enable = true,
     disable = disable_for_large_files,
@@ -159,17 +165,6 @@ require'treesitter-context'.setup {
   -- The options below are exposed but shouldn't require your attention, you can safely ignore them.
   zindex = 20, -- The Z-index of the context window
   mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-}
-
--- nvim-treesitter-refactor (used for treesitter highlight)
-require'nvim-treesitter.configs'.setup {
-  refactor = {
-    highlight_definitions = {
-      enable = true,
-      disable = disable_for_large_files,
-      clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
-    },
-  },
 }
 
 require'nvim-treesitter.configs'.setup {

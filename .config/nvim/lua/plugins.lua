@@ -18,11 +18,11 @@ return {
   -- Dumb code
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-context",
-  "nvim-treesitter/nvim-treesitter-refactor", -- used for treesitter highlight
   "nvim-treesitter/nvim-treesitter-textobjects",
   { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
   "honza/vim-snippets", -- snippets database
   "simrat39/symbols-outline.nvim",
+  { 'echasnovski/mini.cursorword', version = false }, -- highlight word under cursor
 
   -- Smart code
   { "neoclide/coc.nvim", branch = "release", lazy = false },
