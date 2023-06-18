@@ -24,3 +24,14 @@ cat << 'EOF' >> ~/.gitconfig
 [diff]
   external = "difft --color auto --background dark --display inline"
 EOF
+
+# SOURCE BASHRC FILES
+cat << 'EOF' >> ~/.bashrc
+
+alias vim='nvim'
+source ~/.bashrc-vanilla
+if [[ $NIX_PATH ]]; then
+  source ~/.bashrc-dev
+fi
+source ~/.bashrc-aliases
+EOF
