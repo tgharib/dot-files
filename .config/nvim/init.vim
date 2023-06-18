@@ -224,8 +224,8 @@ wk.register({
   k = { ":call ShowDocumentation()<CR>", "show documentation (coc)" },
   b = {
     name = "buffers",
-    f = { ":Files!<CR>", "open file" },
-    b = { ":Buffers!<CR>", "select buffer" },
+    f = { ":Files<CR>", "open file" },
+    b = { ":Buffers<CR>", "select buffer" },
     q = { ":bw<CR>", "quit current buffer :bw" },
     Q = { ":bufdo bw<CR>", "quit all buffers :bufdo bw" },
     t = { ":tabonly<CR>", "tabs -> buffers" },
