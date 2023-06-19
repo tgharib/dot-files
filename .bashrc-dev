@@ -1,5 +1,8 @@
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
+# Ignore hidden files, gitignored files and symbolic links:
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # What follows is:
 # 1. fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`)
