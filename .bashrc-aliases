@@ -13,7 +13,7 @@ a() {
     return
   fi
 
-  abduco -e ~ -A "$1" "$1"
+  abduco -e '~' -A "$1" "$1"
 }
 spwd() {
   echo $(whoami)@$(hostname):$(pwd)
