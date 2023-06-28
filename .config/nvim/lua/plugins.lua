@@ -14,6 +14,7 @@ return {
   "tpope/vim-eunuch",
   { "dstein64/vim-startuptime", lazy = false },
   "nathom/filetype.nvim",
+  { "lambdalisue/suda.vim", lazy = false },
 
   -- Dumb code
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },

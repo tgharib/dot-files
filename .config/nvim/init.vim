@@ -76,6 +76,9 @@ augroup end
 
 " Plugins
 
+"" suda.nvim
+let g:suda_smart_edit = 1
+
 "" mini.cursorword
 lua << EOF
 require('mini.cursorword').setup()
