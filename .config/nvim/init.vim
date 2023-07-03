@@ -45,7 +45,7 @@ require("lazy").setup("plugins", {
 EOF
 
 "" Set colorscheme
-let g:accent_colour = 'red'
+let g:accent_colour = 'blue'
 let g:accent_darken = 1
 colorscheme accent
 set termguicolors " Force colorscheme colors with 24-bit support
@@ -392,7 +392,7 @@ lua << END
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'horizon',
+    theme = 'ayu_dark',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {

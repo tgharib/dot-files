@@ -9,7 +9,7 @@ return {
   font_size = 13,
   font_dirs = {"fonts"},
   font_locator = "ConfigDirsOnly",
-  color_scheme = "Solarized Dark Higher Contrast",
+  color_scheme = "ayu",
   window_padding = {left=0, right=0, top=0, bottom=0},
   window_decorations = "RESIZE",
   enable_tab_bar = false,

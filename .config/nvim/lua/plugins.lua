@@ -1,7 +1,7 @@
 return {
   -- Cosmetic
   "tjdevries/colorbuddy.nvim",
-  "svrana/neosolarized.nvim",
+  "alligator/accent.vim",
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
   -- Regular
