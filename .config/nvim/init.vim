@@ -259,9 +259,9 @@ wk.register({
     f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
     o = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports (coc)" },
     r = { "<Plug>(coc-rename)", "rename symbol (coc)" },
-    b = { "<Cmd>lua require('refactoring').refactor('Extract Block')<CR>", "extract block (refactoring.nvim)" },
-    B = { "<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>", "extract block to file (refactoring.nvim)" },
-    v = { "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
+    b = { ":lua require('refactoring').refactor('Extract Block')<CR>", "extract block (refactoring.nvim)" },
+    B = { ":lua require('refactoring').refactor('Extract Block To File')<CR>", "extract block to file (refactoring.nvim)" },
+    v = { ":lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
     p = {
       name = "printf",
       l = { ":lua require('refactoring').debug.printf({below = true})<CR>", "printf line (refactoring.nvim)" },
@@ -286,8 +286,9 @@ wk.register({
     K = { ":map<CR>", "vim mapped keybinds" },
     v = { ":Colors!<CR>", "vim color schemes" },
     f = { ":echo expand('%:p')<CR>", "show file path" },
+    c = { ":cd %:h<CR>", "cd into current buffer working directory" },
     h = { ":set hlsearch!<CR>", "toggle search highlight" },
-    c = { ":TSContextToggle<CR>", "toggle context" },
+    n = { ":TSContextToggle<CR>", "toggle context (nest)" },
     t = { ":CocCommand document.toggleInlayHint<CR>", "toggle inlay hints (coc)" },
     d = { ":windo :diffthis<CR>", "diff between two splits" },
   },
@@ -305,31 +306,31 @@ wk.register({
     p = { ":TSCppMakeConcreteClass<CR>", "implement pure virtual functions (c++)" },
     ["3"] = { ":TSCppRuleOf3<CR>", "modify class to obey Rule of 3 (c++)" },
     ["5"] = { ":TSCppRuleOf5<CR>", "modify class to obey Rule of 5 (c++)" },
-    v = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>", "extract variable (refactoring.nvim)" },
-    f = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>", "extract function (refactoring.nvim)" },
-    F = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>", "extract function to file (refactoring.nvim)" },
+    v = { ":lua require('refactoring').refactor('Extract Variable')<CR>", "extract variable (refactoring.nvim)" },
+    f = { ":lua require('refactoring').refactor('Extract Function')<CR>", "extract function (refactoring.nvim)" },
+    F = { ":lua require('refactoring').refactor('Extract Function To File')<CR>", "extract function to file (refactoring.nvim)" },
   },
 }, { prefix = "<leader>", mode = "x" })
 
 wk.register({
-  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
-  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
-  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
+  f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
+  F = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
+  t = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
+  T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
 }, { prefix = "", mode = "n" })
 wk.register({
-  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
-  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
-  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
+  f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
+  F = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
+  t = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
+  T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
 }, { prefix = "", mode = "o" })
 wk.register({
-  f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
-  F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-  t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
-  T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
+  f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
+  F = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
+  t = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
+  T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
 }, { prefix = "", mode = "x" })
 EOF
 

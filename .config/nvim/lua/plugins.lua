@@ -15,6 +15,7 @@ return {
   { "dstein64/vim-startuptime", lazy = false },
   "nathom/filetype.nvim",
   { "lambdalisue/suda.vim", lazy = false },
+  { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
 
   -- Dumb code
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
