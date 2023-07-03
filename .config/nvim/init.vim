@@ -44,13 +44,10 @@ require("lazy").setup("plugins", {
 })
 EOF
 
-"" Set colorscheme to NeoSolarized
-lua << EOF
-  require('neosolarized').setup({
-    comment_italics = false,
-    background_set = true,
-  })
-EOF
+"" Set colorscheme
+let g:accent_colour = 'red'
+let g:accent_darken = 1
+colorscheme accent
 set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Auto-reload file changes outside of vim
@@ -395,7 +392,7 @@ lua << END
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'solarized_dark',
+    theme = 'horizon',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
