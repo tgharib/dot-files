@@ -342,7 +342,7 @@ EOF
 " :cmap - Display command-line mode maps i.e. after pressing :
 " :omap - Display operator pending mode maps e.g. deletion after pressing d
 
-let g:coc_global_extensions = ['coc-snippets', 'coc-clangd', 'coc-pyright']
+let g:coc_global_extensions = ['coc-snippets', 'coc-clangd', 'coc-pyright', 'coc-rust-analyzer']
 "" COC START
 set nobackup " Some servers have issues with backup files, see #649.
 set nowritebackup
