@@ -229,6 +229,8 @@ wk.register({
     t = { ":tabonly<CR>", "tabs -> buffers" },
     l = { ":SessionsLoad! ", "load session" },
     s = { ":SessionsSave! ", "save session" },
+    d = { ":windo :diffthis<CR>", "diff between two splits" },
+    u = { ":windo :diffoff<CR>", "undiff between two splits" },
   },
   g = {
     name = "go to",
@@ -247,6 +249,12 @@ wk.register({
     r = { ":Rg! ", "rg text in current working directory" },
     d = { ":CocOutline<CR>", "open document outline in split window (coc)" },
     D = { ":SymbolsOutline<CR>", "open document outline in split window" },
+  },
+  p = {
+    name = "paths",
+    c = { ":cd %:h<CR>", "cd into current buffer working directory" },
+    f = { ":echo expand('%:p')<CR>", "show file path" },
+    o = { ":Oil<CR>", "oil" },
   },
   f = {
     name = "fix error",
@@ -281,16 +289,9 @@ wk.register({
     name = "toggles",
     w = { ":set wrap!<CR>", "toggle line wrap" },
     l = { ":set number!<CR>", "toggle line numbers" },
-    ["?"] = { ":Commands<CR>", "vim commands" },
-    k = { ":help index<CR>", "vim keybinds" },
-    K = { ":map<CR>", "vim mapped keybinds" },
-    v = { ":Colors!<CR>", "vim color schemes" },
-    f = { ":echo expand('%:p')<CR>", "show file path" },
-    c = { ":cd %:h<CR>", "cd into current buffer working directory" },
     h = { ":set hlsearch!<CR>", "toggle search highlight" },
-    n = { ":TSContextToggle<CR>", "toggle context (nest)" },
+    n = { ":TSContextToggle<CR>", "toggle context (nested statements)" },
     t = { ":CocCommand document.toggleInlayHint<CR>", "toggle inlay hints (coc)" },
-    d = { ":windo :diffthis<CR>", "diff between two splits" },
   },
 }, { prefix = "<leader>", mode = "n" })
 wk.register({
