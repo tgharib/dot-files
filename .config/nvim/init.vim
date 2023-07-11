@@ -76,7 +76,9 @@ augroup end
 
 "" gitsigns.nvim
 lua << EOF
-require('gitsigns').setup()
+require('gitsigns').setup {
+  attach_to_untracked = false,
+}
 EOF
 
 "" mini.cursorword
