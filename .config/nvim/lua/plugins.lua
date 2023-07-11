@@ -11,11 +11,12 @@ return {
   { "junegunn/fzf.vim", lazy = false },
   "natecraddock/sessions.nvim",
   "nmac427/guess-indent.nvim",
-  "tpope/vim-eunuch",
   { "dstein64/vim-startuptime", lazy = false },
   "nathom/filetype.nvim",
   { "lambdalisue/suda.vim", lazy = false },
   { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
+  { "lewis6991/gitsigns.nvim" },
+  { "tpope/vim-fugitive", lazy = false },
 
   -- Dumb code
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },

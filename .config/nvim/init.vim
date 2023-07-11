@@ -74,6 +74,11 @@ augroup end
 
 " Plugins
 
+"" gitsigns.nvim
+lua << EOF
+require('gitsigns').setup()
+EOF
+
 "" mini.cursorword
 lua << EOF
 require('mini.cursorword').setup()
@@ -231,6 +236,11 @@ wk.register({
     s = { ":SessionsSave! ", "save session" },
     d = { ":windo :diffthis<CR>", "diff between two splits" },
     u = { ":windo :diffoff<CR>", "undiff between two splits" },
+    g = {
+      name = "git",
+      b = { ":Git blame<CR>", "git blame this buffer" },
+      d = { ":Gitsigns diffthis<CR>", "git diff this buffer" },
+    },
   },
   g = {
     name = "go to",
@@ -256,12 +266,6 @@ wk.register({
     f = { ":echo expand('%:p')<CR>", "show file path" },
     o = { ":Oil<CR>", "oil" },
   },
-  f = {
-    name = "fix error",
-    e = { ":<C-u>CocList diagnostics<CR>", "list errors/diagnostics (coc)" },
-    l = { "<Plug>(coc-fix-current)", "fix error on current line (coc)" },
-    b = { "<Plug>(coc-codeaction)", "fix error on current buffer (coc)" },
-  },
   r = {
     name = "refactor/transform",
     f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
@@ -270,6 +274,12 @@ wk.register({
     b = { ":lua require('refactoring').refactor('Extract Block')<CR>", "extract block (refactoring.nvim)" },
     B = { ":lua require('refactoring').refactor('Extract Block To File')<CR>", "extract block to file (refactoring.nvim)" },
     v = { ":lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
+    f = {
+      name = "fix error",
+      e = { ":<C-u>CocList diagnostics<CR>", "list errors/diagnostics (coc)" },
+      l = { "<Plug>(coc-fix-current)", "fix error on current line (coc)" },
+      b = { "<Plug>(coc-codeaction)", "fix error on current buffer (coc)" },
+    },
     p = {
       name = "printf",
       l = { ":lua require('refactoring').debug.printf({below = true})<CR>", "printf line (refactoring.nvim)" },
