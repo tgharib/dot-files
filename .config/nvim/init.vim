@@ -299,6 +299,7 @@ wk.register({
   },
   t = {
     name = "toggles",
+    d = { ":Gitsigns toggle_signs<CR>", "toggle git diff signs" },
     w = { ":set wrap!<CR>", "toggle line wrap" },
     l = { ":set number!<CR>", "toggle line numbers" },
     h = { ":set hlsearch!<CR>", "toggle search highlight" },
