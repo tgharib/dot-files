@@ -1,3 +1,5 @@
+-- Don't forget to disable lazy loading when installing new plugin!
+
 return {
   -- Cosmetic
   "tjdevries/colorbuddy.nvim",
@@ -15,7 +17,7 @@ return {
   "nathom/filetype.nvim",
   { "lambdalisue/suda.vim", lazy = false },
   { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
-  { "lewis6991/gitsigns.nvim" },
+  "lewis6991/gitsigns.nvim",
   { "tpope/vim-fugitive", lazy = false },
 
   -- Dumb code
@@ -23,7 +25,7 @@ return {
   "nvim-treesitter/nvim-treesitter-context",
   "nvim-treesitter/nvim-treesitter-textobjects",
   { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
-  "honza/vim-snippets", -- snippets database
+  { "honza/vim-snippets", lazy = false }, -- snippets database
   "simrat39/symbols-outline.nvim",
   { 'echasnovski/mini.cursorword', version = false }, -- highlight word under cursor
 

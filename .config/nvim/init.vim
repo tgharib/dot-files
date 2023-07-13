@@ -295,7 +295,7 @@ wk.register({
       ["4"] = { ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", "set tabs to 4 spaces" },
       t = { ":call TrimWhitespace()<CR>", "trim whitespace" },
     },
-    S = { ":CocList snippets<CR>", "snippets" },
+    s = { ":CocList snippets<CR>", "snippets" },
   },
   t = {
     name = "toggles",
@@ -315,7 +315,7 @@ wk.register({
   r = {
     name = "refactor/transform",
     f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
-    s = { "<Plug>(coc-codeaction-selected)", "code action on selected (coc)" },
+    a = { "<Plug>(coc-codeaction-selected)", "code action on selected (coc)" },
     m = { ":TSCppDefineClassFunc<CR>", "implement class member functions (c++)" },
     p = { ":TSCppMakeConcreteClass<CR>", "implement pure virtual functions (c++)" },
     ["3"] = { ":TSCppRuleOf3<CR>", "modify class to obey Rule of 3 (c++)" },
