@@ -2,7 +2,7 @@
 
 return {
   -- Cosmetic
-  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+  { "cranberry-clockworks/coal.nvim", lazy = false },
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
   -- Regular

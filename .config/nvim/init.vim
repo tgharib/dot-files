@@ -45,10 +45,7 @@ require("lazy").setup("plugins", {
 EOF
 
 "" Set colorscheme
-let g:moonflyCursorColor = v:false
-let g:moonflyItalics = v:false
-let g:moonflyWinSeparator = 2
-colorscheme moonfly
+colorscheme coal
 set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Auto-reload file changes outside of vim
