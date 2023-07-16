@@ -2,7 +2,7 @@
 
 return {
   -- Cosmetic
-  { "cranberry-clockworks/coal.nvim", lazy = false },
+  { "huyvohcmc/atlas.vim", lazy = false },
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
   -- Regular

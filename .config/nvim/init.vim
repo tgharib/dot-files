@@ -45,7 +45,7 @@ require("lazy").setup("plugins", {
 EOF
 
 "" Set colorscheme
-colorscheme coal
+colorscheme atlas
 set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Auto-reload file changes outside of vim
