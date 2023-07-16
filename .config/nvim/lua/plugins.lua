@@ -2,8 +2,7 @@
 
 return {
   -- Cosmetic
-  "tjdevries/colorbuddy.nvim",
-  "alligator/accent.vim",
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
   -- Regular

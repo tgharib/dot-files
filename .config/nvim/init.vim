@@ -45,9 +45,10 @@ require("lazy").setup("plugins", {
 EOF
 
 "" Set colorscheme
-let g:accent_colour = 'blue'
-let g:accent_darken = 1
-colorscheme accent
+let g:moonflyCursorColor = v:false
+let g:moonflyItalics = v:false
+let g:moonflyWinSeparator = 2
+colorscheme moonfly
 set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Auto-reload file changes outside of vim
@@ -407,7 +408,7 @@ lua << END
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'ayu_dark',
+    theme = '16color',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {

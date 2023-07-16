@@ -3,13 +3,12 @@ local act = wezterm.action
 
 return {
   check_for_updates = false,
-  -- enable_wayland = false, -- temporary for working clipboard between two wezterm instances in linux
   -- Font from ttf-iosevka-term-15.6.0.zip
   font = wezterm.font("Iosevka Term", {weight="Medium", stretch="Expanded"}),
   font_size = 13,
   font_dirs = {"fonts"},
   font_locator = "ConfigDirsOnly",
-  color_scheme = "ayu",
+  color_scheme = "Ayu Dark (Gogh)",
   window_padding = {left=0, right=0, top=0, bottom=0},
   window_decorations = "RESIZE",
   enable_tab_bar = false,
