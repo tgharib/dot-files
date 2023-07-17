@@ -45,7 +45,15 @@ require("lazy").setup("plugins", {
 EOF
 
 "" Set colorscheme
-colorscheme atlas
+lua << EOF
+require("tokyonight").setup({
+  styles = {
+    comments = { italic = false },
+    keywords = { italic = false },
+  },
+})
+EOF
+colorscheme tokyonight-night
 set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Auto-reload file changes outside of vim
@@ -405,7 +413,7 @@ lua << END
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'iceberg_dark',
+    theme = 'tokyonight',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {

@@ -2,7 +2,7 @@
 
 return {
   -- Cosmetic
-  { "huyvohcmc/atlas.vim", lazy = false },
+  { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
   -- Regular
