@@ -272,7 +272,7 @@ wk.register({
     name = "paths",
     c = { ":cd %:h<CR>", "cd into current buffer working directory" },
     f = { ":echo expand('%:p')<CR>", "show file path" },
-    o = { ":Oil<CR>", "oil" },
+    o = { ":Oil<CR>", "oil (file manager)" },
   },
   f = {
     name = "fix error",
