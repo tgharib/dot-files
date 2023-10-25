@@ -27,6 +27,7 @@ return {
   { "honza/vim-snippets", lazy = false }, -- snippets database
   "simrat39/symbols-outline.nvim",
   { 'echasnovski/mini.cursorword', version = false }, -- highlight word under cursor
+  { 'echasnovski/mini.align', version = false },
 
   -- Smart code
   { "neoclide/coc.nvim", branch = "release", lazy = false },

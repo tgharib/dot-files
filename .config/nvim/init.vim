@@ -90,6 +90,7 @@ EOF
 "" mini.cursorword
 lua << EOF
 require('mini.cursorword').setup()
+require('mini.align').setup()
 EOF
 
 "" guess-indent.nvim
