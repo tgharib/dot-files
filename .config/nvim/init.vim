@@ -90,7 +90,6 @@ EOF
 "" mini.cursorword
 lua << EOF
 require('mini.cursorword').setup()
-require('mini.align').setup()
 EOF
 
 "" guess-indent.nvim
@@ -340,6 +339,7 @@ wk.register({
   T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
+  ["ga"] = { "<Plug>(EasyAlign)", "start interactive EasyAlign" },
 }, { prefix = "", mode = "n" })
 wk.register({
   f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
@@ -356,6 +356,7 @@ wk.register({
   T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
+  ["ga"] = { "<Plug>(EasyAlign)", "start interactive EasyAlign" },
 }, { prefix = "", mode = "x" })
 EOF
 
