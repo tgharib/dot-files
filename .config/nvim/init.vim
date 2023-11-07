@@ -87,6 +87,11 @@ require('gitsigns').setup {
 }
 EOF
 
+"" mini.align
+lua << EOF
+require('mini.align').setup()
+EOF
+
 "" mini.cursorword
 lua << EOF
 require('mini.cursorword').setup()
@@ -330,7 +335,6 @@ wk.register({
     f = { ":lua require('refactoring').refactor('Extract Function')<CR>", "extract function (refactoring.nvim)" },
     F = { ":lua require('refactoring').refactor('Extract Function To File')<CR>", "extract function to file (refactoring.nvim)" },
   },
-  a = { "<Plug>(EasyAlign)", "EasyAlign (interactive)" },
 }, { prefix = "<leader>", mode = "x" })
 
 wk.register({
