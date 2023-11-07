@@ -330,6 +330,7 @@ wk.register({
     f = { ":lua require('refactoring').refactor('Extract Function')<CR>", "extract function (refactoring.nvim)" },
     F = { ":lua require('refactoring').refactor('Extract Function To File')<CR>", "extract function to file (refactoring.nvim)" },
   },
+  a = { "<Plug>(EasyAlign)", "EasyAlign (interactive)" },
 }, { prefix = "<leader>", mode = "x" })
 
 wk.register({
@@ -339,7 +340,6 @@ wk.register({
   T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
-  ["ga"] = { "<Plug>(EasyAlign)", "start interactive EasyAlign" },
 }, { prefix = "", mode = "n" })
 wk.register({
   f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
@@ -356,7 +356,6 @@ wk.register({
   T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
   ["<C-j>"] = { "2j", "move cursor down two lines" },
   ["<C-k>"] = { "2k", "move cursor up two lines" },
-  ["ga"] = { "<Plug>(EasyAlign)", "start interactive EasyAlign" },
 }, { prefix = "", mode = "x" })
 EOF
 
