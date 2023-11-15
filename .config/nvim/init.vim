@@ -88,6 +88,10 @@ require('gitsigns').setup {
 EOF
 
 "" mini.align
+" gA to start
+" s for split pattern
+" t for trimming whitespace
+" https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-align.txt
 lua << EOF
 require('mini.align').setup()
 EOF
