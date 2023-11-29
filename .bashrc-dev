@@ -1,4 +1,5 @@
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT='-c'
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
 # Ignore hidden files, gitignored files and symbolic links:
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
