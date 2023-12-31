@@ -1,5 +1,5 @@
 " For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
-" Vim motion options: f/F for horizontal, C-j/C-k for vertical, /n*, search/goto hotkeys
+" Vim motion options: f/F/t/T for horizontal, pounce.nvim for vertical, */#, search, goto definition
 " Paste text vertically using visual block mode https://stackoverflow.com/a/27542895
 
 " Options
@@ -129,9 +129,9 @@ lua << EOF
 require("sessions").setup()
 EOF
 
-"" hop.nvim
+"" pounce.nvim
 lua << EOF
-require'hop'.setup()
+require'pounce'.setup()
 EOF
 
 "" nvim-treesitter
@@ -342,28 +342,16 @@ wk.register({
 }, { prefix = "<leader>", mode = "x" })
 
 wk.register({
-  f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
-  F = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-  t = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
-  T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
-  ["<C-j>"] = { "2j", "move cursor down two lines" },
-  ["<C-k>"] = { "2k", "move cursor up two lines" },
+  s = { ":Pounce<CR>", "pounce" },
+  S = { ":PounceRepeat<CR>", "pounce repeat" },
 }, { prefix = "", mode = "n" })
 wk.register({
-  f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
-  F = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-  t = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
-  T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
-  ["<C-j>"] = { "2j", "move cursor down two lines" },
-  ["<C-k>"] = { "2k", "move cursor up two lines" },
+  s = { ":Pounce<CR>", "pounce" },
+  S = { ":PounceRepeat<CR>", "pounce repeat" },
 }, { prefix = "", mode = "o" })
 wk.register({
-  f = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", "jump in line (after cursor)" },
-  F = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", "jump in line (before cursor)" },
-  t = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", "jump in line (after cursor)" },
-  T = { ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", "jump in line (before cursor)" },
-  ["<C-j>"] = { "2j", "move cursor down two lines" },
-  ["<C-k>"] = { "2k", "move cursor up two lines" },
+  s = { ":Pounce<CR>", "pounce" },
+  S = { ":PounceRepeat<CR>", "pounce repeat" },
 }, { prefix = "", mode = "x" })
 EOF
 

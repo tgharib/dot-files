@@ -7,7 +7,7 @@ return {
 
   -- Regular
   "folke/which-key.nvim",
-  "phaazon/hop.nvim",
+  "rlane/pounce.nvim",
   { "junegunn/fzf", build = function() vim.fn["fzf#install"]() end, lazy = false },
   { "junegunn/fzf.vim", lazy = false },
   "natecraddock/sessions.nvim",
