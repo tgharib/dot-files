@@ -363,6 +363,7 @@ EOF
 " :cmap - Display command-line mode maps i.e. after pressing :
 " :omap - Display operator pending mode maps e.g. deletion after pressing d
 
+" For Rust, as per https://github.com/neoclide/coc.nvim/wiki/Language-servers#rust, rust-analyzer binary needs to be compiled from source
 let g:coc_global_extensions = ['coc-snippets', 'coc-clangd', 'coc-pyright', 'coc-rust-analyzer']
 "" COC START
 set nobackup " Some servers have issues with backup files, see #649.
