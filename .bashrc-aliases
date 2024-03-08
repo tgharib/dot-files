@@ -4,6 +4,7 @@ alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable
 alias sc='wl-copy'
 alias s='kitten ssh'
 alias asciify="perl -pe 's/[^[:ascii:]]//g'"
+alias r="tput reset"
 
 cheat() {
   curl cheat.sh/"$1"
