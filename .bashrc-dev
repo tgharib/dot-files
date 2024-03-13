@@ -6,10 +6,20 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --follow --exclude .g
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # What follows is:
+# 0. yazi's alias
 # 1. fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`)
 # 2. fzf's completion.bash
 # 3. pazi's bash init with a modification to echo the directory:
 # 91) cd "${res}" && echo "${res}";;
+
+function ya() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 #     ____      ____
 #    / __/___  / __/
