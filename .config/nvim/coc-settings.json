@@ -1,8 +1,9 @@
 {
   "languageserver": {
-    "nix": {
-      "command": "rnix-lsp",
-      "filetypes": [ "nix" ]
+    "nixd": {
+      "command": "nixd",
+      "rootPatterns": [".nixd.json"],
+      "filetypes": ["nix"]
     }
   },
   "list.maxPreviewHeight": 30,
