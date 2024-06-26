@@ -3,16 +3,24 @@
 # INSTALL NIX PORTABLE
 mkdir ~/bin
 cd ~/bin
-wget https://github.com/DavHau/nix-portable/releases/download/v009/nix-portable
+wget https://github.com/DavHau/nix-portable/releases/download/v012/nix-portable-x86_64 -O nix-portable
 chmod +x nix-portable
-ln -s ./nix-portable ./nix
 
+# ADD TO BASHRC
 cat << 'EOF' >> ~/.bashrc
 
+# Nix-portable
 export PATH="${PATH:+${PATH}:}~/bin"
-alias enter-dev='NP_RUNTIME=bwrap nix shell github:nixos/nixpkgs/nixos-24.05#{ripgrep,sd,fd,as-tree,fzf,abduco,lazygit,du-dust,bat,btop,difftastic,yazi,trash-cli,neovim,tree-sitter,nodejs,gcc,pazi}'
-# github:nixos/nixpkgs/nixos-unstable
-alias machine-clean='~/bin/nix-portable nix-collect-garbage -d'
+alias enter-dev='nix-portable nix shell github:nixos/nixpkgs/nixos-24.05#{ripgrep,sd,fd,as-tree,fzf,abduco,lazygit,du-dust,bat,btop,difftastic,yazi,trash-cli,neovim,tree-sitter,nodejs,pazi}'
+alias machine-clean='nix-portable nix-collect-garbage -d'
+
+# Source bashrc files
+alias vim='nvim'
+source ~/.bashrc-vanilla
+if [[ $NIX_PATH ]]; then
+  source ~/.bashrc-dev
+fi
+source ~/.bashrc-aliases
 EOF
 
 # USE DIFFTASTIC
@@ -23,15 +31,4 @@ cat << 'EOF' >> ~/.gitconfig
 
 [diff]
   external = "difft --color auto --background dark --display inline"
-EOF
-
-# SOURCE BASHRC FILES
-cat << 'EOF' >> ~/.bashrc
-
-alias vim='nvim'
-source ~/.bashrc-vanilla
-if [[ $NIX_PATH ]]; then
-  source ~/.bashrc-dev
-fi
-source ~/.bashrc-aliases
 EOF
