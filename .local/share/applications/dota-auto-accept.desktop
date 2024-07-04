@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=dota auto accept
+Terminal=false
+Exec=wezterm-start /home/owner/personal-only/misc/scripts/dota-auto-accept.sh
+Hidden=false

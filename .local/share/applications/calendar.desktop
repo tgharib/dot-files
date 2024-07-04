@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=calendar
+Terminal=false
+Exec=kitty /home/owner/personal-only/misc/remint.sh /home/owner/personal-only/misc/.remind/.calendar
+Hidden=false

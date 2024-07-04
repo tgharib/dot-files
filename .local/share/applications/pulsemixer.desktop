@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=pulsemixer
+Terminal=false
+Exec=kitty pulsemixer
+Hidden=false

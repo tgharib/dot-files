@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=no mode
+Terminal=false
+Exec=sh -c "pkill gammastep"
+Hidden=false

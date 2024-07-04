@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=night mode
+Terminal=false
+Exec=sh -c "pkill gammastep; nohup gammastep -P -b 0.7 -O 1500 > /dev/null 2>&1 & set-brightness 0"
+Hidden=false

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=keepassxc-cli
+Terminal=false
+Exec=kitty --class passwords -- keepassxc-cli open /home/owner/personal-only/misc/passwords.kdbx
+Hidden=false
+Categories=mycustom

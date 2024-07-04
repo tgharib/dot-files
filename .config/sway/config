@@ -1,0 +1,183 @@
+include "config.d/$(cat /etc/hostname)"
+
+# Super key
+set $mod Mod4
+# Alt key
+set $mod2 Mod1
+# Ctrl key
+set $mod3 Ctrl
+
+floating_modifier Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
+font pango:monospace 12
+
+# Hotkeys
+## Focus window in workspace
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Tab focus right
+bindsym $mod+$mod2+Tab focus left
+
+## Move focused window in workspace
+bindsym $mod+$mod2+h move left
+bindsym $mod+$mod2+j move down
+bindsym $mod+$mod2+k move up
+bindsym $mod+$mod2+l move right
+
+## Focus workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+## Move focused window to workspace
+bindsym $mod+$mod2+1 move container to workspace 1
+bindsym $mod+$mod2+2 move container to workspace 2
+bindsym $mod+$mod2+3 move container to workspace 3
+bindsym $mod+$mod2+4 move container to workspace 4
+bindsym $mod+$mod2+5 move container to workspace 5
+bindsym $mod+$mod2+6 move container to workspace 6
+bindsym $mod+$mod2+7 move container to workspace 7
+bindsym $mod+$mod2+8 move container to workspace 8
+bindsym $mod+$mod2+9 move container to workspace 9
+bindsym $mod+$mod2+0 move container to workspace 10
+
+## Tiling
+bindsym $mod+x split h
+bindsym $mod+y split v
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+## Floating / fullscreen
+bindsym $mod+f fullscreen toggle
+# toggle between focusing tiling windows or floating windows
+bindsym $mod+space focus mode_toggle
+# float/unfloat focused window
+bindsym $mod+t floating toggle
+# focus the parent container
+bindsym $mod+$mod2+a focus parent
+# focus the child container
+bindsym $mod+$mod2+d focus child
+
+## Hotkeys
+bindsym --locked XF86AudioRaiseVolume exec /home/owner/personal-only/misc/scripts/increase_volume.sh
+bindsym --locked XF86AudioLowerVolume exec /home/owner/personal-only/misc/scripts/decrease_volume.sh
+bindsym --locked XF86MonBrightnessUp exec sudo /run/current-system/sw/bin/light -T 1.4
+bindsym --locked XF86MonBrightnessDown exec sudo /run/current-system/sw/bin/light -T 0.72
+
+## Launchers
+bindsym $mod+a exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-workspace-renamer.sh"
+bindsym $mod+d exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-desktop-launcher.sh"
+bindsym $mod+s exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-workspace-selector.sh"
+bindsym $mod+$mod2+s exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-container-mover.sh"
+bindsym $mod+i exec kitty nvim -c "autocmd TextChanged,TextChangedI <buffer> silent write" /home/owner/personal-only/vim-temp.md
+bindsym $mod+u exec kitty nvim -c "autocmd TextChanged,TextChangedI <buffer> silent write" /home/owner/work-only/vim-temp.md
+bindsym $mod+o exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-clipboard.sh"
+bindsym $mod+p exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-passwords.sh"
+bindsym $mod+Return exec kitty
+bindsym Print exec /home/owner/personal-only/misc/scripts/sway-screenshot.sh
+# dex is used so that mpv launch isn't in workspace where Pause is pressed
+# bindsym Pause exec dex /home/owner/.local/share/applications/streamlink-tab.desktop
+
+## Other
+bindsym $mod+$mod2+q kill
+bindsym $mod+$mod2+$mod3+q exec wkill
+bindsym ctrl+space exec "makoctl dismiss"
+# reload the configuration file
+bindsym $mod+c reload
+
+# Modes
+## Resize
+mode resize {
+  bindsym h resize shrink width 5 px or 5 ppt
+  bindsym j resize grow height 5 px or 5 ppt
+  bindsym k resize shrink height 5 px or 5 ppt
+  bindsym l resize grow width 5 px or 5 ppt
+
+  bindsym Return mode default
+  bindsym Escape mode default
+  bindsym $mod+r mode default
+}
+bindsym $mod+r mode resize
+
+# Window rules
+for_window {
+  # Add XWayland to titles
+  [shell="xwayland"] title_format "%title [XWayland]"
+
+  # Center windows with launcher app_id
+  [app_id="^launcher$"] floating enable, border none, resize set width 40 ppt height 20 ppt, move position 30 ppt 30 ppt
+
+  # Inhibit idle for fullscreen windows in both X11 (class) and Wayland (app_id). Should not be necessary as the app should inhibit idle.
+  # [class="^.*"] inhibit_idle fullscreen
+  # [app_id="^.*"] inhibit_idle fullscreen
+
+  # Move windows
+  [app_id="passwords"] move container to workspace p
+  [class="Steam"] move container to workspace f
+  [class="Lutris"] move container to workspace f
+}
+
+# Bar config
+bar {
+  mode hide
+  modifier $mod
+  status_command i3status
+  tray_output primary
+}
+
+# Hardware config
+## Mouse settings
+input type:pointer {
+  accel_profile flat # disable mouse acceleration
+  pointer_accel -0.5 # set mouse sensitivity (between -1 and 1); use 0 for 1:1 input
+  middle_emulation disabled
+  # left_handed enabled
+}
+## Touchpad settings (disable while typing)
+input type:touchpad {
+  dwt enabled
+}
+
+## Screens
+### Desktop monitor
+output DP-3 mode 1920x1080@360Hz
+# output DP-6 scale 2.5 # without glasses
+### Laptop monitor
+output eDP-1 scale 1.75
+bindswitch lid:on output eDP-1 disable
+bindswitch lid:off output eDP-1 enable
+
+### VNC
+output Virtual-1 mode 1920x1080@360Hz
+
+# Sway config
+## default to tabbed layout
+workspace_layout tabbed
+## hide borders
+default_border pixel 1
+hide_edge_borders --i3 both
+## hide mouse cursor
+# seat * hide_cursor 3000
+gaps inner 4
+
+# Startup
+## Run X11 apps without restrictions
+exec /home/owner/personal-only/misc/scripts/startup.sh
+## Must come after startup.sh to work
+exec xhost +local:
+
+## VNC keyboard passthrough (this mode should only be used on viewer/cient)
+mode passthrough {
+  bindsym $mod+Insert mode default; bar mode hide
+}
+bindsym $mod+Insert mode passthrough; bar mode invisible

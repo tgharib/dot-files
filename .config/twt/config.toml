@@ -1,0 +1,45 @@
+[twitch]
+username = "tahayassen"
+channel = " "
+server = "irc.chat.twitch.tv"
+token = "oauth:lejfmkyglqh7wm9wm7x81c5ltaiv8o"
+
+[terminal]
+tick_delay = 30
+maximum_messages = 500
+log_file = ""
+verbose = false
+first_state = "dashboard"
+
+[storage]
+channels = true
+mentions = true
+
+[filters]
+enabled = false
+reversed = false
+
+[frontend]
+show_datetimes = false
+date_format = ""
+username_shown = true
+palette = "pastel"
+title_shown = false
+margin = 0
+badges = false
+theme = "dark"
+username_highlight = true
+state_tabs = false
+cursor_shape = "block"
+blinking_cursor = false
+inverted_scrolling = false
+show_scroll_offset = true
+twitch_emotes = true
+betterttv_emotes = true
+seventv_emotes = true
+frankerfacez_emotes = true
+favorite_channels = []
+recent_channel_count = 5
+border_type = "plain"
+right_align_usernames = false
+show_unsupported_screen_size = true

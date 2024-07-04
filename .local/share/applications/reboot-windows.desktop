@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=boot windows
+Terminal=false
+Exec=/home/owner/personal-only/misc/scripts/reboot-windows.sh
+Hidden=false

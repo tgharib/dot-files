@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=buku
+Terminal=false
+Exec=kitty buku
+Hidden=false

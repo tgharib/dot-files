@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=screenshot
+Terminal=false
+Exec=/home/owner/personal-only/misc/scripts/sway-screenshot.sh
+Hidden=false
