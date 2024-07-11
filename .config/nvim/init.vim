@@ -18,6 +18,7 @@ set expandtab " Spaces-only indenation https://gist.github.com/LunarLambda/4c444
 set softtabstop=-1 " Spaces-only indenation
 syntax off " Rely on treesitter only for syntax highlighting
 let g:suda_smart_edit = 1 " suda.nvim smart write
+set mouse= " Disable mouse support
 
 " Don't touch unnamed register when pasting over visual selection
 xnoremap p P
