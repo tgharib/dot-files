@@ -11,7 +11,7 @@ cat << 'EOF' >> ~/.bashrc
 
 # Nix-portable
 export PATH="${PATH:+${PATH}:}~/bin"
-alias enter-dev='nix-portable nix shell github:nixos/nixpkgs/nixos-24.05#{ripgrep,sd,fd,as-tree,fzf,abduco,lazygit,du-dust,bat,btop,difftastic,yazi,trash-cli,neovim,tree-sitter,nodejs,pazi}'
+alias enter-dev='nix-portable nix shell github:nixos/nixpkgs/nixos-24.05#{ripgrep,sd,fd,as-tree,fzf,lazygit,du-dust,bat,btop,difftastic,hexyl,pazi,minicom,yazi,neovim,tree-sitter,nodejs}'
 alias machine-clean='nix-portable nix-collect-garbage -d'
 
 # Source bashrc files
