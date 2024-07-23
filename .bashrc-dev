@@ -1,3 +1,39 @@
+export PS1="[$SHLVL] \[\033[38;5;50m\]\u\[$(tput sgr0)\]@\h \[$(tput sgr0)\]\[\033[38;5;87m\]\W\[$(tput sgr0)\]> \[$(tput sgr0)\]"
+set -o vi
+shopt -s expand_aliases
+shopt -s dotglob
+
+alias s='kitten ssh'
+alias r="tput reset"
+cheat() {
+  curl cheat.sh/"$1"
+}
+spwd() {
+  echo $(whoami)@$(hostname):$(pwd)
+}
+
+# linux-only
+
+alias sc='wl-copy'
+alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable'
+
+merge() {
+  local ext
+  [ $# -ne 2 ] && echo "Error: Need exactly two args." && return 1
+  [[ ! -r $1 || ! -r $2 ]] && echo "Error: One of the files is not readable." && return 1
+  if [[ ${1##*/} =~ '.' || ${2##*/} =~ '.' ]]; then
+    [ ${1##*.} != ${2##*.} ] && echo "Error: Files must have same extension." && return 1
+     ext=.${1##*.}
+  fi
+  touch tmp$ext # use empty file as the 'root' of the merge
+  cp $1 backup$ext
+  git merge-file $1 tmp$ext $2 # will write to file 1
+  mv $1 merge$ext
+  mv backup$ext $1
+  rm tmp$ext
+  echo "Files merged into \"merge$ext\"."
+}
+
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT='-c'
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
