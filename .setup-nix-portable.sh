@@ -16,11 +16,9 @@ alias machine-clean='nix-portable nix-collect-garbage -d'
 
 # Source bashrc files
 alias vim='nvim'
-source ~/.bashrc-vanilla
 if [[ $NIX_PATH ]]; then
   source ~/.bashrc-dev
 fi
-source ~/.bashrc-aliases
 EOF
 
 # USE DIFFTASTIC
