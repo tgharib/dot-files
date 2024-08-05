@@ -26,8 +26,7 @@ return {
   { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
   { "honza/vim-snippets", lazy = false }, -- snippets database
   "simrat39/symbols-outline.nvim",
-  { "echasnovski/mini.cursorword", version = false }, -- highlight word under cursor
-  { 'echasnovski/mini.align', version = false },
+  { "echasnovski/mini.nvim", version = false }, -- highlight word under cursor
 
   -- Smart code
   { "neoclide/coc.nvim", branch = "release", lazy = false },

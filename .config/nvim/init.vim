@@ -88,18 +88,17 @@ require('gitsigns').setup {
 }
 EOF
 
-"" mini.align
-" gA to start
-" s for split pattern
-" t for trimming whitespace
+"" mini.nvim
+
+" mini.align: gA to start, s for split pattern, t for trimming whitespace
 " https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-align.txt
+
+" mini.cursorword: highlight word under cursor
+
 lua << EOF
 require('mini.align').setup()
-EOF
-
-"" mini.cursorword
-lua << EOF
 require('mini.cursorword').setup()
+require('mini.bufremove').setup()
 EOF
 
 "" guess-indent.nvim
@@ -247,8 +246,8 @@ wk.register({
     name = "buffers",
     f = { ":Files<CR>", "open file" },
     b = { ":Buffers<CR>", "select buffer" },
-    q = { ":bw<CR>", "quit current buffer :bw" },
-    Q = { ":bufdo bw<CR>", "quit all buffers :bufdo bw" },
+    q = { ":lua MiniBufremove.wipeout()<CR>", "quit current buffer" },
+    Q = { ":bufdo bw<CR>", "quit all buffers" },
     t = { ":tabonly<CR>", "tabs -> buffers" },
     l = { ":SessionsLoad! ", "load session" },
     s = { ":SessionsSave! ", "save session" },
