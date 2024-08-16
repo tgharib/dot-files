@@ -146,6 +146,7 @@ input type:pointer {
 ## Touchpad settings (disable while typing)
 input type:touchpad {
   dwt enabled
+  tap enabled
 }
 
 ## Screens
