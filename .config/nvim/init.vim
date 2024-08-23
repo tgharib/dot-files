@@ -20,10 +20,10 @@ syntax off " Rely on treesitter only for syntax highlighting
 let g:suda_smart_edit = 1 " suda.nvim smart write
 set mouse= " Disable mouse support
 
-" Don't touch unnamed register when pasting over visual selection
+"" Don't touch unnamed register when pasting over visual selection
 xnoremap p P
 
-" bootstrap lazy.nvim
+"" bootstrap lazy.nvim
 lua << EOF
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -76,6 +76,51 @@ augroup helper_funcs
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
+  endfunction
+
+  "" Function to expand C macros
+  function! ExpandCMacro()
+    "get current info
+    let l:macro_file_name = "__macroexpand__" . tabpagenr()
+    let l:file_row = line(".")
+    let l:file_name = expand("%")
+    let l:file_window = winnr()
+    "create mark
+    execute "normal! Oint " . l:macro_file_name . ";"
+    execute "w"
+    "open tiny window ... check if we have already an open buffer for macro
+    if bufwinnr( l:macro_file_name ) != -1
+      execute bufwinnr( l:macro_file_name) . "wincmd w"
+      setlocal modifiable
+      execute "normal! ggdG"
+    else
+      execute "bot 10split " . l:macro_file_name
+      execute "setlocal filetype=cpp"
+      execute "setlocal buftype=nofile"
+      nnoremap <buffer> q :q!<CR>
+    endif
+    "read file with gcc
+    silent! execute "r!gcc -E " . l:file_name
+    "keep specific macro line
+    execute "normal! ggV/int " . l:macro_file_name . ";$\<CR>d"
+    execute "normal! jdG"
+    "indent
+    execute "%!indent -st -kr"
+    execute "normal! gg=G"
+    "resize window
+    execute "normal! G"
+    let l:macro_end_row = line(".")
+    execute "resize " . l:macro_end_row
+    execute "normal! gg"
+    "no modifiable
+    setlocal nomodifiable
+    "return to origin place
+    execute l:file_window . "wincmd w"
+    execute l:file_row
+    execute "normal!u"
+    execute "w"
+    "highlight origin line
+    let @/ = getline('.')
   endfunction
 augroup end
 
@@ -287,16 +332,15 @@ wk.register({
     name = "fix error",
     e = { ":<C-u>CocList diagnostics<CR>", "list errors/diagnostics (coc)" },
     l = { "<Plug>(coc-fix-current)", "fix error on current line (coc)" },
-    b = { "<Plug>(coc-codeaction)", "fix error on current buffer (coc)" },
-    z = { "<Plug>(coc-codeaction-cursor)", "test" },
+    b = { "<Plug>(coc-codeaction)", "code action on current buffer (coc)" },
+    c = { "<Plug>(coc-codeaction-cursor)", "code action on cursor (coc)" },
+    z = { ":call ExpandCMacro()<CR>", "expand C macro (requires indent installed)" },
   },
   r = {
     name = "refactor/transform",
     f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
     o = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports (coc)" },
     r = { "<Plug>(coc-rename)", "rename symbol (coc)" },
-    b = { ":lua require('refactoring').refactor('Extract Block')<CR>", "extract block (refactoring.nvim)" },
-    B = { ":lua require('refactoring').refactor('Extract Block To File')<CR>", "extract block to file (refactoring.nvim)" },
     v = { ":lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
     p = {
       name = "printf",
@@ -331,14 +375,12 @@ wk.register({
   r = {
     name = "refactor/transform",
     f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
-    a = { "<Plug>(coc-codeaction-selected)", "code action on selected (coc)" },
-    m = { ":TSCppDefineClassFunc<CR>", "implement class member functions (c++)" },
-    p = { ":TSCppMakeConcreteClass<CR>", "implement pure virtual functions (c++)" },
-    ["3"] = { ":TSCppRuleOf3<CR>", "modify class to obey Rule of 3 (c++)" },
-    ["5"] = { ":TSCppRuleOf5<CR>", "modify class to obey Rule of 5 (c++)" },
+    m = { ":TSCppDefineClassFunc<CR>", "implement class member functions (nvim-treesitter-cpp)" },
+    p = { ":TSCppMakeConcreteClass<CR>", "implement pure virtual functions (nvim-treesitter-cpp)" },
+    ["3"] = { ":TSCppRuleOf3<CR>", "modify class to obey Rule of 3 (nvim-treesitter-cpp)" },
+    ["5"] = { ":TSCppRuleOf5<CR>", "modify class to obey Rule of 5 (nvim-treesitter-cpp)" },
     v = { ":lua require('refactoring').refactor('Extract Variable')<CR>", "extract variable (refactoring.nvim)" },
     f = { ":lua require('refactoring').refactor('Extract Function')<CR>", "extract function (refactoring.nvim)" },
-    F = { ":lua require('refactoring').refactor('Extract Function To File')<CR>", "extract function to file (refactoring.nvim)" },
   },
 }, { prefix = "<leader>", mode = "x" })
 
