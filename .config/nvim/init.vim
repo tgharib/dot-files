@@ -288,6 +288,7 @@ wk.register({
     e = { ":<C-u>CocList diagnostics<CR>", "list errors/diagnostics (coc)" },
     l = { "<Plug>(coc-fix-current)", "fix error on current line (coc)" },
     b = { "<Plug>(coc-codeaction)", "fix error on current buffer (coc)" },
+    z = { "<Plug>(coc-codeaction-cursor)", "test" },
   },
   r = {
     name = "refactor/transform",
