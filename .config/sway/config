@@ -93,7 +93,7 @@ bindsym $mod+$mod2+q kill
 bindsym $mod+$mod2+$mod3+q exec wkill
 bindsym ctrl+space exec "makoctl dismiss"
 # reload the configuration file
-bindsym $mod+c reload
+bindsym $mod+m reload
 
 # Modes
 ## Resize
