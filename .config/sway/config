@@ -2,10 +2,10 @@ include "config.d/$(cat /etc/hostname)"
 
 # Super key
 set $mod Mod4
-# Alt key
-set $mod2 Mod1
 # Ctrl key
-set $mod3 Ctrl
+set $mod2 Ctrl
+# Alt key
+set $mod3 Mod1
 
 floating_modifier Mod4
 
