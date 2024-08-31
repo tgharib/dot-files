@@ -151,7 +151,7 @@ input type:touchpad {
 
 ## Screens
 ### Desktop monitor
-output DP-3 mode 1920x1080@360Hz
+output DP-2 mode 1920x1080@360Hz
 # output DP-6 scale 2.5 # without glasses
 ### Laptop monitor
 output eDP-1 scale 1.75
