@@ -1,6 +1,5 @@
 # linux-only below (do not copy to zshrc)
 
-alias sc='wl-copy'
 alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable'
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
