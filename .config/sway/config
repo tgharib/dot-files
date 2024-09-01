@@ -1,5 +1,3 @@
-include "config.d/$(cat /etc/hostname)"
-
 # Super key
 set $mod Mod4
 # Ctrl key
