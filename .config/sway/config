@@ -137,7 +137,7 @@ bar {
 ## Mouse settings
 input type:pointer {
   accel_profile flat # disable mouse acceleration
-  pointer_accel -0.5 # set mouse sensitivity (between -1 and 1); use 0 for 1:1 input
+  pointer_accel 0 # set mouse sensitivity (between -1 and 1); use 0 for 1:1 input
   middle_emulation disabled
 }
 ## Touchpad settings (disable while typing)
