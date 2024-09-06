@@ -150,7 +150,7 @@ input type:touchpad {
 ### Desktop monitor
 output DP-2 mode 1920x1080@360Hz
 ### Laptop monitor
-output eDP-1 scale 1.75
+output eDP-1 scale 1.5
 bindswitch lid:on output eDP-1 disable
 bindswitch lid:off output eDP-1 enable
 
