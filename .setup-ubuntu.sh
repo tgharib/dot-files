@@ -35,8 +35,11 @@ run tee /etc/keyd/default.conf <<EOF
 [main]
 # Maps capslock to escape when pressed and meta when held.
 capslock = overload(meta, esc)
+# Maps tab to tab when pressed and alt when held.
+tab = overload(alt, tab)
 
-# Remaps the escape key to capslock
+# Remaps keys
+leftalt = leftcontrol
 # esc = capslock
 EOF
 
