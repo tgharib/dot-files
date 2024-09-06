@@ -15,7 +15,7 @@ source ~/.bashrc-nonix
 source ~/.bashrc-dev
 EOF
 
-run sudo apt install kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim
+run sudo apt install kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc
 # mako, pazi
 run sudo ln -s /usr/bin/fdfind /usr/bin/fd
 
