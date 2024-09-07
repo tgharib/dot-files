@@ -69,8 +69,8 @@ bindsym $mod+$mod2+d focus child
 ## Hotkeys
 bindsym --locked XF86AudioRaiseVolume exec /home/owner/personal-only/misc/scripts/increase_volume.sh
 bindsym --locked XF86AudioLowerVolume exec /home/owner/personal-only/misc/scripts/decrease_volume.sh
-bindsym --locked XF86MonBrightnessUp exec sudo /run/current-system/sw/bin/light -T 1.4
-bindsym --locked XF86MonBrightnessDown exec sudo /run/current-system/sw/bin/light -T 0.72
+bindsym --locked XF86MonBrightnessUp exec light -T 1.4
+bindsym --locked XF86MonBrightnessDown exec light -T 0.72
 
 ## Launchers
 bindsym $mod+a exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-workspace-renamer.sh"
