@@ -3,7 +3,7 @@ set $mod Mod4
 # Ctrl key
 set $mod2 Ctrl
 # Alt key
-set $mod3 Mod1
+# set $mod3 Mod1
 
 floating_modifier $mod
 
@@ -87,8 +87,8 @@ bindsym Print exec /home/owner/personal-only/misc/scripts/sway-screenshot.sh
 # bindsym Pause exec dex /home/owner/.local/share/applications/streamlink-tab.desktop
 
 ## Other
-bindsym $mod+$mod2+q kill
-bindsym $mod+$mod2+$mod3+q exec wkill
+bindsym $mod+q kill
+bindsym $mod+$mod2+q exec wkill
 bindsym ctrl+space exec "makoctl dismiss"
 # reload the configuration file
 bindsym $mod+m reload
