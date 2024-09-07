@@ -25,6 +25,8 @@ run unzip SuperTTC-Iosevka-31.5.0.zip
 run mkdir ~/.fonts/
 run mv Iosevka.ttc ~/.fonts/
 
+# Setup firefox by logging into firefox account
+
 # Laptop only below
 
 run mkdir /etc/keyd/
