@@ -116,8 +116,8 @@ for_window {
   [app_id="^launcher$"] floating enable, border none, resize set width 40 ppt height 20 ppt, move position 30 ppt 30 ppt
 
   # Inhibit idle for fullscreen windows in both X11 (class) and Wayland (app_id). Should not be necessary as the app should inhibit idle.
-  # [class="^.*"] inhibit_idle fullscreen
-  # [app_id="^.*"] inhibit_idle fullscreen
+  [class="^.*"] inhibit_idle fullscreen
+  [app_id="^.*"] inhibit_idle fullscreen
 
   # Move windows
   [app_id="passwords"] move container to workspace p
