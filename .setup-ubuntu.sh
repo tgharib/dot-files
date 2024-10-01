@@ -15,11 +15,12 @@ source ~/.bashrc-nonix
 source ~/.bashrc-dev
 EOF
 
-run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint
+run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint imv
 # mako, pazi
 run sudo adduser owner video
 run sudo ln -s /usr/bin/fdfind /usr/bin/fd
 run sudo ln -s /usr/bin/batcat /usr/bin/bat
+run sudo ln -s /usr/bin/imv-wayland /usr/bin/imv
 
 run cd ~/Downloads/
 run wget https://github.com/be5invis/Iosevka/releases/download/v31.5.0/SuperTTC-Iosevka-31.5.0.zip
