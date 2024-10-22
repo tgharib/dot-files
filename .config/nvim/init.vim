@@ -240,116 +240,94 @@ lua << EOF
 require("which-key").setup {
 }
 local wk = require("which-key")
-wk.register({
-  k = { ":call ShowDocumentation()<CR>", "show documentation (coc)" },
-  b = {
-    name = "buffers",
-    f = { ":Files<CR>", "open file" },
-    b = { ":Buffers<CR>", "select buffer" },
-    q = { ":lua MiniBufremove.wipeout()<CR>", "quit current buffer" },
-    Q = { ":bufdo bw<CR>", "quit all buffers" },
-    t = { ":tabonly<CR>", "tabs -> buffers" },
-    l = { ":SessionsLoad! ", "load session" },
-    s = { ":SessionsSave! ", "save session" },
-    d = { ":windo :diffthis<CR>", "diff between two splits" },
-    u = { ":windo :diffoff<CR>", "undiff between two splits" },
-    g = {
-      name = "git",
-      b = { ":Git blame<CR>", "git blame this buffer" },
-      d = { ":Gitsigns diffthis<CR>", "git diff this buffer" },
-    },
+wk.add({
+  { "<leader>b", group = "buffers" },
+  { "<leader>bQ", ":bufdo bw<CR>", desc = "quit all buffers" },
+  { "<leader>bb", ":Buffers<CR>", desc = "select buffer" },
+  { "<leader>bd", ":windo :diffthis<CR>", desc = "diff between two splits" },
+  { "<leader>bf", ":Files<CR>", desc = "open file" },
+  { "<leader>bg", group = "git" },
+  { "<leader>bgb", ":Git blame<CR>", desc = "git blame this buffer" },
+  { "<leader>bgd", ":Gitsigns diffthis<CR>", desc = "git diff this buffer" },
+  { "<leader>bl", ":SessionsLoad! ", desc = "load session" },
+  { "<leader>bq", ":lua MiniBufremove.wipeout()<CR>", desc = "quit current buffer" },
+  { "<leader>bs", ":SessionsSave! ", desc = "save session" },
+  { "<leader>bt", ":tabonly<CR>", desc = "tabs -> buffers" },
+  { "<leader>bu", ":windo :diffoff<CR>", desc = "undiff between two splits" },
+  { "<leader>f", group = "fix error" },
+  { "<leader>fb", "<Plug>(coc-codeaction)", desc = "code action on current buffer (coc)" },
+  { "<leader>fc", "<Plug>(coc-codeaction-cursor)", desc = "code action on cursor (coc)" },
+  { "<leader>fe", ":<C-u>CocList diagnostics<CR>", desc = "list errors/diagnostics (coc)" },
+  { "<leader>fl", "<Plug>(coc-fix-current)", desc = "fix error on current line (coc)" },
+  { "<leader>g", group = "go to" },
+  { "<leader>gD", "<Plug>(coc-implementation)", desc = "go to implementation (coc)" },
+  { "<leader>gd", "<Plug>(coc-definition)", desc = "go to definition (coc)" },
+  { "<leader>gg", ":CocCommand clangd.switchSourceHeader<CR>", desc = "go to source/header (coc)" },
+  { "<leader>gr", "<Plug>(coc-references)", desc = "go to references (coc)" },
+  { "<leader>gt", "<Plug>(coc-type-definition)", desc = "go to type definition (coc)" },
+  { "<leader>k", ":call ShowDocumentation()<CR>", desc = "show documentation (coc)" },
+  { "<leader>p", group = "paths" },
+  { "<leader>pc", ":cd %:h<CR>", desc = "cd into current buffer working directory" },
+  { "<leader>pf", ":echo expand('%:p')<CR>", desc = "show file path" },
+  { "<leader>po", ":Oil<CR>", desc = "oil (file manager)" },
+  { "<leader>r", group = "refactor/transform" },
+  { "<leader>rf", ":call CocActionAsync('format')<CR>", desc = "format buffer (coc)" },
+  { "<leader>ro", ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", desc = "organize imports (coc)" },
+  { "<leader>rp", group = "printf" },
+  { "<leader>rpc", ":lua require('refactoring').debug.cleanup({})<CR>", desc = "cleanup (refactoring.nvim)" },
+  { "<leader>rpl", ":lua require('refactoring').debug.printf({below = true})<CR>", desc = "printf line (refactoring.nvim)" },
+  { "<leader>rpv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", desc = "printf variable (refactoring.nvim)" },
+  { "<leader>rr", "<Plug>(coc-rename)", desc = "rename symbol (coc)" },
+  { "<leader>rs", ":CocList snippets<CR>", desc = "snippets" },
+  { "<leader>rv", ":lua require('refactoring').refactor('Inline Variable')<CR>", desc = "inline variable (refactoring.nvim)" },
+  { "<leader>rw", group = "whitespace" },
+  { "<leader>rw2", ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 2 spaces" },
+  { "<leader>rw4", ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 4 spaces" },
+  { "<leader>rwr", ":retab<CR>", desc = "replace tabs with spaces" },
+  { "<leader>rwt", ":call TrimWhitespace()<CR>", desc = "trim whitespace" },
+  { "<leader>s", group = "search" },
+  { "<leader>sD", ":SymbolsOutline<CR>", desc = "open document outline in split window" },
+  { "<leader>sS", ":<C-u>CocList -I symbols<CR>", desc = "search symbol in workspace (coc)" },
+  { "<leader>sT", ":Lines!<CR>", desc = "search text in all buffers" },
+  { "<leader>sd", ":CocOutline<CR>", desc = "open document outline in split window (coc)" },
+  { "<leader>sr", ":Rg! ", desc = "rg text in current working directory" },
+  { "<leader>ss", ":<C-u>CocList outline<CR>", desc = "search symbol in document outline (coc)" },
+  { "<leader>st", ":BLines!<CR>", desc = "search text in current buffer" },
+  { "<leader>t", group = "toggles" },
+  { "<leader>td", ":Gitsigns toggle_signs<CR>", desc = "toggle git diff signs" },
+  { "<leader>th", ":set hlsearch!<CR>", desc = "toggle search highlight" },
+  { "<leader>tl", ":set number!<CR>", desc = "toggle line numbers" },
+  { "<leader>tn", ":TSContextToggle<CR>", desc = "toggle context (nested statements)" },
+  { "<leader>tt", ":CocCommand document.toggleInlayHint<CR>", desc = "toggle inlay hints (coc)" },
+  { "<leader>tw", ":set wrap!<CR>", desc = "toggle line wrap" },
+  })
+wk.add({
+  {
+  mode = { "x" },
+  { "<leader>d", group = "debug" },
+  { "<leader>ds", ":lua require('refactoring').debug.print_var({})<CR>", desc = "printf selection (refactoring.nvim)" },
+  { "<leader>r", group = "refactor/transform" },
+  { "<leader>r3", ":TSCppRuleOf3<CR>", desc = "modify class to obey Rule of 3 (nvim-treesitter-cpp)" },
+  { "<leader>r5", ":TSCppRuleOf5<CR>", desc = "modify class to obey Rule of 5 (nvim-treesitter-cpp)" },
+  { "<leader>rf", ":lua require('refactoring').refactor('Extract Function')<CR>", desc = "extract function (refactoring.nvim)" },
+  { "<leader>rm", ":TSCppDefineClassFunc<CR>", desc = "implement class member functions (nvim-treesitter-cpp)" },
+  { "<leader>rp", ":TSCppMakeConcreteClass<CR>", desc = "implement pure virtual functions (nvim-treesitter-cpp)" },
+  { "<leader>rv", ":lua require('refactoring').refactor('Extract Variable')<CR>", desc = "extract variable (refactoring.nvim)" },
   },
-  g = {
-    name = "go to",
-    d = { "<Plug>(coc-definition)", "go to definition (coc)" },
-    D = { "<Plug>(coc-implementation)", "go to implementation (coc)" },
-    r = { "<Plug>(coc-references)", "go to references (coc)" },
-    t = { "<Plug>(coc-type-definition)", "go to type definition (coc)" },
-    g = { ":CocCommand clangd.switchSourceHeader<CR>", "go to source/header (coc)" },
-  },
-  s = {
-    name = "search",
-    s = { ":<C-u>CocList outline<CR>", "search symbol in document outline (coc)" },
-    S = { ":<C-u>CocList -I symbols<CR>", "search symbol in workspace (coc)" },
-    t = { ":BLines!<CR>", "search text in current buffer" },
-    T = { ":Lines!<CR>", "search text in all buffers" },
-    r = { ":Rg! ", "rg text in current working directory" },
-    d = { ":CocOutline<CR>", "open document outline in split window (coc)" },
-    D = { ":SymbolsOutline<CR>", "open document outline in split window" },
-  },
-  p = {
-    name = "paths",
-    c = { ":cd %:h<CR>", "cd into current buffer working directory" },
-    f = { ":echo expand('%:p')<CR>", "show file path" },
-    o = { ":Oil<CR>", "oil (file manager)" },
-  },
-  f = {
-    name = "fix error",
-    e = { ":<C-u>CocList diagnostics<CR>", "list errors/diagnostics (coc)" },
-    l = { "<Plug>(coc-fix-current)", "fix error on current line (coc)" },
-    b = { "<Plug>(coc-codeaction)", "code action on current buffer (coc)" },
-    c = { "<Plug>(coc-codeaction-cursor)", "code action on cursor (coc)" },
-  },
-  r = {
-    name = "refactor/transform",
-    f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
-    o = { ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", "organize imports (coc)" },
-    r = { "<Plug>(coc-rename)", "rename symbol (coc)" },
-    v = { ":lua require('refactoring').refactor('Inline Variable')<CR>", "inline variable (refactoring.nvim)" },
-    p = {
-      name = "printf",
-      l = { ":lua require('refactoring').debug.printf({below = true})<CR>", "printf line (refactoring.nvim)" },
-      v = { ":lua require('refactoring').debug.print_var({ normal = true })<CR>", "printf variable (refactoring.nvim)" },
-      c = { ":lua require('refactoring').debug.cleanup({})<CR>", "cleanup (refactoring.nvim)" },
-    },
-    w = {
-      name = "whitespace",
-      r = { ":retab<CR>", "replace tabs with spaces" },
-      ["2"] = { ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", "set tabs to 2 spaces" },
-      ["4"] = { ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", "set tabs to 4 spaces" },
-      t = { ":call TrimWhitespace()<CR>", "trim whitespace" },
-    },
-    s = { ":CocList snippets<CR>", "snippets" },
-  },
-  t = {
-    name = "toggles",
-    d = { ":Gitsigns toggle_signs<CR>", "toggle git diff signs" },
-    w = { ":set wrap!<CR>", "toggle line wrap" },
-    l = { ":set number!<CR>", "toggle line numbers" },
-    h = { ":set hlsearch!<CR>", "toggle search highlight" },
-    n = { ":TSContextToggle<CR>", "toggle context (nested statements)" },
-    t = { ":CocCommand document.toggleInlayHint<CR>", "toggle inlay hints (coc)" },
-  },
-}, { prefix = "<leader>", mode = "n" })
-wk.register({
-  d = {
-    name = "debug",
-    s = { ":lua require('refactoring').debug.print_var({})<CR>", "printf selection (refactoring.nvim)" },
-  },
-  r = {
-    name = "refactor/transform",
-    f = { ":call CocActionAsync('format')<CR>", "format buffer (coc)" },
-    m = { ":TSCppDefineClassFunc<CR>", "implement class member functions (nvim-treesitter-cpp)" },
-    p = { ":TSCppMakeConcreteClass<CR>", "implement pure virtual functions (nvim-treesitter-cpp)" },
-    ["3"] = { ":TSCppRuleOf3<CR>", "modify class to obey Rule of 3 (nvim-treesitter-cpp)" },
-    ["5"] = { ":TSCppRuleOf5<CR>", "modify class to obey Rule of 5 (nvim-treesitter-cpp)" },
-    v = { ":lua require('refactoring').refactor('Extract Variable')<CR>", "extract variable (refactoring.nvim)" },
-    f = { ":lua require('refactoring').refactor('Extract Function')<CR>", "extract function (refactoring.nvim)" },
-  },
-}, { prefix = "<leader>", mode = "x" })
+  })
 
-wk.register({
-  s = { ":Pounce<CR>", "pounce" },
-  S = { ":PounceRepeat<CR>", "pounce repeat" },
-}, { prefix = "", mode = "n" })
-wk.register({
-  s = { ":Pounce<CR>", "pounce" },
-  S = { ":PounceRepeat<CR>", "pounce repeat" },
-}, { prefix = "", mode = "o" })
-wk.register({
-  s = { ":Pounce<CR>", "pounce" },
-  S = { ":PounceRepeat<CR>", "pounce repeat" },
-}, { prefix = "", mode = "x" })
+wk.add({
+  { "S", ":PounceRepeat<CR>", desc = "pounce repeat" },
+  { "s", ":Pounce<CR>", desc = "pounce" },
+  })
+wk.add({
+  { "S", ":PounceRepeat<CR>", desc = "pounce repeat", mode = "o" },
+  { "s", ":Pounce<CR>", desc = "pounce", mode = "o" },
+  })
+wk.add({
+  { "S", ":PounceRepeat<CR>", desc = "pounce repeat", mode = "x" },
+  { "s", ":Pounce<CR>", desc = "pounce", mode = "x" },
+  })
 EOF
 
 " :nmap - Display normal mode maps
