@@ -15,7 +15,7 @@ source ~/.bashrc-nonix
 source ~/.bashrc-dev
 EOF
 
-run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint imv zathura
+run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint imv zathura nodejs
 # mako, pazi
 run sudo adduser owner video
 run sudo ln -s /usr/bin/fdfind /usr/bin/fd
