@@ -81,6 +81,11 @@ augroup end
 
 " Plugins
 
+"" remote-nvim.nvim
+lua << EOF
+require("remote-nvim").setup()
+EOF
+
 "" gitsigns.nvim
 lua << EOF
 require('gitsigns').setup {
