@@ -11,8 +11,7 @@ run() {
 run cat << 'EOF' >> ~/.bashrc
 
 # Source bashrc files
-source ~/.bashrc-nonix
-source ~/.bashrc-dev
+source ~/.bashrc-portable
 EOF
 
 run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint imv zathura nodejs npm

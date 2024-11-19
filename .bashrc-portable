@@ -1,4 +1,33 @@
+export PS1="[$SHLVL] \[\033[38;5;50m\]\u\[$(tput sgr0)\]@\h \[$(tput sgr0)\]\[\033[38;5;87m\]\W\[$(tput sgr0)\]> \[$(tput sgr0)\]"
+set -o vi
+shopt -s dotglob
+
+alias s='kitten ssh'
+cheat() {
+  curl cheat.sh/"$1"
+}
+spwd() {
+  echo $(whoami)@$(hostname):$(pwd)
+}
+
 # linux-only below (do not copy to zshrc)
+
+merge() {
+  local ext
+  [ $# -ne 2 ] && echo "Error: Need exactly two args." && return 1
+  [[ ! -r $1 || ! -r $2 ]] && echo "Error: One of the files is not readable." && return 1
+  if [[ ${1##*/} =~ '.' || ${2##*/} =~ '.' ]]; then
+    [ ${1##*.} != ${2##*.} ] && echo "Error: Files must have same extension." && return 1
+     ext=.${1##*.}
+  fi
+  touch tmp$ext # use empty file as the 'root' of the merge
+  cp $1 backup$ext
+  git merge-file $1 tmp$ext $2 # will write to file 1
+  mv $1 merge$ext
+  mv backup$ext $1
+  rm tmp$ext
+  echo "Files merged into \"merge$ext\"."
+}
 
 alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable'
 
@@ -10,20 +39,10 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --follow --exclude .g
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # What follows is:
-# 0. yazi's alias
 # 1. fzf's key-bindings.bash (with emacs references removed so that escape+c doesn't trigger `__fzf_cd__`)
 # 2. fzf's completion.bash
 # 3. pazi's bash init with a modification to echo the directory:
 # 91) cd "${res}" && echo "${res}";;
-
-function ya() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
 
 #     ____      ____
 #    / __/___  / __/
@@ -527,4 +546,4 @@ pazi_cd() {
     *) echo "${res}" && return $ret;;
     esac
 }
-alias z='pazi_cd'
+
