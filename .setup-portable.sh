@@ -7,6 +7,5 @@ export PATH="${PATH:+${PATH}:}~/bin:~/.cargo/bin:~/bin/nvim/usr/bin"
 # install rustup for cargo, rg, sd, fd, fzf, lazygit, dust, as-tree, btop, pazi, nvim, tree-sitter, nodejs
 
 # Source bashrc files
-alias vim='nvim'
 source ~/.bashrc-portable
 EOF
