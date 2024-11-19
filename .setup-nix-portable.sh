@@ -9,9 +9,9 @@ chmod +x nix-portable
 # ADD TO BASHRC
 cat << 'EOF' >> ~/.bashrc
 
+export PATH="${PATH:+${PATH}:}~/bin:~/.cargo/bin"
 # Nix-portable
-export PATH="${PATH:+${PATH}:}~/bin"
-alias enter-dev='nix-portable nix shell github:nixos/nixpkgs/nixos-24.05#{ripgrep,sd,fd,as-tree,fzf,lazygit,du-dust,bat,btop,hexyl,pazi,minicom,yazi,neovim,tree-sitter,nodejs}'
+alias enter-dev='nix-portable nix shell github:nixos/nixpkgs/nixos-24.11#{ripgrep,sd,fd,as-tree,fzf,lazygit,du-dust,bat,btop,hexyl,pazi,minicom,yazi,neovim,tree-sitter,nodejs}'
 alias machine-clean='nix-portable nix-collect-garbage -d'
 
 # Source bashrc files
