@@ -84,6 +84,7 @@ augroup end
 "" remote-nvim.nvim
 lua << EOF
 require("remote-nvim").setup({
+<<<<<<< Updated upstream
     client_callback = function(port, workspace_config)
       local cmd = ("wezterm cli set-tab-title --pane-id $(wezterm cli spawn nvim --server localhost:%s --remote-ui) %s"):format(
         port,
@@ -92,6 +93,10 @@ require("remote-nvim").setup({
       if vim.env.TERM == "xterm-kitty" then
         cmd = ("kitty -e nvim --server localhost:%s --remote-ui"):format(port)
       end
+=======
+    client_callback = function(port, _)
+      local cmd = ("open -n -a Neovide --args --remote-tcp localhost:%s"):format(port)
+>>>>>>> Stashed changes
       vim.fn.jobstart(cmd, {
         detach = true,
         on_exit = function(job_id, exit_code, event_type)
@@ -456,10 +461,3 @@ END
 " Highlight trailing whitespace (at the end after colorscheme is set)
 highlight extrawhitespace ctermbg=red guibg=red
 match extrawhitespace /\s\+$\| \+\ze\t/
-
-" Neovide
-
-if exists("g:neovide")
-  set guifont=Iosevka\ Term:h18
-  autocmd VimEnter * call timer_start(100, {tid -> execute('NeovideFocus')})
-endif
