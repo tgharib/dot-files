@@ -12,10 +12,11 @@ run cat << 'EOF' >> ~/.bashrc
 
 # Source bashrc files
 source ~/.bashrc-portable
+
 EOF
 
-run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint imv zathura nodejs npm
-# mako, pazi
+run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint imv zathura nodejs npm mako-notifier
+run cargo intall pazi
 run sudo adduser owner video
 run sudo ln -s /usr/bin/fdfind /usr/bin/fd
 run sudo ln -s /usr/bin/batcat /usr/bin/bat

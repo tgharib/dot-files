@@ -546,4 +546,5 @@ pazi_cd() {
     *) echo "${res}" && return $ret;;
     esac
 }
+alias z='pazi_cd'
 
