@@ -3,7 +3,7 @@ set $mod Mod4
 # Ctrl key
 set $mod2 Ctrl
 # Alt key
-# set $mod3 Mod1
+set $mod3 Mod1
 
 floating_modifier $mod
 
@@ -58,7 +58,7 @@ bindsym $mod+e layout toggle split
 ## Floating / fullscreen
 bindsym $mod+f fullscreen toggle
 # toggle between focusing tiling windows or floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod3+space focus mode_toggle
 # float/unfloat focused window
 bindsym $mod+t floating toggle
 # focus the parent container
@@ -89,7 +89,7 @@ bindsym Print exec /home/owner/personal-only/misc/scripts/sway-screenshot.sh
 ## Other
 bindsym $mod+q kill
 bindsym $mod+$mod2+q exec wkill
-bindsym ctrl+space exec "makoctl dismiss"
+bindsym $mod+space exec "makoctl dismiss"
 # reload the configuration file
 bindsym $mod+m reload
 
