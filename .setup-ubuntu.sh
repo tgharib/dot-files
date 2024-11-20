@@ -22,11 +22,19 @@ run sudo ln -s /usr/bin/fdfind /usr/bin/fd
 run sudo ln -s /usr/bin/batcat /usr/bin/bat
 run sudo ln -s /usr/bin/imv-wayland /usr/bin/imv
 
+run mkdir ~/.fonts/
 run cd ~/Downloads/
+
 run wget https://github.com/be5invis/Iosevka/releases/download/v31.5.0/SuperTTC-Iosevka-31.5.0.zip
 run unzip SuperTTC-Iosevka-31.5.0.zip
-run mkdir ~/.fonts/
+run rm SuperTTC-Iosevka-31.5.0.zip
 run mv Iosevka.ttc ~/.fonts/
+
+run wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/NerdFontsSymbolsOnly.tar.xz
+run tar xvf NerdFontsSymbolsOnly.tar.xz
+run rm NerdFontsSymbolsOnly.tar.xz LICENSE README.md 10-nerd-font-symbols.conf
+run mv SymbolsNerdFontMono-Regular.ttf ~/.fonts/
+run mv SymbolsNerdFont-Regular.ttf ~/.fonts/
 
 # Setup firefox by logging into firefox account
 
