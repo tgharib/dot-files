@@ -456,3 +456,10 @@ END
 " Highlight trailing whitespace (at the end after colorscheme is set)
 highlight extrawhitespace ctermbg=red guibg=red
 match extrawhitespace /\s\+$\| \+\ze\t/
+
+" Neovide
+
+if exists("g:neovide")
+  set guifont=Iosevka\ Term:h18
+  autocmd VimEnter * call timer_start(100, {tid -> execute('NeovideFocus')})
+endif
