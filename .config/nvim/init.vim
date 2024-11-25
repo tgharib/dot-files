@@ -1,5 +1,5 @@
 " For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
-" Vim motion options: f/F/t/T for horizontal, pounce.nvim for vertical, */#, search, goto definition
+" Vim motion options: f/F/t/T for horizontal, <CR> for vertical, */#, search, goto definition, ripgrep
 " Paste text vertically using visual block mode https://stackoverflow.com/a/27542895
 
 " Options
@@ -111,10 +111,19 @@ EOF
 
 " mini.cursorword: highlight word under cursor
 
+" mini.bufremove: close windows while saving window layout
+
+" mini.jump2d: hop.nvim clone
+
 lua << EOF
 require('mini.align').setup()
 require('mini.cursorword').setup()
 require('mini.bufremove').setup()
+require('mini.jump2d').setup({
+  view = {
+    dim = true
+  }
+})
 EOF
 
 "" guess-indent.nvim
@@ -143,11 +152,6 @@ EOF
 "" sessions.nvim
 lua << EOF
 require("sessions").setup()
-EOF
-
-"" pounce.nvim
-lua << EOF
-require'pounce'.setup()
 EOF
 
 "" nvim-treesitter
@@ -331,18 +335,23 @@ wk.add({
   { "<leader>rv", ":lua require('refactoring').refactor('Extract Variable')<CR>", desc = "extract variable (refactoring.nvim)" },
   },
   })
-
 wk.add({
-  { "S", ":PounceRepeat<CR>", desc = "pounce repeat" },
-  { "s", ":Pounce<CR>", desc = "pounce" },
+  { "f", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
+  { "F", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
+  { "t", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
+  { "T", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
   })
 wk.add({
-  { "S", ":PounceRepeat<CR>", desc = "pounce repeat", mode = "o" },
-  { "s", ":Pounce<CR>", desc = "pounce", mode = "o" },
+  { "f", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
+  { "F", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
+  { "t", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
+  { "T", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
   })
 wk.add({
-  { "S", ":PounceRepeat<CR>", desc = "pounce repeat", mode = "x" },
-  { "s", ":Pounce<CR>", desc = "pounce", mode = "x" },
+  { "f", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
+  { "F", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
+  { "t", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
+  { "T", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
   })
 EOF
 

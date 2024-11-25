@@ -7,7 +7,6 @@ return {
 
   -- Regular
   "folke/which-key.nvim",
-  "rlane/pounce.nvim",
   { "junegunn/fzf", build = function() vim.fn["fzf#install"]() end, lazy = false },
   { "junegunn/fzf.vim", lazy = false },
   "natecraddock/sessions.nvim",
@@ -26,7 +25,7 @@ return {
   { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
   { "honza/vim-snippets", lazy = false }, -- snippets database
   "simrat39/symbols-outline.nvim",
-  { "echasnovski/mini.nvim", version = false }, -- highlight word under cursor
+  { "echasnovski/mini.nvim", version = false },
 
   -- Smart code
   { "neoclide/coc.nvim", branch = "release", lazy = false },
