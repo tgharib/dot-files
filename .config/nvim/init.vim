@@ -335,24 +335,6 @@ wk.add({
   { "<leader>rv", ":lua require('refactoring').refactor('Extract Variable')<CR>", desc = "extract variable (refactoring.nvim)" },
   },
   })
-wk.add({
-  { "f", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
-  { "F", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
-  { "t", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
-  { "T", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line" },
-  })
-wk.add({
-  { "f", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
-  { "F", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
-  { "t", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
-  { "T", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "o" },
-  })
-wk.add({
-  { "f", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
-  { "F", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
-  { "t", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
-  { "T", ":lua MiniJump2d.start({allowed_lines = { cursor_before = false, cursor_after = false },})<CR>", desc = "jump2d current line", mode = "x" },
-  })
 EOF
 
 " :nmap - Display normal mode maps
