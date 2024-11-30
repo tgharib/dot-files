@@ -67,7 +67,7 @@ sudo add-apt-repository ppa:linrunner/tlp
 sudo apt update
 sudo apt install tlp tlp-rdw powertop
 sudo systemctl enable tlp.service
-# disable bluetooth and enable battery cary in /etc/tlp.conf
+# disable bluetooth and enable battery care in /etc/tlp.conf
 # add acpi.ec_no_wakeup=1 kernel parameter
 # sudo powertop to check wattage
 # https://old.reddit.com/r/thinkpad/comments/1dvw8gp/thinkpad_t14_gen_5_amd_on_ubuntu_2204_2404/
