@@ -48,6 +48,7 @@ run xdg-mime default org.pwmt.zathura.desktop application/pdf
 # * `;u`, `;U`, `;;` to hover
 # * `s` and `S` to search DDG
 # * `b` to search tabs
+# * Ctrl+I in textbox to edit with editorcmd (`:set editorcmd`)
 
 # Laptop only below
 
