@@ -16,6 +16,7 @@ source ~/.bashrc-portable
 EOF
 
 run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard sway build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing neovim keepassxc light slurp grim kolourpaint imv zathura nodejs npm mako-notifier pandoc texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science entr
+# if you use nvim appimage, you can edit `/etc/environment` to set $EDITOR and follow https://askubuntu.com/a/1390401
 run cargo install pazi
 run cargo install du-dust
 run cargo install -f --git https://github.com/jez/as-tree
