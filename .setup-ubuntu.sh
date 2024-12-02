@@ -83,5 +83,8 @@ STOP_CHARGE_THRESH_BAT0=80
 RESTORE_THRESHOLDS_ON_BAT=1
 EOF
 # add acpi.ec_no_wakeup=1 kernel parameter
+# other hacks: https://old.reddit.com/r/thinkpad/comments/1dvw8gp/thinkpad_t14_gen_5_amd_on_ubuntu_2204_2404/
 # sudo powertop to check wattage
-# https://old.reddit.com/r/thinkpad/comments/1dvw8gp/thinkpad_t14_gen_5_amd_on_ubuntu_2204_2404/
+# limit TDP when on battery
+# install special Ubuntu software package oem-kernel
+# use a battery bank for extended battery life
