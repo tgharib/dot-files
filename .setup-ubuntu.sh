@@ -44,6 +44,10 @@ run LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygi
 run xdg-mime default org.pwmt.zathura.desktop application/pdf
 
 # Setup firefox by logging into firefox account
+# Firefox tridactyl has binds:
+# * `;u`, `;U`, `;;` to hover
+# * `s` and `S` to search DDG
+# * `b` to search tabs
 
 # Laptop only below
 
