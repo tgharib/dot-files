@@ -121,8 +121,12 @@ require('mini.cursorword').setup()
 require('mini.bufremove').setup()
 require('mini.jump2d').setup({
   view = {
-    dim = true
-  }
+    dim = true,
+    n_steps_ahead = 10,
+  },
+  mappings = {
+    start_jumping = '',
+  },
 })
 EOF
 
@@ -261,6 +265,7 @@ require("which-key").setup {
 }
 local wk = require("which-key")
 wk.add({
+  { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   { "<leader>b", group = "buffers" },
   { "<leader>bQ", ":bufdo bw<CR>", desc = "quit all buffers" },
   { "<leader>bb", ":Buffers<CR>", desc = "select buffer" },
@@ -324,6 +329,7 @@ wk.add({
 wk.add({
   {
   mode = { "x" },
+  { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   { "<leader>d", group = "debug" },
   { "<leader>ds", ":lua require('refactoring').debug.print_var({})<CR>", desc = "printf selection (refactoring.nvim)" },
   { "<leader>r", group = "refactor/transform" },
@@ -333,6 +339,12 @@ wk.add({
   { "<leader>rm", ":TSCppDefineClassFunc<CR>", desc = "implement class member functions (nvim-treesitter-cpp)" },
   { "<leader>rp", ":TSCppMakeConcreteClass<CR>", desc = "implement pure virtual functions (nvim-treesitter-cpp)" },
   { "<leader>rv", ":lua require('refactoring').refactor('Extract Variable')<CR>", desc = "extract variable (refactoring.nvim)" },
+  },
+  })
+wk.add({
+  {
+  mode = { "o" },
+  { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   },
   })
 EOF
