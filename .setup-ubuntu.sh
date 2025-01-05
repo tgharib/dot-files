@@ -43,6 +43,21 @@ run LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygi
 
 run xdg-mime default org.pwmt.zathura.desktop application/pdf
 
+run tee /etc/systemd/system/vpn.service <<EOF
+[Unit]
+Description=VPN
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/home/owner/personal-only/misc/scripts/my_start_vpn.sh
+ExecStop=sh -c "wg-quick down pia && ufw disable && echo 'DONE STOPPING VPN'"
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 # Setup firefox by logging into firefox account
 # Firefox tridactyl has binds:
 # * `;u`, `;U`, `;;` to hover
