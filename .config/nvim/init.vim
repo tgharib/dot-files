@@ -87,16 +87,13 @@ augroup end
 "" remote-nvim.nvim
 lua << EOF
 require("remote-nvim").setup({
-    client_callback = function(port, _)
-      local cmd = ("open -n -a Neovide --args --remote-tcp localhost:%s"):format(port)
-      vim.fn.jobstart(cmd, {
-        detach = true,
-        on_exit = function(job_id, exit_code, event_type)
-          -- This function will be called when the job exits
-          print("Client", job_id, "exited with code", exit_code, "Event type:", event_type)
-        end,
-      })
-    end,
+  client_callback = function(port, _)
+    require("remote-nvim.ui").float_term(("kitty nvim --server localhost:%s --remote-ui"):format(port), function(exit_code)
+      if exit_code ~= 0 then
+        vim.notify(("Local client failed with exit code %s"):format(exit_code), vim.log.levels.ERROR)
+      end
+    end)
+  end,
 })
 EOF
 
