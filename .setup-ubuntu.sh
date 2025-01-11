@@ -52,7 +52,7 @@ After=network-online.target
 [Service]
 RemainAfterExit=yes
 ExecStart=/home/owner/personal-only/misc/scripts/my_start_vpn.sh
-ExecStop=sh -c "wg-quick down pia && ufw disable && echo 'DONE STOPPING VPN'"
+ExecStop=sh -c "wg-quick down pia; ufw disable; echo 'DONE STOPPING VPN'"
 
 [Install]
 WantedBy=multi-user.target
