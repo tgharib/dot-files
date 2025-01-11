@@ -51,6 +51,7 @@ After=network-online.target
 
 [Service]
 RemainAfterExit=yes
+ExecStartPre=/bin/sh -c 'until ping -c1 google.com; do sleep 1; done;'
 ExecStart=/home/owner/personal-only/misc/scripts/my_start_vpn.sh
 ExecStop=sh -c "wg-quick down pia; ufw disable; echo 'DONE STOPPING VPN'"
 
