@@ -60,6 +60,8 @@ WantedBy=multi-user.target
 EOF
 
 # Setup firefox by logging into firefox account
+# https://medium.com/@Aenon/firefox-hide-native-tabs-and-titlebar-f0b00bdbb88b
+# https://github.com/pixeltris/TwitchAdSolutions (use vaft)
 # Firefox tridactyl has binds:
 # * `;u`, `;U`, `;;` to hover
 # * `s` and `S` to search DDG
