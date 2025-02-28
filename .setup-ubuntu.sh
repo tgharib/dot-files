@@ -43,7 +43,7 @@ run LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygi
 
 run xdg-mime default org.pwmt.zathura.desktop application/pdf
 
-run tee /etc/systemd/system/vpn.service <<EOF
+run sudo tee /etc/systemd/system/vpn.service <<EOF
 [Unit]
 Description=VPN
 Wants=network-online.target
@@ -67,6 +67,12 @@ EOF
 # * `s` and `S` to search DDG
 # * `b` to search tabs
 # * Ctrl+I in textbox to edit with editorcmd (`:set editorcmd`)
+
+# Desktop only below
+
+run sudo tee /etc/modprobe.d/blacklist-intelwifi.conf <<EOF
+blacklist iwlwifi
+EOF
 
 # Laptop only below
 
