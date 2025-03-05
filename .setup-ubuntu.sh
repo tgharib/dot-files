@@ -82,14 +82,32 @@ run tee /etc/keyd/default.conf <<EOF
 *
 
 [main]
-# Maps capslock to escape when pressed and meta when held.
+# Switch to dota layer
+insert = toggle(dota)
+
+# Remap keys
+leftalt = leftcontrol
+# Escape when pressed and meta when held
 capslock = overload(meta, esc)
-# Maps tab to tab when pressed and alt when held.
+# Tab when pressed and alt when held
 tab = overload(alt, tab)
 
-# Remaps keys
-leftalt = leftcontrol
-# esc = capslock
+[dota]
+# Switch to main layer
+insert = toggle(dota)
+
+# Remap keys
+leftalt = leftalt
+# Escape when pressed and meta when held
+capslock = leftcontrol
+# Tab when pressed and alt when held
+tab = layer(dotaspecial)
+
+[dotaspecial]
+q = f1
+w = f2
+e = f3
+r = f4
 EOF
 
 run sudo add-apt-repository ppa:keyd-team/ppa
