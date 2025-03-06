@@ -76,43 +76,22 @@ EOF
 
 # Laptop only below
 
-run sudo mkdir /etc/keyd/
-run sudo tee /etc/keyd/default.conf <<EOF
-[ids]
-*
+cd .kanata
+run wget https://github.com/jtroo/kanata/releases/download/v1.8.0/kanata
+cd ..
+run sudo tee /etc/systemd/system/kanata.service <<EOF
+[Unit]
+Description=Kanata keyboard remapper
+Documentation=https://github.com/jtroo/kanata
 
-[main]
-# Switch to dota layer
-insert = toggle(dota)
+[Service]
+Type=simple
+ExecStart=/home/owner/.kanata/kanata --cfg /home/owner/.kanata/kanata.kbd
+Restart=never
 
-# Remap keys
-leftalt = leftcontrol
-# Escape when pressed and meta when held
-capslock = overload(meta, esc)
-# Tab when pressed and alt when held
-tab = overload(alt, tab)
-
-[dota]
-# Switch to main layer
-insert = toggle(dota)
-
-# Remap keys
-leftalt = leftalt
-# Escape when pressed and meta when held
-capslock = leftcontrol
-# Tab when pressed and alt when held
-tab = layer(dotaspecial)
-
-[dotaspecial]
-q = f1
-w = f2
-e = f3
-r = f4
+[Install]
+WantedBy=default.target
 EOF
-
-run sudo add-apt-repository ppa:keyd-team/ppa
-run sudo apt update
-run sudo apt install keyd
 
 run sudo add-apt-repository ppa:linrunner/tlp
 run sudo apt update
