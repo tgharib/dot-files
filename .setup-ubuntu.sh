@@ -76,8 +76,8 @@ EOF
 
 # Laptop only below
 
-run mkdir /etc/keyd/
-run tee /etc/keyd/default.conf <<EOF
+run sudo mkdir /etc/keyd/
+run sudo tee /etc/keyd/default.conf <<EOF
 [ids]
 *
 
@@ -114,10 +114,10 @@ run sudo add-apt-repository ppa:keyd-team/ppa
 run sudo apt update
 run sudo apt install keyd
 
-sudo add-apt-repository ppa:linrunner/tlp
-sudo apt update
-sudo apt install tlp tlp-rdw powertop
-sudo systemctl enable tlp.service
+run sudo add-apt-repository ppa:linrunner/tlp
+run sudo apt update
+run sudo apt install tlp tlp-rdw powertop
+run sudo systemctl enable tlp.service
 run sudo tee /etc/tlp.d/laptop.conf <<EOF
 DEVICES_TO_DISABLE_ON_STARTUP="bluetooth nfc wwan"
 EOF
