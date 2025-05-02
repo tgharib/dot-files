@@ -135,15 +135,6 @@ lua << EOF
 require('guess-indent').setup()
 EOF
 
-"" symbols-outline.nvim
-lua << EOF
-local opts = {
-  highlight_hovered_item = false,
-  position = 'left',
-}
-require("symbols-outline").setup(opts)
-EOF
-
 "" coc-snippets
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
