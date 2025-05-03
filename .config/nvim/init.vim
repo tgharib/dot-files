@@ -95,6 +95,8 @@ require("aerial").setup({
   link_folds_to_tree = false,
   link_tree_to_folds = true,
   open_automatic = true,
+  disable_max_lines = 50000,
+  disable_max_size = 2000000, -- 2MB
   -- set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
