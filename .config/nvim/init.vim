@@ -84,6 +84,26 @@ augroup end
 
 " Plugins
 
+"" aerial.nvim
+
+lua << EOF
+require("aerial").setup({
+  layout = {
+    default_direction = "left",
+  },
+  manage_folds = true,
+  link_folds_to_tree = false,
+  link_tree_to_folds = true,
+  open_automatic = true,
+  -- set keymaps when aerial has attached to a buffer
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
+})
+EOF
+
 "" remote-nvim.nvim
 lua << EOF
 require("remote-nvim").setup({
@@ -288,7 +308,7 @@ wk.add({
   { "<leader>rwr", ":retab<CR>", desc = "replace tabs with spaces" },
   { "<leader>rwt", ":call TrimWhitespace()<CR>", desc = "trim whitespace" },
   { "<leader>s", group = "search" },
-  { "<leader>sD", ":SymbolsOutline<CR>", desc = "open document outline in split window" },
+  { "<leader>sD", "<cmd>AerialToggle!<CR>", desc = "open document outline in split window" },
   { "<leader>sS", ":<C-u>CocList -I symbols<CR>", desc = "search symbol in workspace (coc)" },
   { "<leader>sT", ":Lines!<CR>", desc = "search text in all buffers" },
   { "<leader>sd", ":CocOutline<CR>", desc = "open document outline in split window (coc)" },

@@ -18,14 +18,23 @@ return {
   "lewis6991/gitsigns.nvim",
   { "tpope/vim-fugitive", lazy = false },
 
-  -- Dumb code
+  -- Doesn't require LSP
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-context",
   "nvim-treesitter/nvim-treesitter-textobjects",
   { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
   { "echasnovski/mini.nvim", version = false },
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+       "nvim-treesitter/nvim-treesitter",
+       "nvim-tree/nvim-web-devicons"
+    },
+  },
 
-  -- Smart code
+  -- Requires LSP
   { "neoclide/coc.nvim", branch = "release", lazy = false },
 
   -- C++
