@@ -135,10 +135,6 @@ lua << EOF
 require('guess-indent').setup()
 EOF
 
-"" coc-snippets
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
 "" refactoring.nvim
 lua << EOF
 require('refactoring').setup({})
@@ -285,7 +281,6 @@ wk.add({
   { "<leader>rpl", ":lua require('refactoring').debug.printf({below = true})<CR>", desc = "printf line (refactoring.nvim)" },
   { "<leader>rpv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", desc = "printf variable (refactoring.nvim)" },
   { "<leader>rr", "<Plug>(coc-rename)", desc = "rename symbol (coc)" },
-  { "<leader>rs", ":CocList snippets<CR>", desc = "snippets" },
   { "<leader>rv", ":lua require('refactoring').refactor('Inline Variable')<CR>", desc = "inline variable (refactoring.nvim)" },
   { "<leader>rw", group = "whitespace" },
   { "<leader>rw2", ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 2 spaces" },
@@ -340,7 +335,7 @@ EOF
 " :omap - Display operator pending mode maps e.g. deletion after pressing d
 
 " For Rust, as per https://github.com/neoclide/coc.nvim/wiki/Language-servers#rust, rust-analyzer binary needs to be compiled from source
-let g:coc_global_extensions = ['coc-snippets', 'coc-clangd', 'coc-pyright', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-clangd', 'coc-pyright', 'coc-rust-analyzer']
 "" COC START
 set nobackup " Some servers have issues with backup files, see #649.
 set nowritebackup

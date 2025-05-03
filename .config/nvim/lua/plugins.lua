@@ -7,7 +7,7 @@ return {
 
   -- Regular
   "folke/which-key.nvim",
-  { "junegunn/fzf", build = function() vim.fn["fzf#install"]() end, lazy = false },
+  { "junegunn/fzf", lazy = false },
   { "junegunn/fzf.vim", lazy = false },
   "natecraddock/sessions.nvim",
   "nmac427/guess-indent.nvim",
@@ -23,7 +23,6 @@ return {
   "nvim-treesitter/nvim-treesitter-context",
   "nvim-treesitter/nvim-treesitter-textobjects",
   { "ThePrimeagen/refactoring.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
-  { "honza/vim-snippets", lazy = false }, -- snippets database
   { "echasnovski/mini.nvim", version = false },
 
   -- Smart code
