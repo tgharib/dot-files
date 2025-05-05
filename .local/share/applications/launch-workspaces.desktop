@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=launch workspaces
+Terminal=false
+Exec=kitty /home/owner/personal-only/misc/scripts/launch-workspaces.sh
+Hidden=false
