@@ -44,6 +44,7 @@ run LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygi
 
 run xdg-mime default org.pwmt.zathura.desktop application/pdf
 
+# Disable ipv6 in /etc/default/ufw
 run sudo tee /etc/systemd/system/vpn.service <<EOF
 [Unit]
 Description=VPN
