@@ -60,6 +60,7 @@ ExecStop=sh -c "wg-quick down pia; ufw disable; echo 'DONE STOPPING VPN'"
 [Install]
 WantedBy=multi-user.target
 EOF
+# For VPN with obfuscation, use PIA linux app: https://www.privateinternetaccess.com/download/linux-vpn
 
 # Setup firefox by logging into firefox account
 # https://medium.com/@Aenon/firefox-hide-native-tabs-and-titlebar-f0b00bdbb88b
