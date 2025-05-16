@@ -17,6 +17,7 @@ return {
   { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
   "lewis6991/gitsigns.nvim",
   { "tpope/vim-fugitive", lazy = false },
+  { "f-person/auto-dark-mode.nvim", opts = {} },
 
   -- Doesn't require LSP
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
