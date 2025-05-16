@@ -66,11 +66,12 @@ bindsym $mod+$mod2+a focus parent
 # focus the child container
 bindsym $mod+$mod2+d focus child
 
-## Hotkeys
+## Function Hotkeys
 bindsym --locked XF86AudioRaiseVolume exec /home/owner/personal-only/misc/scripts/increase_volume.sh
 bindsym --locked XF86AudioLowerVolume exec /home/owner/personal-only/misc/scripts/decrease_volume.sh
 bindsym --locked XF86MonBrightnessUp exec light -T 1.4
 bindsym --locked XF86MonBrightnessDown exec light -T 0.72
+bindsym --locked XF86Display exec /home/owner/personal-only/misc/scripts/sway-toggle-dark-mode.sh
 
 ## Launchers
 bindsym $mod+a exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-workspace-renamer.sh"
@@ -78,9 +79,7 @@ bindsym $mod+d exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts
 bindsym $mod+s exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-workspace-selector.sh"
 bindsym $mod+$mod2+s exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-container-mover.sh"
 bindsym $mod+i exec kitty nvim -c "autocmd TextChanged,TextChangedI <buffer> silent write" /home/owner/personal-only/vim-temp.md
-bindsym $mod+u exec kitty nvim -c "autocmd TextChanged,TextChangedI <buffer> silent write" /home/owner/work-only/vim-temp.md
 bindsym $mod+o exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-clipboard.sh"
-bindsym $mod+p exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-passwords.sh"
 bindsym $mod+Return exec kitty
 bindsym Print exec /home/owner/personal-only/misc/scripts/sway-screenshot.sh
 # dex is used so that mpv launch isn't in workspace where Pause is pressed
