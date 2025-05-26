@@ -57,6 +57,18 @@ EOF
 colorscheme tokyonight
 set termguicolors " Force colorscheme colors with 24-bit support
 
+"" Highlight unwanted characters (whitespace, unicode)
+
+augroup HighlightTrailingWhitespace
+  autocmd!
+  autocmd ColorScheme *
+         \ syntax match extrawhitespace /\s\+$\| \+\ze\t/ |
+         \ highlight extrawhitespace ctermbg=red guibg=red
+  autocmd ColorScheme *
+         \ syntax match nonascii "[^\x00-\x7F]" |
+         \ highlight nonascii ctermbg=red guibg=red
+augroup END
+
 "" Auto-reload file changes outside of vim
 augroup autoreload
   autocmd!
@@ -452,7 +464,3 @@ require('lualine').setup {
 END
 
 "" COC END
-
-" Highlight trailing whitespace (at the end after colorscheme is set)
-highlight extrawhitespace ctermbg=red guibg=red
-match extrawhitespace /\s\+$\| \+\ze\t/
