@@ -58,6 +58,7 @@ colorscheme tokyonight
 set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Highlight unwanted characters (whitespace, unicode)
+"" https://vi.stackexchange.com/a/29458
 
 augroup HighlightTrailingWhitespace
   autocmd!
