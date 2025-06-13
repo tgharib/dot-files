@@ -111,7 +111,7 @@ require("aerial").setup({
   manage_folds = true,
   link_folds_to_tree = false,
   link_tree_to_folds = true,
-  open_automatic = true,
+  open_automatic = false,
   disable_max_lines = 50000,
   disable_max_size = 2000000, -- 2MB
   -- set keymaps when aerial has attached to a buffer
