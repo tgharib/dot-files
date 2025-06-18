@@ -1,13 +1,5 @@
 {
-  "languageserver": {
-    "nixd": {
-      "command": "nixd",
-      "rootPatterns": [".nixd.json"],
-      "filetypes": ["nix"]
-    }
-  },
   "list.maxPreviewHeight": 30,
-  "snippets.ultisnips.pythonPrompt": false,
   "workspace.ignoredFolders": [
     "$HOME",
     "$HOME/.cargo/**",
