@@ -338,7 +338,7 @@ wk.add({
   { "<leader>td", ":Gitsigns toggle_signs<CR>", desc = "toggle git diff signs" },
   { "<leader>th", ":set hlsearch!<CR>", desc = "toggle search highlight" },
   { "<leader>tl", ":set number!<CR>", desc = "toggle line numbers" },
-  { "<leader>tn", ":TSContextToggle<CR>", desc = "toggle context (nested statements)" },
+  { "<leader>tn", ":TSContext toggle<CR>", desc = "toggle context (nested statements)" },
   { "<leader>tt", ":CocCommand document.toggleInlayHint<CR>", desc = "toggle inlay hints (coc)" },
   { "<leader>tw", ":set wrap!<CR>", desc = "toggle line wrap" },
   })
