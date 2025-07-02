@@ -59,15 +59,16 @@ set termguicolors " Force colorscheme colors with 24-bit support
 
 "" Highlight unwanted characters (whitespace, unicode)
 "" https://vi.stackexchange.com/a/29458
+"" https://superuser.com/a/211965
 
-augroup HighlightTrailingWhitespace
+augroup HighlightUnwanted
   autocmd!
-  autocmd ColorScheme *
-         \ syntax match extrawhitespace /\s\+$\| \+\ze\t/ |
-         \ highlight extrawhitespace ctermbg=red guibg=red
-  autocmd ColorScheme *
-         \ syntax match nonascii "[^\x00-\x7F]" |
-         \ highlight nonascii ctermbg=red guibg=red
+
+  highlight extrawhitespace ctermbg=red guibg=red
+  match extrawhitespace /\s\+$\| \+\ze\t/
+
+  highlight nonascii ctermbg=red guibg=red
+  2match nonascii "[^\x00-\x7F]"
 augroup END
 
 "" Auto-reload file changes outside of vim
