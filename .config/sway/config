@@ -76,7 +76,7 @@ bindsym $mod+a exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts
 bindsym $mod+d exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-desktop-launcher.sh"
 bindsym $mod+s exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-workspace-selector.sh"
 bindsym $mod+$mod2+s exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-container-mover.sh"
-bindsym $mod+i exec kitty nvim -c "autocmd TextChanged,TextChangedI <buffer> silent write" /home/owner/personal-only/vim-temp.md
+bindsym $mod+i exec kitty nvim -c "autocmd TextChanged,TextChangedI <buffer> silent write" /home/owner/personal-only/non-reference-sheets/vim-temp.md
 bindsym $mod+o exec /usr/bin/env bash -c "/home/owner/personal-only/misc/scripts/sway-kill-launcher.sh; foot -a 'launcher' /home/owner/personal-only/misc/scripts/sway-clipboard.sh"
 bindsym $mod+Return exec kitty
 bindsym Print exec /home/owner/personal-only/misc/scripts/sway-screenshot.sh
