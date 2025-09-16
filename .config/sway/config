@@ -84,7 +84,7 @@ bindsym Print exec /home/owner/personal-only/misc/scripts/sway-screenshot.sh
 # bindsym Pause exec dex /home/owner/.local/share/applications/streamlink-tab.desktop
 
 ## Other
-bindsym $mod+$mod2+q kill
+bindsym $mod+q kill
 bindsym $mod+space exec "makoctl dismiss"
 # reload the configuration file
 bindsym $mod+m reload
