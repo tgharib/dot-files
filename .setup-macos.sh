@@ -1,7 +1,4 @@
 #!/usr/bin/env zsh
 
-brew install --cask macfuse
-# https://github.com/libfuse/sshfs/issues/308#issuecomment-2204031771
-brew install gromgit/fuse/sshfs-mac
-
-# Karabiner, AltTab, Smooze Pro, f.lux
+# Install homebrew (macos user needs to be an admin)
+# Install Karabiner, AltTab, Smooze Pro, f.lux, VS Code
