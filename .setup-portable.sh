@@ -20,6 +20,6 @@ EOF
 # Install nvim
 run mkdir ~/bin
 run cd ~/bin
-run wget https://github.com/neovim/neovim-releases/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz
+run wget https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-x86_64.tar.gz
 run tar xvf nvim-linux-x86_64.tar.gz
 run rm nvim-linux-x86_64.tar.gz
