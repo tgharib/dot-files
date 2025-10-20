@@ -22,9 +22,10 @@ export PATH="\${PATH:+\${PATH}:}~/bin:~/.cargo/bin:~/bin/nvim-linux-$arch/bin"
 source ~/.bashrc-portable
 EOF
 
-# Install rustup and use cargo to install: ripgrep, sd, fd-find, skim, du-dust, astree, pazi
-# Install lazygit and btop
-run ln -s ~/.cargo/bin/sk ~/.cargo/bin/fzf
+# Install rustup and use cargo to install: ripgrep, sd, fd-find, du-dust, astree, pazi
+# Install fzf, lazygit and btop
+run git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+run ~/.fzf/install
 
 # Install nodejs
 run curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
