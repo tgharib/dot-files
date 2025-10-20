@@ -22,7 +22,8 @@ export PATH="\${PATH:+\${PATH}:}~/bin:~/.cargo/bin:~/bin/nvim-linux-$arch/bin"
 source ~/.bashrc-portable
 EOF
 
-# Install rustup for cargo, rg, sd, fd, fzf, lazygit, dust, as-tree, btop, pazi
+# Install rustup and use cargo to install: ripgrep, sd, fd-find, skim, du-dust, astree, pazi
+# Install lazygit and btop
 
 # Install nodejs
 run curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
