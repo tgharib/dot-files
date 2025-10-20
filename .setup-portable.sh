@@ -25,10 +25,10 @@ EOF
 # Install rustup for cargo, rg, sd, fd, fzf, lazygit, dust, as-tree, btop, pazi
 
 # Install nodejs
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+run curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 ## restart terminal
-nvm install node
-nvm use node
+run nvm install node
+run nvm use node
 
 # Install nvim
 run mkdir ~/bin
