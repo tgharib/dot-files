@@ -24,6 +24,7 @@ EOF
 
 # Install rustup and use cargo to install: ripgrep, sd, fd-find, skim, du-dust, astree, pazi
 # Install lazygit and btop
+run ln -s ~/.cargo/bin/sk ~/.cargo/bin/fzf
 
 # Install nodejs
 run curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
