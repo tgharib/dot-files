@@ -18,7 +18,7 @@ arch=$1
 # Add to bashrc
 run cat << 'EOF' >> ~/.bashrc
 
-export PATH="${PATH:+${PATH}:}~/bin:~/.cargo/bin:~/bin/nvim-linux-$arch/bin"
+export PATH="${PATH:+${PATH}:}~/bin:~/.cargo/bin:~/bin/nvim-linux-${arch}/bin"
 source ~/.bashrc-portable
 EOF
 
