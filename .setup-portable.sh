@@ -22,8 +22,6 @@ export PATH="\${PATH:+\${PATH}:}~/bin:~/.cargo/bin:~/bin/nvim-linux-$arch/bin"
 source ~/.bashrc-portable
 EOF
 
-# Install rustup and use cargo to install: ripgrep, sd, fd-find, du-dust, astree, pazi
-# Install fzf, lazygit and btop
 run git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 run ~/.fzf/install
 
@@ -39,3 +37,6 @@ run cd ~/bin
 run wget https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-$arch.tar.gz
 run tar xvf nvim-linux-$arch.tar.gz
 run rm nvim-linux-$arch.tar.gz
+
+# Install rustup and use cargo to install: ripgrep, sd, fd-find, du-dust, astree, pazi
+# Install fzf, lazygit and btop
