@@ -39,4 +39,4 @@ run tar xvf nvim-linux-$arch.tar.gz
 run rm nvim-linux-$arch.tar.gz
 
 # Install rustup and use cargo to install: ripgrep, sd, fd-find, du-dust, astree, pazi
-# Install fzf, lazygit and btop
+# Install lazygit and btop
