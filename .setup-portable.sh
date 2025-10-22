@@ -38,5 +38,6 @@ run wget https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-$
 run tar xvf nvim-linux-$arch.tar.gz
 run rm nvim-linux-$arch.tar.gz
 
-# Install rustup and use cargo to install: ripgrep, sd, fd-find, du-dust, astree, pazi
+# Install rustup and use cargo to install: ripgrep, sd, fd-find, du-dust, pazi
+# cargo install -f --git https://github.com/jez/as-tree
 # Install lazygit and btop
