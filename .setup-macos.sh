@@ -7,3 +7,5 @@
 # https://stackoverflow.com/questions/77052638/changing-default-shell-from-zsh-to-bash-on-macos-catalina-and-beyond
 # Changing shell to bash requires a restart
 # Add `source ~/.bashrc-portable` to ~/.bash_profile
+
+brew install --cask --no-quarantine middleclick
