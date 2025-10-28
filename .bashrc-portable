@@ -29,7 +29,7 @@ merge() {
   echo "Files merged into \"merge$ext\"."
 }
 
-alias ls='ls --hyperlink=auto --group-directories-first --color --human-readable'
+alias ls='ls --group-directories-first --color --human-readable'
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT='-c'
