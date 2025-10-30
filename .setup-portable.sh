@@ -41,4 +41,6 @@ run rm nvim-linux-$arch.tar.gz
 # Install rustup
 run cargo install ripgrep sd fd-find du-dust pazi
 run cargo install -f --git https://github.com/jez/as-tree
-# Install lazygit and btop
+
+run sudo apt install btop
+# Install lazygit
