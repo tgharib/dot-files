@@ -177,7 +177,7 @@ EOF
 
 "" refactoring.nvim
 lua << EOF
-require('refactoring').setup({})
+require('refactoring').setup({show_success_message = true})
 EOF
 
 "" sessions.nvim
