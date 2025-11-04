@@ -177,7 +177,7 @@ EOF
 
 "" refactoring.nvim
 lua << EOF
-require('refactoring').setup({show_success_message = true})
+require('refactoring').setup()
 EOF
 
 "" sessions.nvim
@@ -316,12 +316,12 @@ wk.add({
   { "<leader>r", group = "refactor/transform" },
   { "<leader>rf", ":call CocActionAsync('format')<CR>", desc = "format buffer (coc)" },
   { "<leader>ro", ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", desc = "organize imports (coc)" },
-  { "<leader>rp", group = "printf" },
+  { "<leader>rp", group = "print debug" },
   { "<leader>rpc", ":lua require('refactoring').debug.cleanup({})<CR>", desc = "cleanup (refactoring.nvim)" },
-  { "<leader>rpl", ":lua require('refactoring').debug.printf({below = true})<CR>", desc = "printf line (refactoring.nvim)" },
-  { "<leader>rpv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", desc = "printf variable (refactoring.nvim)" },
+  { "<leader>rpl", ":lua require('refactoring').debug.printf({below = true})<CR>", desc = "print line (refactoring.nvim)" },
+  { "<leader>rpv", ":lua require('refactoring').debug.print_var()<CR>", desc = "print variable (refactoring.nvim)" },
+  { "<leader>rz", ":lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
   { "<leader>rr", "<Plug>(coc-rename)", desc = "rename symbol (coc)" },
-  { "<leader>rv", ":lua require('refactoring').refactor('Inline Variable')<CR>", desc = "inline variable (refactoring.nvim)" },
   { "<leader>rw", group = "whitespace" },
   { "<leader>rw2", ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 2 spaces" },
   { "<leader>rw4", ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 4 spaces" },
@@ -349,14 +349,12 @@ wk.add({
   mode = { "x" },
   { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   { "<leader>d", group = "debug" },
-  { "<leader>ds", ":lua require('refactoring').debug.print_var({})<CR>", desc = "printf selection (refactoring.nvim)" },
   { "<leader>r", group = "refactor/transform" },
   { "<leader>r3", ":TSCppRuleOf3<CR>", desc = "modify class to obey Rule of 3 (nvim-treesitter-cpp)" },
   { "<leader>r5", ":TSCppRuleOf5<CR>", desc = "modify class to obey Rule of 5 (nvim-treesitter-cpp)" },
-  { "<leader>rf", ":lua require('refactoring').refactor('Extract Function')<CR>", desc = "extract function (refactoring.nvim)" },
   { "<leader>rm", ":TSCppDefineClassFunc<CR>", desc = "implement class member functions (nvim-treesitter-cpp)" },
   { "<leader>rp", ":TSCppMakeConcreteClass<CR>", desc = "implement pure virtual functions (nvim-treesitter-cpp)" },
-  { "<leader>rv", ":lua require('refactoring').refactor('Extract Variable')<CR>", desc = "extract variable (refactoring.nvim)" },
+  { "<leader>rz", ":lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
   },
   })
 wk.add({
