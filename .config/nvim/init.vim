@@ -331,6 +331,7 @@ wk.add({
   { "<leader>sD", "<cmd>AerialToggle!<CR>", desc = "open document outline in split window" },
   { "<leader>sS", ":<C-u>CocList -I symbols<CR>", desc = "search symbol in workspace (coc)" },
   { "<leader>sT", ":Lines!<CR>", desc = "search text in all buffers" },
+  { "<leader>sc", ":let @/ = \"\"<CR>", desc = "clear search buffer" },
   { "<leader>sd", ":CocOutline<CR>", desc = "open document outline in split window (coc)" },
   { "<leader>sr", ":Rg! ", desc = "rg text in current working directory" },
   { "<leader>ss", ":<C-u>CocList outline<CR>", desc = "search symbol in document outline (coc)" },
