@@ -139,9 +139,7 @@ EOF
 
 "" gitsigns.nvim
 lua << EOF
-require('gitsigns').setup {
-  attach_to_untracked = false,
-}
+require('gitsigns').setup {}
 EOF
 
 "" mini.nvim
@@ -287,23 +285,16 @@ wk.add({
   { "<leader>b", group = "buffers" },
   { "<leader>bQ", ":bufdo bw<CR>", desc = "quit all buffers" },
   { "<leader>bb", ":Buffers<CR>", desc = "select buffer" },
-  { "<leader>bd", ":windo :diffthis<CR>", desc = "diff between two splits" },
   { "<leader>bf", ":Files<CR>", desc = "open file" },
-  { "<leader>bg", group = "git" },
-  { "<leader>bgb", ":Git blame<CR>", desc = "git blame this buffer" },
-  { "<leader>bgd", ":Gitsigns diffthis<CR>", desc = "git diff this buffer" },
   { "<leader>bl", ":SessionsLoad! ", desc = "load session" },
   { "<leader>bq", ":lua MiniBufremove.wipeout()<CR>", desc = "quit current buffer" },
   { "<leader>bs", ":SessionsSave! ", desc = "save session" },
   { "<leader>bt", ":tabonly<CR>", desc = "tabs -> buffers" },
-  { "<leader>bu", ":windo :diffoff<CR>", desc = "undiff between two splits" },
   { "<leader>f", group = "fix error" },
-  { "<leader>fb", "<Plug>(coc-codeaction)", desc = "code action on current buffer (coc)" },
-  { "<leader>fc", "<Plug>(coc-codeaction-cursor)", desc = "code action on cursor (coc)" },
   { "<leader>fe", ":<C-u>CocList diagnostics<CR>", desc = "list errors/diagnostics (coc)" },
   { "<leader>fl", "<Plug>(coc-fix-current)", desc = "fix error on current line (coc)" },
   { "<leader>g", group = "go to" },
-  { "<leader>gD", "<Plug>(coc-implementation)", desc = "go to implementation (coc)" },
+  { "<leader>gs", "<Plug>(coc-implementation)", desc = "go to subclasses (coc)" },
   { "<leader>gd", "<Plug>(coc-definition)", desc = "go to definition (coc)" },
   { "<leader>gg", ":CocCommand clangd.switchSourceHeader<CR>", desc = "go to source/header (coc)" },
   { "<leader>gr", "<Plug>(coc-references)", desc = "go to references (coc)" },
@@ -348,7 +339,6 @@ wk.add({
   {
   mode = { "x" },
   { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
-  { "<leader>d", group = "debug" },
   { "<leader>r", group = "refactor/transform" },
   { "<leader>r3", ":TSCppRuleOf3<CR>", desc = "modify class to obey Rule of 3 (nvim-treesitter-cpp)" },
   { "<leader>r5", ":TSCppRuleOf5<CR>", desc = "modify class to obey Rule of 5 (nvim-treesitter-cpp)" },
