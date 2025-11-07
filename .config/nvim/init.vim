@@ -64,7 +64,12 @@ require("lazy").setup({
     { "f-person/auto-dark-mode.nvim", opts = {} },
 
     -- Doesn't require LSP
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    {
+      'nvim-treesitter/nvim-treesitter',
+      lazy = false,
+      branch = 'master',
+      build = ':TSUpdate'
+    },
     "nvim-treesitter/nvim-treesitter-context",
     {
       "ThePrimeagen/refactoring.nvim",
@@ -273,7 +278,7 @@ end
 
 require'nvim-treesitter.configs'.setup {
   -- Install languages for treesitter
-  ensure_installed = { "bash", "beancount", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog" },
+  ensure_installed = { "bash", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog" },
   sync_install = false,
   auto_install = false,
   highlight = {
@@ -282,6 +287,14 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+-- New treesitter config (main branch instead of master) but doesn't work with rust
+-- require'nvim-treesitter'.install {'bash', 'c', 'cmake', 'comment', 'cpp', 'dockerfile', 'glsl', 'java', 'lua', 'make', 'markdown', 'ninja', 'nix', 'python', 'rust', 'verilog'}
+--
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { 'rs', 'vim', 'h', 'c', 'hpp', 'cpp', 'sh', 'bash' },
+--   callback = function() vim.treesitter.start() end,
+-- })
 
 -- nvim-treesitter-context
 require'treesitter-context'.setup{
