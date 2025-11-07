@@ -7,10 +7,8 @@ let mapleader = " "
 set nowrap " Turn off line wrap
 set nohlsearch " Turn off search highlighting
 set clipboard=unnamedplus " Use system clipboard for copy and paste
-set ignorecase " Search with smart case
 set smartcase " Search with smart case
 set timeoutlen=0 " Immediately show which-key
-let $BASH_ENV = "~/.bash-aliases"
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 set hidden " Allow buffers to be hidden without saving
 set number " Enable line numbers by default
@@ -318,9 +316,16 @@ EOF
 " Some coc commands can be found in:
 " https://github.com/neoclide/coc.nvim/blob/master/data/schema.json
 " https://github.com/neoclide/coc.nvim/blob/master/doc/coc-config.txt
+"
+" :nmap - Display normal mode maps
+" :imap - Display insert mode maps
+" :vmap - Display visual and select mode maps
+" :smap - Display select mode maps <-- select mode is never used
+" :xmap - Display visual mode maps
+" :cmap - Display command-line mode maps i.e. after pressing :
+" :omap - Display operator pending mode maps e.g. deletion after pressing d
 lua << EOF
-require("which-key").setup {
-}
+require("which-key").setup {}
 local wk = require("which-key")
 wk.add({
   { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
@@ -393,14 +398,6 @@ wk.add({
   })
 EOF
 
-" :nmap - Display normal mode maps
-" :imap - Display insert mode maps
-" :vmap - Display visual and select mode maps
-" :smap - Display select mode maps <-- select mode is never used
-" :xmap - Display visual mode maps
-" :cmap - Display command-line mode maps i.e. after pressing :
-" :omap - Display operator pending mode maps e.g. deletion after pressing d
-
 " For Rust, as per https://github.com/neoclide/coc.nvim/wiki/Language-servers#rust, rust-analyzer binary needs to be compiled from source
 let g:coc_global_extensions = ['coc-clangd', 'coc-pyright', 'coc-rust-analyzer']
 "" COC START
@@ -448,6 +445,7 @@ inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float
 inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"" COC END
 
 lua << END
 require('lualine').setup {
@@ -491,5 +489,3 @@ require('lualine').setup {
   extensions = {}
 }
 END
-
-"" COC END
