@@ -7,7 +7,7 @@ let mapleader = " "
 set nowrap " Turn off line wrap
 set nohlsearch " Turn off search highlighting
 set clipboard=unnamedplus " Use system clipboard for copy and paste
-set smartcase " Search with smart case
+set ignorecase smartcase " Use smart case for search (smartcase needs ignorecase set)
 set timeoutlen=0 " Immediately show which-key
 set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
 set hidden " Allow buffers to be hidden without saving
