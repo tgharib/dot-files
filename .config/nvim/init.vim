@@ -329,6 +329,8 @@ require("which-key").setup {}
 local wk = require("which-key")
 wk.add({
   { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+  { "<leader>k", ":call ShowDocumentation()<CR>", desc = "show documentation (coc)" },
+  { "<leader>L", ":Lazy<CR>", desc = "show Lazy plugin manager window" },
   { "<leader>b", group = "buffers" },
   { "<leader>bQ", ":bufdo bw<CR>", desc = "quit all buffers" },
   { "<leader>bb", ":Buffers<CR>", desc = "select buffer" },
@@ -346,7 +348,6 @@ wk.add({
   { "<leader>gg", ":CocCommand clangd.switchSourceHeader<CR>", desc = "go to source/header (coc)" },
   { "<leader>gr", "<Plug>(coc-references)", desc = "go to references (coc)" },
   { "<leader>gt", "<Plug>(coc-type-definition)", desc = "go to type definition (coc)" },
-  { "<leader>k", ":call ShowDocumentation()<CR>", desc = "show documentation (coc)" },
   { "<leader>p", group = "paths" },
   { "<leader>pc", ":cd %:h<CR>", desc = "cd into current buffer working directory" },
   { "<leader>pf", ":echo expand('%:p')<CR>", desc = "show file path" },
