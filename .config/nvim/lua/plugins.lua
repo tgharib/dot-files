@@ -19,7 +19,6 @@ return {
   -- Doesn't require LSP
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-context",
-  "nvim-treesitter/nvim-treesitter-textobjects",
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
@@ -42,9 +41,6 @@ return {
 
   -- Requires LSP
   { "neoclide/coc.nvim", branch = "release", lazy = false },
-
-  -- C++
-  { "Badhi/nvim-treesitter-cpp-tools", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 
   -- Remote nvim
   {

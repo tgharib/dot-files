@@ -208,7 +208,7 @@ disable_for_large_files = function(lang, bufnr) -- Disable in large buffers
 end
 
 require'nvim-treesitter.configs'.setup {
-  -- Install all languages for treesitter except for rnoweb, phpdoc
+  -- Install languages for treesitter
   ensure_installed = { "bash", "beancount", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog" },
   sync_install = false,
   auto_install = false,
@@ -217,14 +217,6 @@ require'nvim-treesitter.configs'.setup {
     disable = disable_for_large_files,
     additional_vim_regex_highlighting = false,
   },
-  -- nvim-treesitter-cpp-tools
-  nt_cpp_tools = {
-      enable = true,
-      preview = {
-          quit = '<Esc>',
-          accept = '<CR>'
-      },
-  }
 }
 
 -- nvim-treesitter-context
@@ -242,50 +234,6 @@ require'treesitter-context'.setup{
   separator = nil,
   zindex = 20, -- The Z-index of the context window
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-}
-
-require'nvim-treesitter.configs'.setup {
-  textobjects = {
-    move = {
-      enable = true,
-      disable = disable_for_large_files,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = { query = "@class.outer", desc = "Next class start" },
-        --
-        -- You can use regex matching and/or pass a list in a "query" key to group multiple queires.
-        ["]o"] = "@loop.*",
-        -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
-        --
-        -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-        -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-        ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-        ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-      },
-      goto_next_end = {
-        ["]M"] = "@function.outer",
-        ["]["] = "@class.outer",
-      },
-      goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
-      },
-      goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
-      },
-      -- Below will go to either the start or the end, whichever is closer.
-      -- Use if you want more granular movements
-      -- Make it even more gradual by adding multiple queries and regex.
-      goto_next = {
-        ["]d"] = "@conditional.outer",
-      },
-      goto_previous = {
-        ["[d"] = "@conditional.outer",
-      }
-    },
-  },
 }
 EOF
 
@@ -357,10 +305,6 @@ wk.add({
   mode = { "x" },
   { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   { "<leader>r", group = "refactor/transform" },
-  { "<leader>r3", ":TSCppRuleOf3<CR>", desc = "modify class to obey Rule of 3 (nvim-treesitter-cpp)" },
-  { "<leader>r5", ":TSCppRuleOf5<CR>", desc = "modify class to obey Rule of 5 (nvim-treesitter-cpp)" },
-  { "<leader>rm", ":TSCppDefineClassFunc<CR>", desc = "implement class member functions (nvim-treesitter-cpp)" },
-  { "<leader>rp", ":TSCppMakeConcreteClass<CR>", desc = "implement pure virtual functions (nvim-treesitter-cpp)" },
   { "<leader>rz", ":lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
   },
   })
