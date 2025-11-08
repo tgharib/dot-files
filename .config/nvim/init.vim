@@ -50,8 +50,14 @@ require("lazy").setup({
     { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
     "folke/which-key.nvim",
-    { "junegunn/fzf", lazy = false },
-    { "junegunn/fzf.vim", lazy = false },
+    {
+      "ibhagwan/fzf-lua",
+      -- optional for icon support
+      -- dependencies = { "nvim-tree/nvim-web-devicons" },
+      -- or if using mini.icons/mini.nvim
+      dependencies = { "nvim-mini/mini.icons" },
+      opts = {}
+    },
     "natecraddock/sessions.nvim",
     "nmac427/guess-indent.nvim",
     { "lambdalisue/suda.vim", lazy = false },
@@ -140,13 +146,14 @@ require("lazy").setup({
         hint_enable = false,
         select_signature_key = '<C-p>',
       },
-    }
+    },
+    { 'kosayoda/nvim-lightbulb' }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
+  -- do not automatically check for plugin updates
+  checker = { enabled = false },
 })
 EOF
 
@@ -220,6 +227,18 @@ augroup end
 
 " Plugins
 
+"" nvim-lightbulb
+lua << EOF
+require("nvim-lightbulb").setup({
+  autocmd = { enabled = true }
+})
+EOF
+
+"" fzf-lua
+lua << EOF
+require('fzf-lua').setup({'fzf-vim'})
+EOF
+
 "" Mason tool installer
 lua << EOF
 require('mason-tool-installer').setup({
@@ -251,8 +270,8 @@ require("aerial").setup({
   -- set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set("n", "{", ":AerialPrev<CR>", { buffer = bufnr })
-    vim.keymap.set("n", "}", ":AerialNext<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<Cmd>AerialNext<CR>", { buffer = bufnr })
   end,
 })
 EOF
@@ -376,76 +395,78 @@ lua << EOF
 require("which-key").setup {}
 local wk = require("which-key")
 wk.add({
-  { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
-  { "<leader>k", ":lua vim.lsp.buf.hover()<CR>", desc = "show documentation" },
-  { "<leader>L", ":Lazy<CR>", desc = "show Lazy plugin manager window" },
+  { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+  { "<leader>k", "<Cmd>lua vim.lsp.buf.hover()<CR>", desc = "show documentation" },
+  { "<leader>L", "<Cmd>Lazy<CR>", desc = "show Lazy plugin manager window" },
   { "<leader>b", group = "buffers" },
-  { "<leader>bQ", ":bufdo bw<CR>", desc = "quit all buffers" },
-  { "<leader>bb", ":Buffers<CR>", desc = "select buffer" },
-  { "<leader>bf", ":Files<CR>", desc = "open file" },
+  { "<leader>bQ", "<Cmd>bufdo bw<CR>", desc = "quit all buffers" },
+  { "<leader>bb", "<Cmd>Buffers<CR>", desc = "select buffer" },
+  { "<leader>bf", "<Cmd>Files<CR>", desc = "open file" },
   { "<leader>bl", ":SessionsLoad! ", desc = "load session" },
-  { "<leader>bq", ":lua MiniBufremove.wipeout()<CR>", desc = "quit current buffer" },
+  { "<leader>bq", "<Cmd>lua MiniBufremove.wipeout()<CR>", desc = "quit current buffer" },
   { "<leader>bs", ":SessionsSave! ", desc = "save session" },
-  { "<leader>bt", ":tabonly<CR>", desc = "tabs -> buffers" },
+  { "<leader>bt", "<Cmd>tabonly<CR>", desc = "tabs -> buffers" },
   { "<leader>x", group = "fix error" },
-  { "<leader>fe", ":Trouble diagnostics toggle filter.buf=0<cr>", desc = "buffer diagnostics" },
-  { "<leader>fE", ":Trouble diagnostics toggle<cr>", desc = "diagnostics" },
-  { "<leader>fl", ":Trouble qflist toggle<cr>", desc = "quickfix list" },
-  { "<leader>fL", ":Trouble loclist toggle<cr>", desc = "location list" },
+  { "<leader>fe", "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "buffer diagnostics" },
+  { "<leader>fE", "<Cmd>Trouble diagnostics toggle<cr>", desc = "diagnostics" },
+  { "<leader>fl", "<Cmd>Trouble qflist toggle<cr>", desc = "quickfix list" },
+  { "<leader>fL", "<Cmd>Trouble loclist toggle<cr>", desc = "location list" },
   { "<leader>g", group = "go to" },
-  { "<leader>gi", ":lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
-  { "<leader>gD", ":lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
-  { "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
-  { "<leader>gg", ":CocCommand clangd.switchSourceHeader<CR>", desc = "go to source/header (coc)" },
-  { "<leader>gr", ":lua vim.lsp.buf.references()<CR>", desc = "go to references" },
-  { "<leader>gt", ":lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
+  { "<leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
+  { "<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
+  { "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
+  { "<leader>gg", "<Cmd>CocCommand clangd.switchSourceHeader<CR>", desc = "go to source/header (coc)" },
+  { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
+  { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
   { "<leader>p", group = "paths" },
-  { "<leader>pc", ":cd %:h<CR>", desc = "cd into current buffer working directory" },
-  { "<leader>pf", ":echo expand('%:p')<CR>", desc = "show file path" },
-  { "<leader>po", ":Oil<CR>", desc = "oil (file manager)" },
+  { "<leader>pc", "<Cmd>cd %<Cmd>h<CR>", desc = "cd into current buffer working directory" },
+  { "<leader>pf", "<Cmd>echo expand('%<Cmd>p')<CR>", desc = "show file path" },
+  { "<leader>po", "<Cmd>Oil<CR>", desc = "oil (file manager)" },
   { "<leader>r", group = "refactor/transform" },
-  { "<leader>ra", ":lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
-  { "<leader>rf", ":lua vim.lsp.buf.format()<CR>", desc = "format buffer" },
-  { "<leader>ro", ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", desc = "organize imports (coc)" },
+  { "<leader>ra", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
+  { "<leader>rf", "<Cmd>lua vim.lsp.buf.format()<CR>", desc = "format buffer" },
+  { "<leader>ro", "<Cmd>call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", desc = "organize imports (coc)" },
   { "<leader>rp", group = "print debug" },
-  { "<leader>rpc", ":lua require('refactoring').debug.cleanup({})<CR>", desc = "cleanup (refactoring.nvim)" },
-  { "<leader>rpl", ":lua require('refactoring').debug.printf({below = true})<CR>", desc = "print line (refactoring.nvim)" },
-  { "<leader>rpv", ":lua require('refactoring').debug.print_var()<CR>", desc = "print variable (refactoring.nvim)" },
-  { "<leader>rz", ":lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
-  { "<leader>rr", ":lua vim.lsp.buf.rename()<CR>", desc = "rename symbol" },
+  { "<leader>rpc", "<Cmd>lua require('refactoring').debug.cleanup({})<CR>", desc = "cleanup (refactoring.nvim)" },
+  { "<leader>rpl", "<Cmd>lua require('refactoring').debug.printf({below = true})<CR>", desc = "print line (refactoring.nvim)" },
+  { "<leader>rpv", "<Cmd>lua require('refactoring').debug.print_var()<CR>", desc = "print variable (refactoring.nvim)" },
+  { "<leader>rz", "<Cmd>lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
+  { "<leader>rr", "<Cmd>lua vim.lsp.buf.rename()<CR>", desc = "rename symbol" },
   { "<leader>rw", group = "whitespace" },
-  { "<leader>rw2", ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 2 spaces" },
-  { "<leader>rw4", ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 4 spaces" },
-  { "<leader>rwr", ":retab<CR>", desc = "replace tabs with spaces" },
-  { "<leader>rwt", ":call TrimWhitespace()<CR>", desc = "trim whitespace" },
+  { "<leader>rw2", "<Cmd>set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 2 spaces" },
+  { "<leader>rw4", "<Cmd>set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 4 spaces" },
+  { "<leader>rwr", "<Cmd>retab<CR>", desc = "replace tabs with spaces" },
+  { "<leader>rwt", "<Cmd>call TrimWhitespace()<CR>", desc = "trim whitespace" },
   { "<leader>s", group = "search" },
-  { "<leader>sd", ":Trouble symbols toggle focus=false<cr>", desc = "open document outline in split window" },
-  { "<leader>sD", ":AerialToggle!<CR>", desc = "open document outline in split window" },
-  { "<leader>sT", ":Lines!<CR>", desc = "search text in all buffers" },
-  { "<leader>sc", ":let @/ = \"\"<CR>", desc = "clear search buffer" },
+  { "<leader>se", "<Cmd>lua vim.lsp.buf.document_symbol()<CR>", desc = "open document outline" },
+  { "<leader>sd", "<Cmd>Trouble symbols toggle focus=false<cr>", desc = "open document outline" },
+  { "<leader>sD", "<Cmd>AerialToggle!<CR>", desc = "open document outline" },
+  { "<leader>sT", "<Cmd>Lines!<CR>", desc = "search text in all buffers" },
+  { "<leader>sc", "<Cmd>let @/ = \"\"<CR>", desc = "clear search buffer" },
   { "<leader>sr", ":Rg! ", desc = "rg text in current working directory" },
-  { "<leader>ss", ":lua vim.lsp.buf.document_symbol()<CR>", desc = "list symbols in buffer" },
-  { "<leader>st", ":BLines!<CR>", desc = "search text in current buffer" },
+  { "<leader>ss", "<Cmd>FzfLua lsp_document_symbols<CR>", desc = "search symbols in buffer" },
+  { "<leader>st", "<Cmd>BLines!<CR>", desc = "search text in current buffer" },
   { "<leader>t", group = "toggles" },
-  { "<leader>td", ":Gitsigns toggle_signs<CR>", desc = "toggle git diff signs" },
-  { "<leader>th", ":set hlsearch!<CR>", desc = "toggle search highlight" },
-  { "<leader>tl", ":set number!<CR>", desc = "toggle line numbers" },
-  { "<leader>tn", ":TSContext toggle<CR>", desc = "toggle context (nested statements)" },
-  { "<leader>tt", ":InlayHintsToggle<CR>", desc = "toggle inlay hints" },
-  { "<leader>tw", ":set wrap!<CR>", desc = "toggle line wrap" },
+  { "<leader>td", "<Cmd>Gitsigns toggle_signs<CR>", desc = "toggle git diff signs" },
+  { "<leader>th", "<Cmd>set hlsearch!<CR>", desc = "toggle search highlight" },
+  { "<leader>tl", "<Cmd>set number!<CR>", desc = "toggle line numbers" },
+  { "<leader>tn", "<Cmd>TSContext toggle<CR>", desc = "toggle context (nested statements)" },
+  { "<leader>tt", "<Cmd>InlayHintsToggle<CR>", desc = "toggle inlay hints" },
+  { "<leader>tw", "<Cmd>set wrap!<CR>", desc = "toggle line wrap" },
   })
 wk.add({
   {
   mode = { "x" },
-  { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+  { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   { "<leader>r", group = "refactor/transform" },
-  { "<leader>rz", ":lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
+  { "<leader>ra", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
+  { "<leader>rz", "<Cmd>lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
   },
   })
 wk.add({
   {
   mode = { "o" },
-  { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+  { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   },
   })
 EOF
