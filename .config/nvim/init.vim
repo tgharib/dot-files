@@ -47,9 +47,13 @@ require("lazy").setup({
   },
   spec = {
     -- Don't forget to disable lazy loading when installing new plugin!
+    -- Color scheme
     { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+    -- Status line at the bottom
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+    -- Keybind helper
     "folke/which-key.nvim",
+    -- Fzf windows
     {
       "ibhagwan/fzf-lua",
       -- optional for icon support
@@ -58,19 +62,28 @@ require("lazy").setup({
       dependencies = { "nvim-mini/mini.icons" },
       opts = {}
     },
+    -- Sessions support
     "natecraddock/sessions.nvim",
+    -- Autorecognize indent of file
     "nmac427/guess-indent.nvim",
+    -- Edit root files
     { "lambdalisue/suda.vim", lazy = false },
+    -- File manager
     { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
+    -- Show which lines are added, changed or deleted
     "lewis6991/gitsigns.nvim",
+    -- Dark/light mode based on system setting
     { "f-person/auto-dark-mode.nvim", opts = {} },
+    -- Syntax highlighting
     {
       'nvim-treesitter/nvim-treesitter',
       lazy = false,
       branch = 'master',
       build = ':TSUpdate'
     },
+    -- Show current function at top if function is massive
     "nvim-treesitter/nvim-treesitter-context",
+    -- Refactoring plugin for C++ (Rust not supported)
     {
       "ThePrimeagen/refactoring.nvim",
       dependencies = {
@@ -80,7 +93,9 @@ require("lazy").setup({
       lazy = false,
       opts = {},
     },
+    -- Nice plugins
     { "echasnovski/mini.nvim", version = false },
+    -- Document outline for markdown
     {
       'stevearc/aerial.nvim',
       opts = {},
@@ -90,6 +105,7 @@ require("lazy").setup({
          "nvim-tree/nvim-web-devicons"
       },
     },
+    -- Use local neovim GUI on remote server
     {
      "amitds1997/remote-nvim.nvim",
      version = "*", -- Pin to GitHub releases
@@ -101,6 +117,7 @@ require("lazy").setup({
      config = true,
     },
     -- https://gist.github.com/smnatale/b847e568f1a155b8e8349f29a482a1f4
+    -- Provides lspconfig for each mason tool (LSP) installed
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {},
@@ -109,10 +126,12 @@ require("lazy").setup({
             { "neovim/nvim-lspconfig" },
         },
     },
+    -- Ensure selected mason tools (LSPs) are installed
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {},
     },
+    -- Get access to LSP inlay hints via a toggle
     {
         "MysticalDevil/inlay-hints.nvim",
         event = "LspAttach",
@@ -124,17 +143,20 @@ require("lazy").setup({
             })
         end
     },
+    -- Better than fzf-lua for buffer diagnostics (persistent)
     {
       "folke/trouble.nvim",
       opts = {},
       cmd = "Trouble",
       keys = {},
     },
+    -- Better than fzf-lua for go to references (persistent)
     {
       "kevinhwang91/nvim-bqf",
       opts = {},
       lazy = false,
     },
+    -- Signature help when calling a function
     {
       "ray-x/lsp_signature.nvim",
       event = "InsertEnter",
@@ -147,6 +169,7 @@ require("lazy").setup({
         select_signature_key = '<C-p>',
       },
     },
+    -- Show lightbulbs when current line has a code action
     { 'kosayoda/nvim-lightbulb' }
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -197,20 +220,30 @@ augroup end
 let @i ="o![](images/){width=60%}\<Esc>11hi"
 let @e ="o$$\<Enter>$$\<Esc>O"
 
-"" Restore cursor to position in file from last time file was opened
 lua << EOF
+-- https://gist.github.com/smnatale/692ac4f256d5f19fbcbb78fe32c87604
+
+-- restore cursor to file position in previous editing session
 vim.api.nvim_create_autocmd("BufReadPost", {
-	callback = function(args)
-		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-		local line_count = vim.api.nvim_buf_line_count(args.buf)
-		if mark[1] > 0 and mark[1] <= line_count then
-			vim.api.nvim_win_set_cursor(0, mark)
-			-- defer centering slightly so it's applied after render
-			vim.schedule(function()
-				vim.cmd("normal! zz")
-			end)
-		end
-	end,
+  callback = function(args)
+    local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+    local line_count = vim.api.nvim_buf_line_count(args.buf)
+    if mark[1] > 0 and mark[1] <= line_count then
+      vim.api.nvim_win_set_cursor(0, mark)
+      -- defer centering slightly so it's applied after render
+      vim.schedule(function()
+        vim.cmd("normal! zz")
+      end)
+    end
+  end,
+})
+
+-- no auto continue comments on new line
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("no_auto_comment", {}),
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
 })
 EOF
 
@@ -242,11 +275,11 @@ EOF
 "" Mason tool installer
 lua << EOF
 require('mason-tool-installer').setup({
-	ensure_installed = {
-		"clangd",
-		"rust-analyzer",
-		"pyright",
-	}
+  ensure_installed = {
+    "clangd",
+    "rust-analyzer",
+    "pyright",
+  }
 })
 EOF
 
@@ -291,7 +324,7 @@ EOF
 
 "" gitsigns.nvim
 lua << EOF
-require('gitsigns').setup {}
+require('gitsigns').setup()
 EOF
 
 "" mini.nvim
