@@ -156,6 +156,10 @@ require("lazy").setup({
       opts = {},
       lazy = false,
     },
+    -- Show lightbulbs when current line has a code action
+    { 'kosayoda/nvim-lightbulb' },
+    -- C++ clangd extensions
+    { 'https://git.sr.ht/~p00f/clangd_extensions.nvim' },
     -- Signature help when calling a function
     {
       "ray-x/lsp_signature.nvim",
@@ -169,8 +173,86 @@ require("lazy").setup({
         select_signature_key = '<C-p>',
       },
     },
-    -- Show lightbulbs when current line has a code action
-    { 'kosayoda/nvim-lightbulb' }
+    -- Auto-completion
+    {
+      'saghen/blink.cmp',
+      -- optional: provides snippets for the snippet source
+      dependencies = { 'rafamadriz/friendly-snippets' },
+      lazy = false,
+      -- use a release tag to download pre-built binaries
+      version = '1.*',
+
+      ---@module 'blink.cmp'
+      ---@type blink.cmp.Config
+      opts = {
+        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+        -- 'super-tab' for mappings similar to vscode (tab to accept)
+        -- 'enter' for enter to accept
+        -- 'none' for no mappings
+        --
+        -- All presets have the following mappings:
+        -- C-space: Open menu or open docs if already open
+        -- C-n/C-p or Up/Down: Select next/previous item
+        -- C-e: Hide menu
+        -- C-k: Toggle signature help (if signature.enabled = true)
+        --
+        -- See :h blink-cmp-config-keymap for defining your own keymap
+        keymap = {
+          preset = 'enter',
+          ['<C-e>'] = { 'show', 'hide' },
+        },
+
+        appearance = {
+          -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+          -- Adjusts spacing to ensure icons are aligned
+          nerd_font_variant = 'mono'
+        },
+
+        completion = {
+          documentation = { auto_show = true },
+          ghost_text = {
+            enabled = true,
+          },
+          menu = {
+            direction_priority = function()
+              local ctx = require('blink.cmp').get_context()
+              local item = require('blink.cmp').get_selected_item()
+              if ctx == nil or item == nil then return { 's', 'n' } end
+
+              local item_text = item.textEdit ~= nil and item.textEdit.newText or item.insertText or item.label
+              local is_multi_line = item_text:find('\n') ~= nil
+
+              -- after showing the menu upwards, we want to maintain that direction
+              -- until we re-open the menu, so store the context id in a global variable
+              if is_multi_line or vim.g.blink_cmp_upwards_ctx_id == ctx.id then
+                vim.g.blink_cmp_upwards_ctx_id = ctx.id
+                return { 'n', 's' }
+              end
+              return { 's', 'n' }
+            end,
+          },
+          list = {
+            selection = {
+              preselect = false,
+            },
+          },
+        },
+
+        -- Default list of enabled providers defined so that you can extend it
+        -- elsewhere in your config, without redefining it, due to `opts_extend`
+        sources = {
+          default = { 'lsp', 'path', 'snippets', 'buffer' },
+        },
+
+        -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+        --
+        -- See the fuzzy documentation for more information
+        fuzzy = { implementation = "prefer_rust_with_warning" }
+      },
+      opts_extend = { "sources.default" }
+    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -260,6 +342,11 @@ augroup end
 
 " Plugins
 
+"" clangd_extensions
+lua << EOF
+require("clangd_extensions").setup()
+EOF
+
 "" nvim-lightbulb
 lua << EOF
 require("nvim-lightbulb").setup({
@@ -347,11 +434,7 @@ require('mini.jump2d').setup({
     start_jumping = '',
   },
 })
--- autocomplete based on words in buffer
-require('mini.completion').setup({
-  delay = { completion = 10, info = 10, signature = 100000000 },
-})
-
+-- icons
 require('mini.icons').setup()
 EOF
 
@@ -448,7 +531,7 @@ wk.add({
   { "<leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
   { "<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
   { "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
-  { "<leader>gg", "<Cmd>CocCommand clangd.switchSourceHeader<CR>", desc = "go to source/header (coc)" },
+  { "<leader>gg", "<Cmd>ClangdSwitchSourceHeader<CR>", desc = "go to source/header" },
   { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
   { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
   { "<leader>p", group = "paths" },
@@ -458,7 +541,6 @@ wk.add({
   { "<leader>r", group = "refactor/transform" },
   { "<leader>ra", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
   { "<leader>rf", "<Cmd>lua vim.lsp.buf.format()<CR>", desc = "format buffer" },
-  { "<leader>ro", "<Cmd>call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", desc = "organize imports (coc)" },
   { "<leader>rp", group = "print debug" },
   { "<leader>rpc", "<Cmd>lua require('refactoring').debug.cleanup({})<CR>", desc = "cleanup (refactoring.nvim)" },
   { "<leader>rpl", "<Cmd>lua require('refactoring').debug.printf({below = true})<CR>", desc = "print line (refactoring.nvim)" },
