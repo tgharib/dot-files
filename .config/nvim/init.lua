@@ -1,28 +1,25 @@
-" For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
-" Vim motion options: f/F/t/T for horizontal, <CR> for vertical, */#, search, goto definition, ripgrep
-" Paste text vertically using visual block mode https://stackoverflow.com/a/27542895
+-- For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
+-- Vim motion options: f/F/t/T for horizontal, <CR> for vertical, */#, search, goto definition, ripgrep
 
-" Options
-let mapleader = " "
-set nowrap " Turn off line wrap
-set nohlsearch " Turn off search highlighting
-set clipboard=unnamedplus " Use system clipboard for copy and paste
-set ignorecase smartcase " Use smart case for search (smartcase needs ignorecase set)
-set timeoutlen=0 " Immediately show which-key
-set sessionoptions=buffers " Session = buffers only (to avoid bugs with abduco)
-set hidden " Allow buffers to be hidden without saving
-set number " Enable line numbers by default
-set expandtab " Spaces-only indenation https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
-set softtabstop=-1 " Spaces-only indenation
-syntax off " Rely on treesitter only for syntax highlighting
-let g:suda_smart_edit = 1 " suda.nvim smart write
-set mouse= " Disable mouse support
-set signcolumn=number " Combine gutter with number lines column
+-- Options
+vim.g.mapleader = " "
+vim.g.suda_smart_edit = 1 -- suda.nvim smart write
+vim.opt.hlsearch = false -- turn off search highlighting
+vim.opt.clipboard = "unnamedplus" -- use system clipboard for copy and paste
+vim.opt.ignorecase = true -- enable case-insensitive searching by default
+vim.opt.smartcase = true -- enable smartcase behavior
+vim.opt.sessionoptions = "buffers" -- session = buffers only
+vim.opt.hidden = true -- allow buffers to be hidden without saving
+vim.opt.number = true -- enable line numbers by default
+vim.opt.expandtab = true -- spaces-only indenation https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
+vim.opt.softtabstop = -1 -- spaces-only indenation
+vim.opt.mouse = '' -- disable mouse support
+vim.opt.signcolumn = 'number' -- combine gutter with number lines column
+vim.opt.termguicolors = true -- Force colorscheme colors with 24-bit support
+vim.wo.wrap = false -- turn off line wrap
+-- Don't touch unnamed register when pasting over visual selection
+vim.keymap.set("x", "p", "P", { noremap = true, silent = true })
 
-"" Don't touch unnamed register when pasting over visual selection
-xnoremap p P
-
-lua << EOF
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -213,6 +210,7 @@ require("lazy").setup({
           ghost_text = {
             enabled = true,
           },
+          -- https://cmp.saghen.dev/recipes.html#avoid-multi-line-completion-ghost-text
           menu = {
             direction_priority = function()
               local ctx = require('blink.cmp').get_context()
@@ -260,24 +258,21 @@ require("lazy").setup({
   -- do not automatically check for plugin updates
   checker = { enabled = false },
 })
-EOF
 
-"" Set colorscheme
-lua << EOF
+-- Set colorscheme
 require("tokyonight").setup({
   styles = {
     comments = { italic = false },
     keywords = { italic = false },
   },
 })
-EOF
-colorscheme tokyonight
-set termguicolors " Force colorscheme colors with 24-bit support
 
-"" Highlight unwanted characters (whitespace, unicode)
-"" https://vi.stackexchange.com/a/29458
-"" https://superuser.com/a/211965
+vim.cmd.colorscheme('tokyonight')
 
+-- Highlight unwanted characters (whitespace, unicode)
+-- https://vi.stackexchange.com/a/29458
+-- https://superuser.com/a/211965
+vim.api.nvim_exec([[
 augroup HighlightUnwanted
   autocmd!
 
@@ -287,8 +282,10 @@ augroup HighlightUnwanted
   highlight nonascii ctermbg=red guibg=red
   2match nonascii "[^\x00-\x7F]"
 augroup END
+]], false)
 
-"" Auto-reload file changes outside of vim
+-- Auto-reload file changes outside of vim
+vim.api.nvim_exec([[
 augroup autoreload
   autocmd!
   """ trigger `autoread` when files changes on disk
@@ -297,14 +294,9 @@ augroup autoreload
   """ notification after file change
   autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 augroup end
+]], false)
 
-"" Markdown macros
-let @i ="o![](images/){width=60%}\<Esc>11hi"
-let @e ="o$$\<Enter>$$\<Esc>O"
-
-lua << EOF
 -- https://gist.github.com/smnatale/692ac4f256d5f19fbcbb78fe32c87604
-
 -- restore cursor to file position in previous editing session
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(args)
@@ -327,9 +319,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
 })
-EOF
 
-" Helper functions
+-- Helper functions
+vim.api.nvim_exec([[
 augroup helper_funcs
   autocmd!
   "" Trim trailing whitespace function
@@ -339,28 +331,21 @@ augroup helper_funcs
     call winrestview(l:save)
   endfunction
 augroup end
+]], false)
 
-" Plugins
-
-"" clangd_extensions
-lua << EOF
+-- Plugins
+-- clangd_extensions
 require("clangd_extensions").setup()
-EOF
 
-"" nvim-lightbulb
-lua << EOF
+-- nvim-lightbulb
 require("nvim-lightbulb").setup({
   autocmd = { enabled = true }
 })
-EOF
 
-"" fzf-lua
-lua << EOF
+-- fzf-lua
 require('fzf-lua').setup({'fzf-vim'})
-EOF
 
-"" Mason tool installer
-lua << EOF
+-- Mason tool installer
 require('mason-tool-installer').setup({
   ensure_installed = {
     "clangd",
@@ -368,15 +353,11 @@ require('mason-tool-installer').setup({
     "pyright",
   }
 })
-EOF
 
-"" auto-dark-mode.nvim
-lua << EOF
+-- auto-dark-mode.nvim
 require("auto-dark-mode").setup()
-EOF
 
-"" aerial.nvim
-lua << EOF
+-- aerial.nvim
 require("aerial").setup({
   layout = {
     default_direction = "left",
@@ -394,10 +375,8 @@ require("aerial").setup({
     vim.keymap.set("n", "}", "<Cmd>AerialNext<CR>", { buffer = bufnr })
   end,
 })
-EOF
 
-"" remote-nvim.nvim
-lua << EOF
+-- remote-nvim.nvim
 require("remote-nvim").setup({
   client_callback = function(port, _)
     require("remote-nvim.ui").float_term(("kitty nvim --server localhost:%s --remote-ui"):format(port), function(exit_code)
@@ -407,16 +386,11 @@ require("remote-nvim").setup({
     end)
   end,
 })
-EOF
 
-"" gitsigns.nvim
-lua << EOF
+-- gitsigns.nvim
 require('gitsigns').setup()
-EOF
 
-"" mini.nvim
-
-lua << EOF
+-- mini.nvim
 -- gA to start, s for split pattern, t for trimming whitespace
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-align.txt
 require('mini.align').setup()
@@ -436,26 +410,18 @@ require('mini.jump2d').setup({
 })
 -- icons
 require('mini.icons').setup()
-EOF
 
-"" guess-indent.nvim
-lua << EOF
+-- guess-indent.nvim
 require('guess-indent').setup()
-EOF
 
-"" refactoring.nvim
-lua << EOF
+-- refactoring.nvim
 require('refactoring').setup()
-EOF
 
-"" sessions.nvim
-lua << EOF
+-- sessions.nvim
 require("sessions").setup()
-EOF
 
-"" nvim-treesitter
-""" Do NOT use treesitter for folding as it cannot be disabled for large files
-lua << EOF
+-- nvim-treesitter
+--- Do NOT use treesitter for folding as it cannot be disabled for large files
 disable_for_large_files = function(lang, bufnr) -- Disable in large buffers
   return vim.api.nvim_buf_line_count(bufnr) > 50000
 end
@@ -496,18 +462,15 @@ require'treesitter-context'.setup{
   zindex = 20, -- The Z-index of the context window
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
-EOF
 
-"" which-key.nvim
-"
-" :nmap - Display normal mode maps
-" :imap - Display insert mode maps
-" :vmap - Display visual and select mode maps
-" :smap - Display select mode maps <-- select mode is never used
-" :xmap - Display visual mode maps
-" :cmap - Display command-line mode maps i.e. after pressing :
-" :omap - Display operator pending mode maps e.g. deletion after pressing d
-lua << EOF
+-- which-key.nvim
+-- :nmap - Display normal mode maps
+-- :imap - Display insert mode maps
+-- :vmap - Display visual and select mode maps
+-- :smap - Display select mode maps <-- select mode is never used
+-- :xmap - Display visual mode maps
+-- :cmap - Display command-line mode maps i.e. after pressing :
+-- :omap - Display operator pending mode maps e.g. deletion after pressing d
 require("which-key").setup {}
 local wk = require("which-key")
 wk.add({
@@ -584,9 +547,7 @@ wk.add({
   { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   },
   })
-EOF
 
-lua << END
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -627,4 +588,3 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
-END
