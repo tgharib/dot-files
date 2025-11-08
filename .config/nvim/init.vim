@@ -17,6 +17,7 @@ set softtabstop=-1 " Spaces-only indenation
 syntax off " Rely on treesitter only for syntax highlighting
 let g:suda_smart_edit = 1 " suda.nvim smart write
 set mouse= " Disable mouse support
+set signcolumn=number " Combine gutter with number lines column
 
 "" Don't touch unnamed register when pasting over visual selection
 xnoremap p P
@@ -46,11 +47,8 @@ require("lazy").setup({
   },
   spec = {
     -- Don't forget to disable lazy loading when installing new plugin!
-    -- Cosmetic
     { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-
-    -- Regular
     "folke/which-key.nvim",
     { "junegunn/fzf", lazy = false },
     { "junegunn/fzf.vim", lazy = false },
@@ -60,8 +58,6 @@ require("lazy").setup({
     { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
     "lewis6991/gitsigns.nvim",
     { "f-person/auto-dark-mode.nvim", opts = {} },
-
-    -- Doesn't require LSP
     {
       'nvim-treesitter/nvim-treesitter',
       lazy = false,
@@ -88,11 +84,6 @@ require("lazy").setup({
          "nvim-tree/nvim-web-devicons"
       },
     },
-
-    -- Requires LSP
-    { "neoclide/coc.nvim", branch = "release", lazy = false },
-
-    -- Remote nvim
     {
      "amitds1997/remote-nvim.nvim",
      version = "*", -- Pin to GitHub releases
@@ -103,6 +94,53 @@ require("lazy").setup({
      },
      config = true,
     },
+    -- https://gist.github.com/smnatale/b847e568f1a155b8e8349f29a482a1f4
+    {
+        "mason-org/mason-lspconfig.nvim",
+        opts = {},
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            { "neovim/nvim-lspconfig" },
+        },
+    },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        opts = {},
+    },
+    {
+        "MysticalDevil/inlay-hints.nvim",
+        event = "LspAttach",
+        dependencies = { "neovim/nvim-lspconfig" },
+        config = function()
+            require("inlay-hints").setup({
+                commands = { enable = true }, -- Enable InlayHints commands
+                autocmd = { enable = false } -- Disable the inlay hints on `LspAttach` event
+            })
+        end
+    },
+    {
+      "folke/trouble.nvim",
+      opts = {},
+      cmd = "Trouble",
+      keys = {},
+    },
+    {
+      "kevinhwang91/nvim-bqf",
+      opts = {},
+      lazy = false,
+    },
+    {
+      "ray-x/lsp_signature.nvim",
+      event = "InsertEnter",
+      opts = {
+        bind = true,
+        handler_opts = {
+          border = "rounded",
+        },
+        hint_enable = false,
+        select_signature_key = '<C-p>',
+      },
+    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -182,6 +220,17 @@ augroup end
 
 " Plugins
 
+"" Mason tool installer
+lua << EOF
+require('mason-tool-installer').setup({
+	ensure_installed = {
+		"clangd",
+		"rust-analyzer",
+		"pyright",
+	}
+})
+EOF
+
 "" auto-dark-mode.nvim
 lua << EOF
 require("auto-dark-mode").setup()
@@ -202,8 +251,8 @@ require("aerial").setup({
   -- set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "{", ":AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", ":AerialNext<CR>", { buffer = bufnr })
   end,
 })
 EOF
@@ -228,19 +277,15 @@ EOF
 
 "" mini.nvim
 
-" mini.align: gA to start, s for split pattern, t for trimming whitespace
-" https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-align.txt
-
-" mini.cursorword: highlight word under cursor
-
-" mini.bufremove: close windows while saving window layout
-
-" mini.jump2d: hop.nvim clone
-
 lua << EOF
+-- gA to start, s for split pattern, t for trimming whitespace
+-- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-align.txt
 require('mini.align').setup()
+-- highlight word under cursor
 require('mini.cursorword').setup()
+-- close windows while saving window layout
 require('mini.bufremove').setup()
+-- hop.nvim clone
 require('mini.jump2d').setup({
   view = {
     dim = true,
@@ -250,6 +295,12 @@ require('mini.jump2d').setup({
     start_jumping = '',
   },
 })
+-- autocomplete based on words in buffer
+require('mini.completion').setup({
+  delay = { completion = 10, info = 10, signature = 100000000 },
+})
+
+require('mini.icons').setup()
 EOF
 
 "" guess-indent.nvim
@@ -313,9 +364,6 @@ require'treesitter-context'.setup{
 EOF
 
 "" which-key.nvim
-" Some coc commands can be found in:
-" https://github.com/neoclide/coc.nvim/blob/master/data/schema.json
-" https://github.com/neoclide/coc.nvim/blob/master/doc/coc-config.txt
 "
 " :nmap - Display normal mode maps
 " :imap - Display insert mode maps
@@ -329,7 +377,7 @@ require("which-key").setup {}
 local wk = require("which-key")
 wk.add({
   { "<CR>", ":lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
-  { "<leader>k", ":call ShowDocumentation()<CR>", desc = "show documentation (coc)" },
+  { "<leader>k", ":lua vim.lsp.buf.hover()<CR>", desc = "show documentation" },
   { "<leader>L", ":Lazy<CR>", desc = "show Lazy plugin manager window" },
   { "<leader>b", group = "buffers" },
   { "<leader>bQ", ":bufdo bw<CR>", desc = "quit all buffers" },
@@ -339,48 +387,51 @@ wk.add({
   { "<leader>bq", ":lua MiniBufremove.wipeout()<CR>", desc = "quit current buffer" },
   { "<leader>bs", ":SessionsSave! ", desc = "save session" },
   { "<leader>bt", ":tabonly<CR>", desc = "tabs -> buffers" },
-  { "<leader>f", group = "fix error" },
-  { "<leader>fe", ":<C-u>CocList diagnostics<CR>", desc = "list errors/diagnostics (coc)" },
-  { "<leader>fl", "<Plug>(coc-fix-current)", desc = "fix error on current line (coc)" },
+  { "<leader>x", group = "fix error" },
+  { "<leader>fe", ":Trouble diagnostics toggle filter.buf=0<cr>", desc = "buffer diagnostics" },
+  { "<leader>fE", ":Trouble diagnostics toggle<cr>", desc = "diagnostics" },
+  { "<leader>fl", ":Trouble qflist toggle<cr>", desc = "quickfix list" },
+  { "<leader>fL", ":Trouble loclist toggle<cr>", desc = "location list" },
   { "<leader>g", group = "go to" },
-  { "<leader>gs", "<Plug>(coc-implementation)", desc = "go to subclasses (coc)" },
-  { "<leader>gd", "<Plug>(coc-definition)", desc = "go to definition (coc)" },
+  { "<leader>gi", ":lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
+  { "<leader>gD", ":lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
+  { "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
   { "<leader>gg", ":CocCommand clangd.switchSourceHeader<CR>", desc = "go to source/header (coc)" },
-  { "<leader>gr", "<Plug>(coc-references)", desc = "go to references (coc)" },
-  { "<leader>gt", "<Plug>(coc-type-definition)", desc = "go to type definition (coc)" },
+  { "<leader>gr", ":lua vim.lsp.buf.references()<CR>", desc = "go to references" },
+  { "<leader>gt", ":lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
   { "<leader>p", group = "paths" },
   { "<leader>pc", ":cd %:h<CR>", desc = "cd into current buffer working directory" },
   { "<leader>pf", ":echo expand('%:p')<CR>", desc = "show file path" },
   { "<leader>po", ":Oil<CR>", desc = "oil (file manager)" },
   { "<leader>r", group = "refactor/transform" },
-  { "<leader>rf", ":call CocActionAsync('format')<CR>", desc = "format buffer (coc)" },
+  { "<leader>ra", ":lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
+  { "<leader>rf", ":lua vim.lsp.buf.format()<CR>", desc = "format buffer" },
   { "<leader>ro", ":call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>", desc = "organize imports (coc)" },
   { "<leader>rp", group = "print debug" },
   { "<leader>rpc", ":lua require('refactoring').debug.cleanup({})<CR>", desc = "cleanup (refactoring.nvim)" },
   { "<leader>rpl", ":lua require('refactoring').debug.printf({below = true})<CR>", desc = "print line (refactoring.nvim)" },
   { "<leader>rpv", ":lua require('refactoring').debug.print_var()<CR>", desc = "print variable (refactoring.nvim)" },
   { "<leader>rz", ":lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
-  { "<leader>rr", "<Plug>(coc-rename)", desc = "rename symbol (coc)" },
+  { "<leader>rr", ":lua vim.lsp.buf.rename()<CR>", desc = "rename symbol" },
   { "<leader>rw", group = "whitespace" },
   { "<leader>rw2", ":set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 2 spaces" },
   { "<leader>rw4", ":set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 4 spaces" },
   { "<leader>rwr", ":retab<CR>", desc = "replace tabs with spaces" },
   { "<leader>rwt", ":call TrimWhitespace()<CR>", desc = "trim whitespace" },
   { "<leader>s", group = "search" },
-  { "<leader>sD", "<cmd>AerialToggle!<CR>", desc = "open document outline in split window" },
-  { "<leader>sS", ":<C-u>CocList -I symbols<CR>", desc = "search symbol in workspace (coc)" },
+  { "<leader>sd", ":Trouble symbols toggle focus=false<cr>", desc = "open document outline in split window" },
+  { "<leader>sD", ":AerialToggle!<CR>", desc = "open document outline in split window" },
   { "<leader>sT", ":Lines!<CR>", desc = "search text in all buffers" },
   { "<leader>sc", ":let @/ = \"\"<CR>", desc = "clear search buffer" },
-  { "<leader>sd", ":CocOutline<CR>", desc = "open document outline in split window (coc)" },
   { "<leader>sr", ":Rg! ", desc = "rg text in current working directory" },
-  { "<leader>ss", ":<C-u>CocList outline<CR>", desc = "search symbol in document outline (coc)" },
+  { "<leader>ss", ":lua vim.lsp.buf.document_symbol()<CR>", desc = "list symbols in buffer" },
   { "<leader>st", ":BLines!<CR>", desc = "search text in current buffer" },
   { "<leader>t", group = "toggles" },
   { "<leader>td", ":Gitsigns toggle_signs<CR>", desc = "toggle git diff signs" },
   { "<leader>th", ":set hlsearch!<CR>", desc = "toggle search highlight" },
   { "<leader>tl", ":set number!<CR>", desc = "toggle line numbers" },
   { "<leader>tn", ":TSContext toggle<CR>", desc = "toggle context (nested statements)" },
-  { "<leader>tt", ":CocCommand document.toggleInlayHint<CR>", desc = "toggle inlay hints (coc)" },
+  { "<leader>tt", ":InlayHintsToggle<CR>", desc = "toggle inlay hints" },
   { "<leader>tw", ":set wrap!<CR>", desc = "toggle line wrap" },
   })
 wk.add({
@@ -398,55 +449,6 @@ wk.add({
   },
   })
 EOF
-
-" For Rust, as per https://github.com/neoclide/coc.nvim/wiki/Language-servers#rust, rust-analyzer binary needs to be compiled from source
-let g:coc_global_extensions = ['coc-clangd', 'coc-pyright', 'coc-rust-analyzer']
-"" COC START
-set nobackup " Some servers have issues with backup files, see #649.
-set nowritebackup
-set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
-set signcolumn=number " Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved.
-
-""" Use tab for trigger completion with characters ahead and navigate. NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-""" Make <CR> to accept selected completion item or notify coc.nvim to format. <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <c-space> coc#refresh() " Use <c-space> to trigger completion
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-augroup coc_signature
-  autocmd!
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp') " Update signature help on jump placeholder
-augroup end
-
-" Remap <C-f> and <C-b> to scroll floating windows/popups (such as when
-" showing a coc documentation popup)
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"" COC END
 
 lua << END
 require('lualine').setup {
