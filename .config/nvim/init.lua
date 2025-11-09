@@ -499,7 +499,7 @@ wk.add({
   { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
   { "<leader>p", group = "paths" },
   { "<leader>pc", "<Cmd>cd %<Cmd>h<CR>", desc = "cd into current buffer working directory" },
-  { "<leader>pf", "<Cmd>echo expand('%<Cmd>p')<CR>", desc = "show file path" },
+  { "<leader>pf", "<Cmd>echo expand('%:p')<CR>", desc = "show file path" },
   { "<leader>po", "<Cmd>Oil<CR>", desc = "oil (file manager)" },
   { "<leader>r", group = "refactor/transform" },
   { "<leader>ra", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
