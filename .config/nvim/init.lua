@@ -428,7 +428,7 @@ end
 
 require'nvim-treesitter.configs'.setup {
   -- Install languages for treesitter
-  ensure_installed = { "bash", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog" },
+  ensure_installed = { "bash", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog", "json", "toml" },
   sync_install = false,
   auto_install = false,
   highlight = {
