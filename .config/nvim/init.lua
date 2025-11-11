@@ -1,25 +1,6 @@
 -- For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
 -- Vim motion options: f/F/t/T for horizontal, <CR> for vertical, */#, search, goto definition, ripgrep
 
--- Options
-vim.g.mapleader = " "
-vim.g.suda_smart_edit = 1 -- suda.nvim smart write
-vim.opt.hlsearch = false -- turn off search highlighting
-vim.opt.clipboard = "unnamedplus" -- use system clipboard for copy and paste
-vim.opt.ignorecase = true -- enable case-insensitive searching by default
-vim.opt.smartcase = true -- enable smartcase behavior
-vim.opt.sessionoptions = "buffers" -- session = buffers only
-vim.opt.hidden = true -- allow buffers to be hidden without saving
-vim.opt.number = true -- enable line numbers by default
-vim.opt.expandtab = true -- spaces-only indenation https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
-vim.opt.softtabstop = -1 -- spaces-only indenation
-vim.opt.mouse = '' -- disable mouse support
-vim.opt.signcolumn = 'number' -- combine gutter with number lines column
-vim.opt.termguicolors = true -- Force colorscheme colors with 24-bit support
-vim.wo.wrap = false -- turn off line wrap
--- Don't touch unnamed register when pasting over visual selection
-vim.keymap.set("x", "p", "P", { noremap = true, silent = true })
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -259,6 +240,27 @@ require("lazy").setup({
   checker = { enabled = false },
 })
 
+-- Options
+vim.g.mapleader = " "
+vim.g.suda_smart_edit = 1 -- suda.nvim smart write
+vim.opt.hlsearch = false -- turn off search highlighting
+vim.opt.clipboard = "unnamedplus" -- use system clipboard for copy and paste
+vim.opt.ignorecase = true -- enable case-insensitive searching by default
+vim.opt.smartcase = true -- enable smartcase behavior
+vim.opt.sessionoptions = "buffers" -- session = buffers only
+vim.opt.hidden = true -- allow buffers to be hidden without saving
+vim.opt.number = true -- enable line numbers by default
+vim.opt.expandtab = true -- spaces-only indenation https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
+vim.opt.softtabstop = -1 -- spaces-only indenation
+vim.opt.mouse = '' -- disable mouse support
+vim.opt.signcolumn = 'number' -- combine gutter with number lines column
+vim.opt.termguicolors = true -- Force colorscheme colors with 24-bit support
+vim.wo.wrap = false -- turn off line wrap
+-- Don't touch unnamed register when pasting over visual selection
+vim.keymap.set("x", "p", "P", { noremap = true, silent = true })
+-- Don't gray out dead code
+vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" })
+
 -- Set colorscheme
 require("tokyonight").setup({
   styles = {
@@ -266,7 +268,6 @@ require("tokyonight").setup({
     keywords = { italic = false },
   },
 })
-
 vim.cmd.colorscheme('tokyonight')
 
 -- Highlight unwanted characters (whitespace, unicode)
