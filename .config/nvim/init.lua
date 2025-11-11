@@ -240,6 +240,15 @@ require("lazy").setup({
   checker = { enabled = false },
 })
 
+-- Set colorscheme
+require("tokyonight").setup({
+  styles = {
+    comments = { italic = false },
+    keywords = { italic = false },
+  },
+})
+vim.cmd.colorscheme('tokyonight')
+
 -- Options
 vim.g.mapleader = " "
 vim.g.suda_smart_edit = 1 -- suda.nvim smart write
@@ -258,17 +267,7 @@ vim.opt.termguicolors = true -- Force colorscheme colors with 24-bit support
 vim.wo.wrap = false -- turn off line wrap
 -- Don't touch unnamed register when pasting over visual selection
 vim.keymap.set("x", "p", "P", { noremap = true, silent = true })
--- Don't gray out dead code
-vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" })
-
--- Set colorscheme
-require("tokyonight").setup({
-  styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-  },
-})
-vim.cmd.colorscheme('tokyonight')
+vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" }) -- don't gray out dead code
 
 -- Highlight unwanted characters (whitespace, unicode)
 -- https://vi.stackexchange.com/a/29458
