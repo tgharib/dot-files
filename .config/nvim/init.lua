@@ -131,7 +131,11 @@ require("lazy").setup({
     -- Better than fzf-lua for go to references (persistent)
     {
       "kevinhwang91/nvim-bqf",
-      opts = {},
+      opts = {
+        preview = {
+          win_height = 999,
+        },
+      },
       lazy = false,
     },
     -- Show lightbulbs when current line has a code action
