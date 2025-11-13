@@ -139,6 +139,11 @@ require("lazy").setup({
       },
       lazy = false,
     },
+    -- Better than fzf-lua for grepping (persistent)
+    {
+      'mhinz/vim-grepper',
+      lazy = false,
+    },
     -- Show lightbulbs when current line has a code action
     { 'kosayoda/nvim-lightbulb' },
     -- C++ clangd extensions
@@ -236,7 +241,7 @@ require("lazy").setup({
         fuzzy = { implementation = "prefer_rust_with_warning" }
       },
       opts_extend = { "sources.default" }
-    }
+    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -524,11 +529,11 @@ wk.add({
   { "<leader>se", "<Cmd>lua vim.lsp.buf.document_symbol()<CR>", desc = "open document outline" },
   { "<leader>sd", "<Cmd>Trouble symbols toggle focus=false<cr>", desc = "open document outline" },
   { "<leader>sD", "<Cmd>AerialToggle!<CR>", desc = "open document outline" },
-  { "<leader>sT", "<Cmd>Lines!<CR>", desc = "search text in all buffers" },
+  { "<leader>sr", "<Cmd>Grepper<CR>", desc = "grep text in current working directory" },
+  { "<leader>st", "<Cmd>Grepper -buffer<CR>", desc = "grep text in current buffer" },
+  { "<leader>sT", "<Cmd>Grepper -buffers<CR>", desc = "grep text in all buffers" },
   { "<leader>sc", "<Cmd>let @/ = \"\"<CR>", desc = "clear search buffer" },
-  { "<leader>sr", ":Rg! ", desc = "rg text in current working directory" },
   { "<leader>ss", "<Cmd>FzfLua lsp_document_symbols<CR>", desc = "search symbols in buffer" },
-  { "<leader>st", "<Cmd>BLines!<CR>", desc = "search text in current buffer" },
   { "<leader>t", group = "toggles" },
   { "<leader>td", "<Cmd>Gitsigns toggle_signs<CR>", desc = "toggle git diff signs" },
   { "<leader>th", "<Cmd>set hlsearch!<CR>", desc = "toggle search highlight" },
