@@ -134,6 +134,7 @@ require("lazy").setup({
       opts = {
         preview = {
           win_height = 999,
+          winblend = 0,
         },
       },
       lazy = false,
