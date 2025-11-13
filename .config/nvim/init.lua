@@ -378,12 +378,6 @@ require("aerial").setup({
   open_automatic = false,
   disable_max_lines = 50000,
   disable_max_size = 2000000, -- 2MB
-  -- set keymaps when aerial has attached to a buffer
-  on_attach = function(bufnr)
-    -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = bufnr })
-    vim.keymap.set("n", "}", "<Cmd>AerialNext<CR>", { buffer = bufnr })
-  end,
 })
 
 -- remote-nvim.nvim
@@ -549,6 +543,8 @@ wk.add({
   { "<leader>r", group = "refactor/transform" },
   { "<leader>ra", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
   { "<leader>rz", "<Cmd>lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
+  { "<leader>s", group = "search" },
+  { "<leader>sr", "<plug>(GrepperOperator)" },
   },
   })
 wk.add({
