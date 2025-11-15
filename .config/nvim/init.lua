@@ -491,7 +491,7 @@ wk.add({
   { "<leader>bt", "<Cmd>tabonly<CR>", desc = "tabs -> buffers" },
   { "<leader>f", group = "fix error" },
   { "<leader>fe", "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "buffer diagnostics" },
-  { "<leader>fE", "<Cmd>Trouble diagnostics toggle<cr>", desc = "diagnostics" },
+  { "<leader>fE", "<Cmd>Trouble diagnostics toggle<cr>", desc = "all diagnostics" },
   { "<leader>fl", "<Cmd>Trouble qflist toggle<cr>", desc = "quickfix list" },
   { "<leader>fL", "<Cmd>Trouble loclist toggle<cr>", desc = "location list" },
   { "<leader>g", group = "go to" },
