@@ -520,7 +520,7 @@ wk.add({
   { "<leader>rwr", "<Cmd>retab<CR>", desc = "replace tabs with spaces" },
   { "<leader>rwt", "<Cmd>call TrimWhitespace()<CR>", desc = "trim whitespace" },
   { "<leader>s", group = "search" },
-  { "<leader>sd", "<Cmd>Trouble symbols toggle focus=false<cr>", desc = "open document outline" },
+  { "<leader>sd", "<Cmd>Trouble symbols toggle focus=false win.position=bottom<cr>", desc = "open document outline" },
   { "<leader>sD", "<Cmd>AerialToggle!<CR>", desc = "open document outline" },
   { "<leader>sr", "<Cmd>Grepper -tool rg<CR>", desc = "grep text in current working directory" },
   { "<leader>st", "<Cmd>Grepper -tool rg -buffer<CR>", desc = "grep text in current buffer" },
