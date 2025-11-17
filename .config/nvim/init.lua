@@ -267,12 +267,12 @@ vim.opt.expandtab = true -- spaces-only indenation https://gist.github.com/Lunar
 vim.opt.softtabstop = -1 -- spaces-only indenation
 vim.opt.mouse = '' -- disable mouse support
 vim.opt.signcolumn = 'number' -- combine gutter with number lines column
-vim.opt.termguicolors = true -- Force colorscheme colors with 24-bit support
+vim.opt.termguicolors = true -- force colorscheme colors with 24-bit support
 vim.wo.wrap = false -- turn off line wrap
--- Don't touch unnamed register when pasting over visual selection
+-- don't touch unnamed register when pasting over visual selection
 vim.keymap.set("x", "p", "P", { noremap = true, silent = true })
 vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" }) -- don't gray out dead code
-vim.lsp.inlay_hint.enable(true)
+vim.lsp.inlay_hint.enable(true) -- enable lsp inlay hints by default
 
 -- Highlight unwanted characters (whitespace, unicode)
 -- https://vi.stackexchange.com/a/29458
