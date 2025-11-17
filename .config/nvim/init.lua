@@ -109,18 +109,6 @@ require("lazy").setup({
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {},
     },
-    -- Get access to LSP inlay hints via a toggle
-    {
-        "MysticalDevil/inlay-hints.nvim",
-        event = "LspAttach",
-        dependencies = { "neovim/nvim-lspconfig" },
-        config = function()
-            require("inlay-hints").setup({
-                commands = { enable = true }, -- Enable InlayHints commands
-                autocmd = { enable = false } -- Disable the inlay hints on `LspAttach` event
-            })
-        end
-    },
     -- Better than fzf-lua for buffer diagnostics (persistent)
     {
       "folke/trouble.nvim",
@@ -284,6 +272,7 @@ vim.wo.wrap = false -- turn off line wrap
 -- Don't touch unnamed register when pasting over visual selection
 vim.keymap.set("x", "p", "P", { noremap = true, silent = true })
 vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" }) -- don't gray out dead code
+vim.lsp.inlay_hint.enable(true)
 
 -- Highlight unwanted characters (whitespace, unicode)
 -- https://vi.stackexchange.com/a/29458
@@ -538,7 +527,7 @@ wk.add({
   { "<leader>th", "<Cmd>set hlsearch!<CR>", desc = "toggle search highlight" },
   { "<leader>tl", "<Cmd>set number!<CR>", desc = "toggle line numbers" },
   { "<leader>tn", "<Cmd>TSContext toggle<CR>", desc = "toggle context (nested statements)" },
-  { "<leader>tt", "<Cmd>InlayHintsToggle<CR>", desc = "toggle inlay hints" },
+  { "<leader>tt", "<Cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", desc = "toggle inlay hints" },
   { "<leader>tw", "<Cmd>set wrap!<CR>", desc = "toggle line wrap" },
   })
 wk.add({
