@@ -482,6 +482,27 @@ require'treesitter-context'.setup{
 -- :omap - Display operator pending mode maps e.g. deletion after pressing d
 require("which-key").setup {}
 local wk = require("which-key")
+if vim.g.vscode then
+  wk.add({
+    { "<leader>g", group = "go to" },
+    { "<leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
+    { "<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
+    { "<leader>gd", "<Cmd>lua require('vscode').action('editor.action.revealDefinition')<CR>", desc = "go to definition" },
+    { "<leader>gg", "<Cmd>ClangdSwitchSourceHeader<CR>", desc = "go to source/header" },
+    { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
+    { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
+    })
+else
+  wk.add({
+    { "<leader>g", group = "go to" },
+    { "<leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
+    { "<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
+    { "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
+    { "<leader>gg", "<Cmd>ClangdSwitchSourceHeader<CR>", desc = "go to source/header" },
+    { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
+    { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
+    })
+end
 wk.add({
   { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   { "<leader>n", "<Cmd>lua require('telescope').extensions.notify.notify()<CR>", desc = "show notifications" },
@@ -500,13 +521,6 @@ wk.add({
   { "<leader>fE", "<Cmd>Trouble diagnostics toggle<cr>", desc = "all diagnostics" },
   { "<leader>fl", "<Cmd>Trouble qflist toggle<cr>", desc = "quickfix list" },
   { "<leader>fL", "<Cmd>Trouble loclist toggle<cr>", desc = "location list" },
-  { "<leader>g", group = "go to" },
-  { "<leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
-  { "<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
-  { "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
-  { "<leader>gg", "<Cmd>ClangdSwitchSourceHeader<CR>", desc = "go to source/header" },
-  { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
-  { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
   { "<leader>p", group = "paths" },
   { "<leader>pc", "<Cmd>cd %<Cmd>h<CR>", desc = "cd into current buffer working directory" },
   { "<leader>pf", "<Cmd>echo expand('%:p')<CR>", desc = "show file path" },
