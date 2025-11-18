@@ -493,6 +493,8 @@ if vim.g.vscode then
     { "<leader>gt", "<Cmd>lua require('vscode').action('editor.action.goToTypeDefinition')<CR>", desc = "go to type definition" },
     { "<leader>bb", "<Cmd>lua require('vscode').action('workbench.action.showAllEditors')<CR>", desc = "select buffer" },
     { "<leader>bf", "<Cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>", desc = "open file" },
+    { "<leader>tw", "<Cmd>lua require('vscode').action('editor.action.toggleWordWrap')<CR>", desc = "toggle word wrap" },
+    { "<leader>tt", "<Cmd>lua require('vscode').action('clangd.inlayHints.supported')<CR>", desc = "toggle inlay hints" },
     })
 else
   wk.add({
@@ -505,6 +507,8 @@ else
     { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
     { "<leader>bb", "<Cmd>Buffers<CR>", desc = "select buffer" },
     { "<leader>bf", "<Cmd>Files<CR>", desc = "open file" },
+    { "<leader>tw", "<Cmd>set wrap!<CR>", desc = "toggle word wrap" },
+    { "<leader>tt", "<Cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", desc = "toggle inlay hints" },
     })
 end
 wk.add({
@@ -554,8 +558,6 @@ wk.add({
   { "<leader>th", "<Cmd>set hlsearch!<CR>", desc = "toggle search highlight" },
   { "<leader>tl", "<Cmd>set number!<CR>", desc = "toggle line numbers" },
   { "<leader>tn", "<Cmd>TSContext toggle<CR>", desc = "toggle context (nested statements)" },
-  { "<leader>tt", "<Cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", desc = "toggle inlay hints" },
-  { "<leader>tw", "<Cmd>set wrap!<CR>", desc = "toggle line wrap" },
   })
 wk.add({
   {
