@@ -241,6 +241,14 @@ require("lazy").setup({
       "rcarriga/nvim-notify",
       lazy = false,
       opts = { },
+    },
+    -- Macro bank
+    {
+      "sahilsehwag/macrobank.nvim",
+      lazy = false,
+      config = function()
+        require("macrobank").setup()
+      end,
     }
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -558,6 +566,9 @@ wk.add({
   { "<leader>th", "<Cmd>set hlsearch!<CR>", desc = "toggle search highlight" },
   { "<leader>tl", "<Cmd>set number!<CR>", desc = "toggle line numbers" },
   { "<leader>tn", "<Cmd>TSContext toggle<CR>", desc = "toggle context (nested statements)" },
+  { "<leader>m", group = "macros" },
+  { "<leader>mm", function() require('macrobank.editor').open() end, desc = "[Macrobank]: Edit macros" },
+  { "<leader>mb", function() require('macrobank.bank_editor').open() end, desc = "[MacroBank] Edit saved macros" },
   })
 wk.add({
   {
