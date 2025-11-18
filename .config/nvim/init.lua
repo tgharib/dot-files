@@ -235,6 +235,12 @@ require("lazy").setup({
       "j-hui/fidget.nvim",
       lazy = false,
       opts = { },
+    },
+    -- Nvim notifications
+    {
+      "rcarriga/nvim-notify",
+      lazy = false,
+      opts = { },
     }
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -339,6 +345,10 @@ augroup end
 ]], false)
 
 -- Plugins
+-- nvim-notify
+require("notify").setup()
+vim.notify = require("notify")
+
 -- clangd_extensions
 require("clangd_extensions").setup()
 
@@ -474,6 +484,7 @@ require("which-key").setup {}
 local wk = require("which-key")
 wk.add({
   { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+  { "<leader>n", "<Cmd>lua require('telescope').extensions.notify.notify()<CR>", desc = "show notifications" },
   { "<leader>k", "<Cmd>lua vim.lsp.buf.hover()<CR>", desc = "show documentation" },
   { "<leader>L", "<Cmd>Lazy<CR>", desc = "show Lazy plugin manager window" },
   { "<leader>b", group = "buffers" },
