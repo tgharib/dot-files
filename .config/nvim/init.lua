@@ -494,7 +494,7 @@ if vim.g.vscode then
     { "<leader>bb", "<Cmd>lua require('vscode').action('workbench.action.showAllEditors')<CR>", desc = "select buffer" },
     { "<leader>bf", "<Cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>", desc = "open file" },
     { "<leader>tw", "<Cmd>lua require('vscode').action('editor.action.toggleWordWrap')<CR>", desc = "toggle word wrap" },
-    { "<leader>tt", "<Cmd>lua require('vscode').action('clangd.inlayHints.supported')<CR>", desc = "toggle inlay hints" },
+    { "<leader>tt", "<Cmd>lua require('vscode').action('clangd.inlayHints.toggle')<CR>", desc = "toggle inlay hints" },
     })
 else
   wk.add({
