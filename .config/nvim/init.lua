@@ -485,12 +485,12 @@ local wk = require("which-key")
 if vim.g.vscode then
   wk.add({
     { "<leader>g", group = "go to" },
-    { "<leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
-    { "<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
+    { "<leader>gi", "<Cmd>lua require('vscode').action('editor.action.goToImplementation')<CR>", desc = "go to implementation" },
+    { "<leader>gD", "<Cmd>lua require('vscode').action('editor.action.revealDeclaration')<CR>", desc = "go to declaration" },
     { "<leader>gd", "<Cmd>lua require('vscode').action('editor.action.revealDefinition')<CR>", desc = "go to definition" },
-    { "<leader>gg", "<Cmd>ClangdSwitchSourceHeader<CR>", desc = "go to source/header" },
-    { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
-    { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
+    { "<leader>gg", "<Cmd>lua require('vscode').action('clangd.switchheadersource')<CR>", desc = "go to source/header" },
+    { "<leader>gr", "<Cmd>lua require('vscode').action('editor.action.goToReferences')<CR>", desc = "go to references" },
+    { "<leader>gt", "<Cmd>lua require('vscode').action('editor.action.goToTypeDefinition')<CR>", desc = "go to type definition" },
     })
 else
   wk.add({
