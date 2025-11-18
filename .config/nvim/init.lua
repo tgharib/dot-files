@@ -491,6 +491,8 @@ if vim.g.vscode then
     { "<leader>gg", "<Cmd>lua require('vscode').action('clangd.switchheadersource')<CR>", desc = "go to source/header" },
     { "<leader>gr", "<Cmd>lua require('vscode').action('editor.action.goToReferences')<CR>", desc = "go to references" },
     { "<leader>gt", "<Cmd>lua require('vscode').action('editor.action.goToTypeDefinition')<CR>", desc = "go to type definition" },
+    { "<leader>bb", "<Cmd>lua require('vscode').action('workbench.action.showAllEditors')<CR>", desc = "select buffer" },
+    { "<leader>bf", "<Cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>", desc = "open file" },
     })
 else
   wk.add({
@@ -501,6 +503,8 @@ else
     { "<leader>gg", "<Cmd>ClangdSwitchSourceHeader<CR>", desc = "go to source/header" },
     { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
     { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
+    { "<leader>bb", "<Cmd>Buffers<CR>", desc = "select buffer" },
+    { "<leader>bf", "<Cmd>Files<CR>", desc = "open file" },
     })
 end
 wk.add({
@@ -510,8 +514,6 @@ wk.add({
   { "<leader>L", "<Cmd>Lazy<CR>", desc = "show Lazy plugin manager window" },
   { "<leader>b", group = "buffers" },
   { "<leader>bQ", "<Cmd>bufdo bw<CR>", desc = "quit all buffers" },
-  { "<leader>bb", "<Cmd>Buffers<CR>", desc = "select buffer" },
-  { "<leader>bf", "<Cmd>Files<CR>", desc = "open file" },
   { "<leader>bl", ":SessionsLoad! ", desc = "load session" },
   { "<leader>bq", "<Cmd>lua MiniBufremove.wipeout()<CR>", desc = "quit current buffer" },
   { "<leader>bs", ":SessionsSave! ", desc = "save session" },
