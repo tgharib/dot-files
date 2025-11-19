@@ -155,6 +155,7 @@ require("lazy").setup({
       -- optional: provides snippets for the snippet source
       dependencies = { 'rafamadriz/friendly-snippets' },
       lazy = false,
+      cond = not vim.g.vscode,
       -- use a release tag to download pre-built binaries
       version = '1.*',
 
