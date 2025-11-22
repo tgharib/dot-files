@@ -62,9 +62,8 @@ WantedBy=multi-user.target
 EOF
 # For VPN with obfuscation, use PIA linux app: https://www.privateinternetaccess.com/download/linux-vpn
 
-# Setup firefox by logging into firefox account
+# Setup firefox by logging into firefox account and install https://github.com/yokoffing/Betterfox and use firefox containers
 # https://medium.com/@Aenon/firefox-hide-native-tabs-and-titlebar-f0b00bdbb88b
-# https://github.com/pixeltris/TwitchAdSolutions (use vaft)
 # Firefox tridactyl has binds:
 # * `;u`, `;U`, `;;` to hover
 # * `s` and `S` to search DDG
