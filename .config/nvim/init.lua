@@ -1,5 +1,6 @@
 -- For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
 -- Vim motion options: f/F/t/T for horizontal, <CR> for vertical, */#, search, goto definition, ripgrep
+-- VSCode settings for nice to use debugger (CodeLLDB)
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
