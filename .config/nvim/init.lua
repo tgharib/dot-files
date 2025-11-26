@@ -408,7 +408,7 @@ dap.adapters.codelldb = {
   type = "server",
   port = "${port}",
   executable = {
-    command = "codelldb", -- or if not in $PATH: "/absolute/path/to/codelldb"
+    command = "codelldb",
     args = { "--port", "${port}" },
 
     -- On windows you may have to uncomment this:
