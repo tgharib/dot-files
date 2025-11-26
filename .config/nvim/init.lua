@@ -4,13 +4,13 @@
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -27,7 +27,7 @@ require("lazy").setup({
   spec = {
     -- Don't forget to disable lazy loading when installing new plugin!
     -- Color scheme
-    { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+    { "folke/tokyonight.nvim",     lazy = false,                                    priority = 1000 },
     -- Status line at the bottom
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
     -- Keybind helper
@@ -39,7 +39,7 @@ require("lazy").setup({
       -- dependencies = { "nvim-tree/nvim-web-devicons" },
       -- or if using mini.icons/mini.nvim
       dependencies = { "nvim-mini/mini.icons" },
-      opts = {}
+      opts = { "fzf-vim" },
     },
     -- Sessions support
     "natecraddock/sessions.nvim",
@@ -48,17 +48,17 @@ require("lazy").setup({
     -- Edit root files
     { "lambdalisue/suda.vim", lazy = false },
     -- File manager
-    { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
+    { "stevearc/oil.nvim",    opts = {},   dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
     -- Show which lines are added, changed or deleted
     "lewis6991/gitsigns.nvim",
     -- Dark/light mode based on system setting
     { "f-person/auto-dark-mode.nvim", opts = {} },
     -- Syntax highlighting
     {
-      'nvim-treesitter/nvim-treesitter',
+      "nvim-treesitter/nvim-treesitter",
       lazy = false,
-      branch = 'master',
-      build = ':TSUpdate'
+      branch = "master",
+      build = ":TSUpdate",
     },
     -- Show current function at top if function is massive
     "nvim-treesitter/nvim-treesitter-context",
@@ -73,42 +73,42 @@ require("lazy").setup({
       opts = {},
     },
     -- Nice plugins
-    { "echasnovski/mini.nvim", version = false },
+    { "echasnovski/mini.nvim",        version = false },
     -- Document outline for markdown
     {
-      'stevearc/aerial.nvim',
+      "stevearc/aerial.nvim",
       opts = {},
       -- Optional dependencies
       dependencies = {
-         "nvim-treesitter/nvim-treesitter",
-         "nvim-tree/nvim-web-devicons"
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons",
       },
     },
     -- Use local neovim GUI on remote server
     {
-     "amitds1997/remote-nvim.nvim",
-     version = "*", -- Pin to GitHub releases
-     dependencies = {
-         "nvim-lua/plenary.nvim", -- For standard functions
-         "MunifTanjim/nui.nvim", -- To build the plugin UI
-         "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
-     },
-     config = true,
+      "amitds1997/remote-nvim.nvim",
+      version = "*",                     -- Pin to GitHub releases
+      dependencies = {
+        "nvim-lua/plenary.nvim",         -- For standard functions
+        "MunifTanjim/nui.nvim",          -- To build the plugin UI
+        "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+      },
+      config = true,
     },
     -- https://gist.github.com/smnatale/b847e568f1a155b8e8349f29a482a1f4
     -- Provides lspconfig for each mason tool (LSP) installed
     {
-        "mason-org/mason-lspconfig.nvim",
-        opts = {},
-        dependencies = {
-            { "mason-org/mason.nvim", opts = {} },
-            { "neovim/nvim-lspconfig" },
-        },
+      "mason-org/mason-lspconfig.nvim",
+      opts = {},
+      dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        { "neovim/nvim-lspconfig" },
+      },
     },
     -- Ensure selected mason tools (LSPs) are installed
     {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        opts = {},
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      opts = {},
     },
     -- Better than fzf-lua for buffer diagnostics (persistent)
     {
@@ -130,13 +130,21 @@ require("lazy").setup({
     },
     -- Better than fzf-lua for grepping (persistent)
     {
-      'mhinz/vim-grepper',
+      "mhinz/vim-grepper",
       lazy = false,
     },
     -- Show lightbulbs when current line has a code action
-    { 'kosayoda/nvim-lightbulb' },
+    {
+      "kosayoda/nvim-lightbulb",
+      opts = {
+        autocmd = { enabled = true },
+      },
+    },
     -- C++ clangd extensions
-    { 'https://git.sr.ht/~p00f/clangd_extensions.nvim' },
+    {
+      "https://git.sr.ht/~p00f/clangd_extensions.nvim",
+      opts = {},
+    },
     -- Signature help when calling a function
     {
       "ray-x/lsp_signature.nvim",
@@ -147,18 +155,18 @@ require("lazy").setup({
           border = "rounded",
         },
         hint_enable = false,
-        select_signature_key = '<C-p>',
+        select_signature_key = "<C-p>",
       },
     },
     -- Auto-completion
     {
-      'saghen/blink.cmp',
+      "saghen/blink.cmp",
       -- optional: provides snippets for the snippet source
-      dependencies = { 'rafamadriz/friendly-snippets' },
+      dependencies = { "rafamadriz/friendly-snippets" },
       lazy = false,
       cond = not vim.g.vscode,
       -- use a release tag to download pre-built binaries
-      version = '1.*',
+      version = "1.*",
 
       ---@module 'blink.cmp'
       ---@type blink.cmp.Config
@@ -176,14 +184,14 @@ require("lazy").setup({
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         keymap = {
-          preset = 'enter',
-          ['<C-e>'] = { 'show', 'hide' },
+          preset = "enter",
+          ["<C-e>"] = { "show", "hide" },
         },
 
         appearance = {
           -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
           -- Adjusts spacing to ensure icons are aligned
-          nerd_font_variant = 'mono'
+          nerd_font_variant = "mono",
         },
 
         completion = {
@@ -194,20 +202,24 @@ require("lazy").setup({
           -- https://cmp.saghen.dev/recipes.html#avoid-multi-line-completion-ghost-text
           menu = {
             direction_priority = function()
-              local ctx = require('blink.cmp').get_context()
-              local item = require('blink.cmp').get_selected_item()
-              if ctx == nil or item == nil then return { 's', 'n' } end
+              local ctx = require("blink.cmp").get_context()
+              local item = require("blink.cmp").get_selected_item()
+              if ctx == nil or item == nil then
+                return { "s", "n" }
+              end
 
-              local item_text = item.textEdit ~= nil and item.textEdit.newText or item.insertText or item.label
-              local is_multi_line = item_text:find('\n') ~= nil
+              local item_text = item.textEdit ~= nil and item.textEdit.newText
+                  or item.insertText
+                  or item.label
+              local is_multi_line = item_text:find("\n") ~= nil
 
               -- after showing the menu upwards, we want to maintain that direction
               -- until we re-open the menu, so store the context id in a global variable
               if is_multi_line or vim.g.blink_cmp_upwards_ctx_id == ctx.id then
                 vim.g.blink_cmp_upwards_ctx_id = ctx.id
-                return { 'n', 's' }
+                return { "n", "s" }
               end
-              return { 's', 'n' }
+              return { "s", "n" }
             end,
           },
           list = {
@@ -220,7 +232,7 @@ require("lazy").setup({
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer' },
+          default = { "lsp", "path", "snippets", "buffer" },
         },
 
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -228,30 +240,55 @@ require("lazy").setup({
         -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
         --
         -- See the fuzzy documentation for more information
-        fuzzy = { implementation = "prefer_rust_with_warning" }
+        fuzzy = { implementation = "prefer_rust_with_warning" },
       },
-      opts_extend = { "sources.default" }
+      opts_extend = { "sources.default" },
     },
     -- LSP notifications
     {
       "j-hui/fidget.nvim",
       lazy = false,
-      opts = { },
+      opts = {},
     },
     -- Nvim notifications
     {
       "rcarriga/nvim-notify",
       lazy = false,
-      opts = { },
+      opts = {},
     },
     -- Macro bank
     {
       "sahilsehwag/macrobank.nvim",
       lazy = false,
-      config = function()
-        require("macrobank").setup()
-      end,
-    }
+      opts = {},
+    },
+    -- Nvim DAP
+    {
+      "mfussenegger/nvim-dap",
+      lazy = false,
+    },
+    {
+      "igorlfs/nvim-dap-view",
+      lazy = false,
+      ---@module 'dap-view'
+      ---@type dapview.Config
+      opts = {
+        winbar = {
+          sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "disassembly" },
+        },
+        windows = {
+          terminal = {
+            start_hidden = false,
+          },
+        },
+      },
+    },
+    {
+      "Jorenar/nvim-dap-disasm",
+      lazy = false,
+      dependencies = "igorlfs/nvim-dap-view",
+      config = true,
+    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -267,33 +304,34 @@ require("tokyonight").setup({
     keywords = { italic = false },
   },
 })
-vim.cmd.colorscheme('tokyonight')
+vim.cmd.colorscheme("tokyonight")
 
 -- Options
 vim.g.mapleader = " "
-vim.g.suda_smart_edit = 1 -- suda.nvim smart write
-vim.opt.hlsearch = false -- turn off search highlighting
-vim.opt.clipboard = "unnamedplus" -- use system clipboard for copy and paste
-vim.opt.ignorecase = true -- enable case-insensitive searching by default
-vim.opt.smartcase = true -- enable smartcase behavior
+vim.g.suda_smart_edit = 1          -- suda.nvim smart write
+vim.opt.hlsearch = false           -- turn off search highlighting
+vim.opt.clipboard = "unnamedplus"  -- use system clipboard for copy and paste
+vim.opt.ignorecase = true          -- enable case-insensitive searching by default
+vim.opt.smartcase = true           -- enable smartcase behavior
 vim.opt.sessionoptions = "buffers" -- session = buffers only
-vim.opt.hidden = true -- allow buffers to be hidden without saving
-vim.opt.number = true -- enable line numbers by default
-vim.opt.expandtab = true -- spaces-only indenation https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
-vim.opt.softtabstop = -1 -- spaces-only indenation
-vim.opt.mouse = '' -- disable mouse support
-vim.opt.signcolumn = 'number' -- combine gutter with number lines column
-vim.opt.termguicolors = true -- force colorscheme colors with 24-bit support
-vim.wo.wrap = false -- turn off line wrap
+vim.opt.hidden = true              -- allow buffers to be hidden without saving
+vim.opt.number = true              -- enable line numbers by default
+vim.opt.expandtab = true           -- spaces-only indenation https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
+vim.opt.softtabstop = -1           -- spaces-only indenation
+vim.opt.mouse = ""                 -- disable mouse support
+vim.opt.signcolumn = "number"      -- combine gutter with number lines column
+vim.opt.termguicolors = true       -- force colorscheme colors with 24-bit support
+vim.wo.wrap = false                -- turn off line wrap
 -- don't touch unnamed register when pasting over visual selection
 vim.keymap.set("x", "p", "P", { noremap = true, silent = true })
 vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", { link = "DiagnosticUnnecessary" }) -- don't gray out dead code
-vim.lsp.inlay_hint.enable(true) -- enable lsp inlay hints by default
+vim.lsp.inlay_hint.enable(true)                                                     -- enable lsp inlay hints by default
 
 -- Highlight unwanted characters (whitespace, unicode)
 -- https://vi.stackexchange.com/a/29458
 -- https://superuser.com/a/211965
-vim.api.nvim_exec([[
+vim.api.nvim_exec2(
+  [[
 augroup HighlightUnwanted
   autocmd!
 
@@ -303,10 +341,13 @@ augroup HighlightUnwanted
   highlight nonascii ctermbg=red guibg=red
   2match nonascii "[^\x00-\x7F]"
 augroup END
-]], false)
+]],
+  {}
+)
 
 -- Auto-reload file changes outside of vim
-vim.api.nvim_exec([[
+vim.api.nvim_exec2(
+  [[
 augroup autoreload
   autocmd!
   """ trigger `autoread` when files changes on disk
@@ -315,7 +356,9 @@ augroup autoreload
   """ notification after file change
   autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 augroup end
-]], false)
+]],
+  {}
+)
 
 -- https://gist.github.com/smnatale/692ac4f256d5f19fbcbb78fe32c87604
 -- restore cursor to file position in previous editing session
@@ -342,7 +385,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Helper functions
-vim.api.nvim_exec([[
+vim.api.nvim_exec2(
+  [[
 augroup helper_funcs
   autocmd!
   "" Trim trailing whitespace function
@@ -352,31 +396,37 @@ augroup helper_funcs
     call winrestview(l:save)
   endfunction
 augroup end
-]], false)
+]],
+  {}
+)
 
 -- Plugins
+-- DAP
+local dap = require("dap")
+dap.adapters.codelldb = {
+  type = "server",
+  port = "${port}",
+  executable = {
+    command = "codelldb", -- or if not in $PATH: "/absolute/path/to/codelldb"
+    args = { "--port", "${port}" },
+
+    -- On windows you may have to uncomment this:
+    -- detached = false,
+  },
+}
+
 -- nvim-notify
-require("notify").setup()
 vim.notify = require("notify")
 
--- clangd_extensions
-require("clangd_extensions").setup()
-
--- nvim-lightbulb
-require("nvim-lightbulb").setup({
-  autocmd = { enabled = true }
-})
-
--- fzf-lua
-require('fzf-lua').setup({'fzf-vim'})
-
 -- Mason tool installer
-require('mason-tool-installer').setup({
+require("mason-tool-installer").setup({
   ensure_installed = {
     "clangd",
+    "codelldb",
     "rust-analyzer",
     "pyright",
-  }
+    "emmylua_ls",
+  },
 })
 
 -- auto-dark-mode.nvim
@@ -398,56 +448,79 @@ require("aerial").setup({
 -- remote-nvim.nvim
 require("remote-nvim").setup({
   client_callback = function(port, _)
-    require("remote-nvim.ui").float_term(("kitty nvim --server localhost:%s --remote-ui"):format(port), function(exit_code)
-      if exit_code ~= 0 then
-        vim.notify(("Local client failed with exit code %s"):format(exit_code), vim.log.levels.ERROR)
+    require("remote-nvim.ui").float_term(
+      ("kitty nvim --server localhost:%s --remote-ui"):format(port),
+      function(exit_code)
+        if exit_code ~= 0 then
+          vim.notify(("Local client failed with exit code %s"):format(exit_code),
+            vim.log.levels.ERROR)
+        end
       end
-    end)
+    )
   end,
 })
 
 -- gitsigns.nvim
-require('gitsigns').setup()
+require("gitsigns").setup({})
 
 -- mini.nvim
 -- gA to start, s for split pattern, t for trimming whitespace
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-align.txt
-require('mini.align').setup()
+require("mini.align").setup()
 -- highlight word under cursor
-require('mini.cursorword').setup()
+require("mini.cursorword").setup()
 -- close windows while saving window layout
-require('mini.bufremove').setup()
+require("mini.bufremove").setup()
 -- hop.nvim clone
-require('mini.jump2d').setup({
+require("mini.jump2d").setup({
   view = {
     dim = true,
     n_steps_ahead = 10,
   },
   mappings = {
-    start_jumping = '',
+    start_jumping = "",
   },
 })
 -- icons
-require('mini.icons').setup()
+require("mini.icons").setup()
 
 -- guess-indent.nvim
-require('guess-indent').setup()
+require("guess-indent").setup()
 
 -- refactoring.nvim
-require('refactoring').setup()
+require("refactoring").setup()
 
 -- sessions.nvim
 require("sessions").setup()
 
 -- nvim-treesitter
 --- Do NOT use treesitter for folding as it cannot be disabled for large files
-disable_for_large_files = function(lang, bufnr) -- Disable in large buffers
+disable_for_large_files = function(_lang, bufnr) -- Disable in large buffers
   return vim.api.nvim_buf_line_count(bufnr) > 50000
 end
 
-require'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup({
   -- Install languages for treesitter
-  ensure_installed = { "bash", "c", "cmake", "comment", "cpp", "dockerfile", "glsl", "java", "lua", "make", "markdown", "ninja", "nix", "python", "rust", "verilog", "json", "toml" },
+  ensure_installed = {
+    "bash",
+    "c",
+    "cmake",
+    "comment",
+    "cpp",
+    "dockerfile",
+    "glsl",
+    "java",
+    "lua",
+    "make",
+    "markdown",
+    "ninja",
+    "nix",
+    "python",
+    "rust",
+    "verilog",
+    "json",
+    "toml",
+  },
   sync_install = false,
   auto_install = false,
   highlight = {
@@ -455,7 +528,7 @@ require'nvim-treesitter.configs'.setup {
     disable = disable_for_large_files,
     additional_vim_regex_highlighting = false,
   },
-}
+})
 
 -- New treesitter config (main branch instead of master) but doesn't work with rust
 -- require'nvim-treesitter'.install {'bash', 'c', 'cmake', 'comment', 'cpp', 'dockerfile', 'glsl', 'java', 'lua', 'make', 'markdown', 'ninja', 'nix', 'python', 'rust', 'verilog'}
@@ -466,21 +539,21 @@ require'nvim-treesitter.configs'.setup {
 -- })
 
 -- nvim-treesitter-context
-require'treesitter-context'.setup{
-  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  multiwindow = false, -- Enable multiwindow support.
-  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-  min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+require("treesitter-context").setup({
+  enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
+  multiwindow = false,      -- Enable multiwindow support.
+  max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+  min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   line_numbers = true,
   multiline_threshold = 20, -- Maximum number of lines to show for a single context
-  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-  mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+  trim_scope = "outer",     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  mode = "cursor",          -- Line used to calculate context. Choices: 'cursor', 'topline'
   -- Separator between context and content. Should be a single character string, like '-'.
   -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
   separator = nil,
-  zindex = 20, -- The Z-index of the context window
+  zindex = 20,     -- The Z-index of the context window
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-}
+})
 
 -- which-key.nvim
 -- :nmap - Display normal mode maps
@@ -490,112 +563,411 @@ require'treesitter-context'.setup{
 -- :xmap - Display visual mode maps
 -- :cmap - Display command-line mode maps i.e. after pressing :
 -- :omap - Display operator pending mode maps e.g. deletion after pressing d
-require("which-key").setup {}
+require("which-key").setup({})
 local wk = require("which-key")
 if vim.g.vscode then
   wk.add({
     { "<leader>g", group = "go to" },
-    { "<leader>gi", "<Cmd>lua require('vscode').action('editor.action.goToImplementation')<CR>", desc = "go to implementation" },
-    { "<leader>gD", "<Cmd>lua require('vscode').action('editor.action.revealDeclaration')<CR>", desc = "go to declaration" },
-    { "<leader>gd", "<Cmd>lua require('vscode').action('editor.action.revealDefinition')<CR>", desc = "go to definition" },
-    { "<leader>gg", "<Cmd>lua require('vscode').action('clangd.switchheadersource')<CR>", desc = "go to source/header" },
-    { "<leader>gr", "<Cmd>lua require('vscode').action('editor.action.goToReferences')<CR>", desc = "go to references" },
-    { "<leader>gt", "<Cmd>lua require('vscode').action('editor.action.goToTypeDefinition')<CR>", desc = "go to type definition" },
-    { "<leader>bb", "<Cmd>lua require('vscode').action('workbench.action.showAllEditors')<CR>", desc = "select buffer" },
-    { "<leader>bf", "<Cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>", desc = "open file" },
-    { "<leader>tw", "<Cmd>lua require('vscode').action('editor.action.toggleWordWrap')<CR>", desc = "toggle word wrap" },
-    { "<leader>tt", "<Cmd>lua require('vscode').action('clangd.inlayHints.toggle')<CR>", desc = "toggle inlay hints" },
-    })
+    {
+      "<leader>gi",
+      "<Cmd>lua require('vscode').action('editor.action.goToImplementation')<CR>",
+      desc = "go to implementation",
+    },
+    {
+      "<leader>gD",
+      "<Cmd>lua require('vscode').action('editor.action.revealDeclaration')<CR>",
+      desc = "go to declaration",
+    },
+    {
+      "<leader>gd",
+      "<Cmd>lua require('vscode').action('editor.action.revealDefinition')<CR>",
+      desc = "go to definition",
+    },
+    {
+      "<leader>gg",
+      "<Cmd>lua require('vscode').action('clangd.switchheadersource')<CR>",
+      desc = "go to source/header",
+    },
+    {
+      "<leader>gr",
+      "<Cmd>lua require('vscode').action('editor.action.goToReferences')<CR>",
+      desc = "go to references",
+    },
+    {
+      "<leader>gt",
+      "<Cmd>lua require('vscode').action('editor.action.goToTypeDefinition')<CR>",
+      desc = "go to type definition",
+    },
+    {
+      "<leader>bb",
+      "<Cmd>lua require('vscode').action('workbench.action.showAllEditors')<CR>",
+      desc = "select buffer",
+    },
+    {
+      "<leader>bf",
+      "<Cmd>lua require('vscode').action('workbench.action.quickOpen')<CR>",
+      desc = "open file",
+    },
+    {
+      "<leader>tw",
+      "<Cmd>lua require('vscode').action('editor.action.toggleWordWrap')<CR>",
+      desc = "toggle word wrap",
+    },
+    {
+      "<leader>tt",
+      "<Cmd>lua require('vscode').action('clangd.inlayHints.toggle')<CR>",
+      desc = "toggle inlay hints",
+    },
+  })
 else
   wk.add({
     { "<leader>g", group = "go to" },
-    { "<leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
-    { "<leader>gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", desc = "go to declaration" },
-    { "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
-    { "<leader>gg", "<Cmd>ClangdSwitchSourceHeader<CR>", desc = "go to source/header" },
-    { "<leader>gr", "<Cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
-    { "<leader>gt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", desc = "go to type definition" },
-    { "<leader>bb", "<Cmd>Buffers<CR>", desc = "select buffer" },
-    { "<leader>bf", "<Cmd>Files<CR>", desc = "open file" },
-    { "<leader>tw", "<Cmd>set wrap!<CR>", desc = "toggle word wrap" },
-    { "<leader>tt", "<Cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", desc = "toggle inlay hints" },
-    })
+    {
+      "<leader>gi",
+      "<Cmd>lua vim.lsp.buf.implementation()<CR>",
+      desc = "go to implementation",
+    },
+    {
+      "<leader>gD",
+      "<Cmd>lua vim.lsp.buf.declaration()<CR>",
+      desc = "go to declaration",
+    },
+    {
+      "<leader>gd",
+      "<Cmd>lua vim.lsp.buf.definition()<CR>",
+      desc = "go to definition",
+    },
+    {
+      "<leader>gg",
+      "<Cmd>ClangdSwitchSourceHeader<CR>",
+      desc = "go to source/header",
+    },
+    {
+      "<leader>gr",
+      "<Cmd>lua vim.lsp.buf.references()<CR>",
+      desc = "go to references",
+    },
+    {
+      "<leader>gt",
+      "<Cmd>lua vim.lsp.buf.type_definition()<CR>",
+      desc = "go to type definition",
+    },
+    {
+      "<leader>bb",
+      "<Cmd>Buffers<CR>",
+      desc = "select buffer",
+    },
+    {
+      "<leader>bf",
+      "<Cmd>Files<CR>",
+      desc = "open file",
+    },
+    {
+      "<leader>tw",
+      "<Cmd>set wrap!<CR>",
+      desc = "toggle word wrap",
+    },
+    {
+      "<leader>tt",
+      "<Cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
+      desc = "toggle inlay hints",
+    },
+  })
 end
 wk.add({
-  { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
-  { "<leader>n", "<Cmd>lua require('telescope').extensions.notify.notify()<CR>", desc = "show notifications" },
-  { "<leader>k", "<Cmd>lua vim.lsp.buf.hover()<CR>", desc = "show documentation" },
-  { "<leader>L", "<Cmd>Lazy<CR>", desc = "show Lazy plugin manager window" },
+  { "<CR>",      "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+  {
+    "<leader>n",
+    "<Cmd>lua require('telescope').extensions.notify.notify()<CR>",
+    desc = "show notifications",
+  },
+  {
+    "<leader>k",
+    "<Cmd>lua vim.lsp.buf.hover()<CR>",
+    desc = "show documentation",
+  },
+  {
+    "<leader>L",
+    "<Cmd>Lazy<CR>",
+    desc = "show Lazy plugin manager window",
+  },
   { "<leader>b", group = "buffers" },
-  { "<leader>bQ", "<Cmd>bufdo bw<CR>", desc = "quit all buffers" },
-  { "<leader>bl", ":SessionsLoad! ", desc = "load session" },
-  { "<leader>bq", "<Cmd>lua MiniBufremove.wipeout()<CR>", desc = "quit current buffer" },
-  { "<leader>bs", ":SessionsSave! ", desc = "save session" },
-  { "<leader>bt", "<Cmd>tabonly<CR>", desc = "tabs -> buffers" },
+  {
+    "<leader>bQ",
+    "<Cmd>bufdo bw<CR>",
+    desc = "quit all buffers",
+  },
+  {
+    "<leader>bl",
+    ":SessionsLoad! ",
+    desc = "load session",
+  },
+  {
+    "<leader>bq",
+    "<Cmd>lua MiniBufremove.wipeout()<CR>",
+    desc = "quit current buffer",
+  },
+  {
+    "<leader>bs",
+    ":SessionsSave! ",
+    desc = "save session",
+  },
+  {
+    "<leader>bt",
+    "<Cmd>tabonly<CR>",
+    desc = "tabs -> buffers",
+  },
   { "<leader>f", group = "fix error" },
-  { "<leader>fe", "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "buffer diagnostics" },
-  { "<leader>fE", "<Cmd>Trouble diagnostics toggle<cr>", desc = "all diagnostics" },
-  { "<leader>fl", "<Cmd>Trouble qflist toggle<cr>", desc = "quickfix list" },
-  { "<leader>fL", "<Cmd>Trouble loclist toggle<cr>", desc = "location list" },
+  {
+    "<leader>fe",
+    "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+    desc = "buffer diagnostics",
+  },
+  {
+    "<leader>fE",
+    "<Cmd>Trouble diagnostics toggle<cr>",
+    desc = "all diagnostics",
+  },
+  {
+    "<leader>fl",
+    "<Cmd>Trouble qflist toggle<cr>",
+    desc = "quickfix list",
+  },
+  {
+    "<leader>fL",
+    "<Cmd>Trouble loclist toggle<cr>",
+    desc = "location list",
+  },
   { "<leader>p", group = "paths" },
-  { "<leader>pc", "<Cmd>cd %<Cmd>h<CR>", desc = "cd into current buffer working directory" },
-  { "<leader>pf", "<Cmd>echo expand('%:p')<CR>", desc = "show file path" },
-  { "<leader>po", "<Cmd>Oil<CR>", desc = "oil (file manager)" },
-  { "<leader>r", group = "refactor/transform" },
-  { "<leader>ra", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
-  { "<leader>rf", "<Cmd>lua vim.lsp.buf.format()<CR>", desc = "format buffer" },
-  { "<leader>rz", "<Cmd>lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
-  { "<leader>rr", "<Cmd>lua vim.lsp.buf.rename()<CR>", desc = "rename symbol" },
+  {
+    "<leader>pc",
+    "<Cmd>cd %<Cmd>h<CR>",
+    desc = "cd into current buffer working directory",
+  },
+  {
+    "<leader>pf",
+    "<Cmd>echo expand('%:p')<CR>",
+    desc = "show file path",
+  },
+  {
+    "<leader>po",
+    "<Cmd>Oil<CR>",
+    desc = "oil (file manager)",
+  },
+  { "<leader>r",  group = "refactor/transform" },
+  {
+    "<leader>ra",
+    "<Cmd>lua vim.lsp.buf.code_action()<CR>",
+    desc = "code action",
+  },
+  {
+    "<leader>rf",
+    "<Cmd>lua vim.lsp.buf.format()<CR>",
+    desc = "format buffer",
+  },
+  {
+    "<leader>rz",
+    "<Cmd>lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>",
+    desc = "refactoring.nvim prompts",
+  },
+  {
+    "<leader>rr",
+    "<Cmd>lua vim.lsp.buf.rename()<CR>",
+    desc = "rename symbol",
+  },
   { "<leader>rp", group = "print debug" },
-  { "<leader>rpc", "<Cmd>lua require('refactoring').debug.cleanup({})<CR>", desc = "cleanup (refactoring.nvim)" },
-  { "<leader>rpl", "<Cmd>lua require('refactoring').debug.printf({below = true})<CR>", desc = "print line (refactoring.nvim)" },
-  { "<leader>rpv", "<Cmd>lua require('refactoring').debug.print_var()<CR>", desc = "print variable (refactoring.nvim)" },
+  {
+    "<leader>rpc",
+    "<Cmd>lua require('refactoring').debug.cleanup({})<CR>",
+    desc = "cleanup (refactoring.nvim)",
+  },
+  {
+    "<leader>rpl",
+    "<Cmd>lua require('refactoring').debug.printf({below = true})<CR>",
+    desc = "print line (refactoring.nvim)",
+  },
+  {
+    "<leader>rpv",
+    "<Cmd>lua require('refactoring').debug.print_var()<CR>",
+    desc = "print variable (refactoring.nvim)",
+  },
   { "<leader>rw", group = "whitespace" },
-  { "<leader>rw2", "<Cmd>set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 2 spaces" },
-  { "<leader>rw4", "<Cmd>set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>", desc = "set tabs to 4 spaces" },
-  { "<leader>rwr", "<Cmd>retab<CR>", desc = "replace tabs with spaces" },
-  { "<leader>rwt", "<Cmd>call TrimWhitespace()<CR>", desc = "trim whitespace" },
-  { "<leader>s", group = "search" },
-  { "<leader>sd", "<Cmd>Trouble symbols toggle focus=false win.position=bottom<cr>", desc = "open document outline" },
-  { "<leader>sD", "<Cmd>AerialToggle!<CR>", desc = "open document outline" },
-  { "<leader>sr", "<Cmd>Grepper -tool rg<CR>", desc = "grep text in current working directory" },
-  { "<leader>st", "<Cmd>Grepper -tool rg -buffer<CR>", desc = "grep text in current buffer" },
-  { "<leader>sT", "<Cmd>Grepper -tool rg -buffers<CR>", desc = "grep text in all buffers" },
-  { "<leader>sc", "<Cmd>let @/ = \"\"<CR>", desc = "clear search buffer" },
-  { "<leader>ss", "<Cmd>FzfLua lsp_document_symbols<CR>", desc = "search symbols in buffer" },
+  {
+    "<leader>rw2",
+    "<Cmd>set tabstop=2 shiftwidth=2 | set expandtab | set softtabstop=-1<CR>",
+    desc = "set tabs to 2 spaces",
+  },
+  {
+    "<leader>rw4",
+    "<Cmd>set tabstop=4 shiftwidth=4 | set expandtab | set softtabstop=-1<CR>",
+    desc = "set tabs to 4 spaces",
+  },
+  {
+    "<leader>rwr",
+    "<Cmd>retab<CR>",
+    desc = "replace tabs with spaces",
+  },
+  {
+    "<leader>rwt",
+    "<Cmd>call TrimWhitespace()<CR>",
+    desc = "trim whitespace",
+  },
+  { "<leader>s",  group = "search" },
+  {
+    "<leader>sd",
+    "<Cmd>Trouble symbols toggle focus=false win.position=bottom<cr>",
+    desc = "open document outline",
+  },
+  {
+    "<leader>sD",
+    "<Cmd>AerialToggle!<CR>",
+    desc = "open document outline",
+  },
+  {
+    "<leader>sr",
+    "<Cmd>Grepper -tool rg<CR>",
+    desc = "grep text in current working directory",
+  },
+  {
+    "<leader>st",
+    "<Cmd>Grepper -tool rg -buffer<CR>",
+    desc = "grep text in current buffer",
+  },
+  {
+    "<leader>sT",
+    "<Cmd>Grepper -tool rg -buffers<CR>",
+    desc = "grep text in all buffers",
+  },
+  {
+    "<leader>sc",
+    '<Cmd>let @/ = ""<CR>',
+    desc = "clear search buffer",
+  },
+  {
+    "<leader>ss",
+    "<Cmd>FzfLua lsp_document_symbols<CR>",
+    desc = "search symbols in buffer",
+  },
   { "<leader>t", group = "toggles" },
-  { "<leader>td", "<Cmd>Gitsigns toggle_signs<CR>", desc = "toggle git diff signs" },
-  { "<leader>th", "<Cmd>set hlsearch!<CR>", desc = "toggle search highlight" },
-  { "<leader>tl", "<Cmd>set number!<CR>", desc = "toggle line numbers" },
-  { "<leader>tn", "<Cmd>TSContext toggle<CR>", desc = "toggle context (nested statements)" },
+  {
+    "<leader>td",
+    "<Cmd>Gitsigns toggle_signs<CR>",
+    desc = "toggle git diff signs",
+  },
+  {
+    "<leader>th",
+    "<Cmd>set hlsearch!<CR>",
+    desc = "toggle search highlight",
+  },
+  {
+    "<leader>tl",
+    "<Cmd>set number!<CR>",
+    desc = "toggle line numbers",
+  },
+  {
+    "<leader>tn",
+    "<Cmd>TSContext toggle<CR>",
+    desc = "toggle context (nested statements)",
+  },
   { "<leader>m", group = "macros" },
-  { "<leader>mm", function() require('macrobank.editor').open() end, desc = "[Macrobank]: Edit macros" },
-  { "<leader>mb", function() require('macrobank.bank_editor').open() end, desc = "[MacroBank] Edit saved macros" },
-  })
+  {
+    "<leader>mm",
+    function()
+      require("macrobank.editor").open()
+    end,
+    desc = "[Macrobank]: Edit macros",
+  },
+  {
+    "<leader>mb",
+    function()
+      require("macrobank.bank_editor").open()
+    end,
+    desc = "[MacroBank] Edit saved macros",
+  },
+  { "<leader>d",  group = "debug" },
+  {
+    "<leader>dc",
+    function()
+      require("dap").continue()
+    end,
+    desc = "continue",
+  },
+  { "<leader>du", "<Cmd>DapViewOpen<CR>", desc = "open ui" },
+  {
+    "<leader>db",
+    function()
+      require("dap").toggle_breakpoint()
+    end,
+    desc = "toggle breakpoint",
+  },
+  {
+    "<leader>dh",
+    function()
+      require("dap.ui.widgets").hover()
+    end,
+    desc = "value of an expression under cursor (hover)",
+  },
+  {
+    "<S-Right>",
+    function()
+      require("dap").step_into()
+    end,
+    desc = "step into",
+  },
+  {
+    "<S-Left>",
+    function()
+      require("dap").step_out()
+    end,
+    desc = "step out",
+  },
+  {
+    "<S-Down>",
+    function()
+      require("dap").step_over()
+    end,
+    desc = "step over",
+  },
+  {
+    "<S-Up>",
+    function()
+      require("dap").step_back()
+    end,
+    desc = "step back",
+  },
+})
 wk.add({
   {
-  mode = { "x" },
-  { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
-  { "<leader>r", group = "refactor/transform" },
-  { "<leader>ra", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code action" },
-  { "<leader>rz", "<Cmd>lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>", desc = "refactoring.nvim prompts" },
-  { "<leader>s", group = "search" },
-  { "<leader>sr", "<plug>(GrepperOperator)" },
+    mode = { "x" },
+    { "<CR>",      "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+    { "<leader>r", group = "refactor/transform" },
+    {
+      "<leader>ra",
+      "<Cmd>lua vim.lsp.buf.code_action()<CR>",
+      desc = "code action",
+    },
+    {
+      "<leader>rz",
+      "<Cmd>lua require('refactoring').select_refactor({prefer_ex_cmd = true}) <CR>",
+      desc = "refactoring.nvim prompts",
+    },
+    { "<leader>s",  group = "search" },
+    { "<leader>sr", "<plug>(GrepperOperator)" },
   },
-  })
+})
 wk.add({
   {
-  mode = { "o" },
-  { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
+    mode = { "o" },
+    { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   },
-  })
+})
 
-require('lualine').setup {
+require("lualine").setup({
   options = {
     icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    theme = "auto",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -607,26 +979,26 @@ require('lualine').setup {
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
-    }
+    },
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_c = { "filename" },
+    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
   tabline = {},
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
-}
+  extensions = {},
+})
