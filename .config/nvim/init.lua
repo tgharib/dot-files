@@ -39,7 +39,6 @@ require("lazy").setup({
       -- dependencies = { "nvim-tree/nvim-web-devicons" },
       -- or if using mini.icons/mini.nvim
       dependencies = { "nvim-mini/mini.icons" },
-      opts = { "fzf-vim" },
     },
     -- Sessions support
     "natecraddock/sessions.nvim",
@@ -136,14 +135,10 @@ require("lazy").setup({
     -- Show lightbulbs when current line has a code action
     {
       "kosayoda/nvim-lightbulb",
-      opts = {
-        autocmd = { enabled = true },
-      },
     },
     -- C++ clangd extensions
     {
       "https://git.sr.ht/~p00f/clangd_extensions.nvim",
-      opts = {},
     },
     -- Signature help when calling a function
     {
@@ -418,6 +413,17 @@ dap.adapters.codelldb = {
 -- nvim-notify
 vim.notify = require("notify")
 
+-- clangd_extensions
+require("clangd_extensions").setup()
+
+-- nvim-lightbulb
+require("nvim-lightbulb").setup({
+  autocmd = { enabled = true }
+})
+
+-- fzf-lua
+require('fzf-lua').setup({ 'fzf-vim' })
+
 -- Mason tool installer
 require("mason-tool-installer").setup({
   ensure_installed = {
@@ -482,16 +488,16 @@ require("mini.jump2d").setup({
   },
 })
 -- icons
-require("mini.icons").setup()
+require("mini.icons").setup({})
 
 -- guess-indent.nvim
-require("guess-indent").setup()
+require("guess-indent").setup({})
 
 -- refactoring.nvim
-require("refactoring").setup()
+require("refactoring").setup({})
 
 -- sessions.nvim
-require("sessions").setup()
+require("sessions").setup({})
 
 -- nvim-treesitter
 --- Do NOT use treesitter for folding as it cannot be disabled for large files
@@ -563,7 +569,7 @@ require("treesitter-context").setup({
 -- :xmap - Display visual mode maps
 -- :cmap - Display command-line mode maps i.e. after pressing :
 -- :omap - Display operator pending mode maps e.g. deletion after pressing d
-require("which-key").setup({})
+require("which-key").setup()
 local wk = require("which-key")
 if vim.g.vscode then
   wk.add({
