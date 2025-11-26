@@ -261,13 +261,11 @@ require("lazy").setup({
     -- Macro bank
     {
       "sahilsehwag/macrobank.nvim",
-      lazy = false,
       opts = {},
     },
     -- Nvim DAP
     {
       "mfussenegger/nvim-dap",
-      lazy = false,
     },
     {
       "igorlfs/nvim-dap-view",
