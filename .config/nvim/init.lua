@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields, param-type-mismatch
 -- For editing multiple lines in vim, use 1. `V:! sd` 2. macros 3. `V:norm`.
 -- Vim motion options: f/F/t/T for horizontal, <CR> for vertical, */#, search, goto definition, ripgrep
 -- VSCode settings for nice to use debugger (CodeLLDB)
@@ -45,9 +46,15 @@ require("lazy").setup({
     -- Autorecognize indent of file
     "nmac427/guess-indent.nvim",
     -- Edit root files
-    { "lambdalisue/suda.vim", lazy = false },
+    {
+      "lambdalisue/vim-suda",
+      lazy = false,
+      init = function()
+        vim.g.suda_smart_edit = 1
+      end
+    },
     -- File manager
-    { "stevearc/oil.nvim",    opts = {},   dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
+    { "stevearc/oil.nvim",            opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = false },
     -- Show which lines are added, changed or deleted
     "lewis6991/gitsigns.nvim",
     -- Dark/light mode based on system setting
@@ -72,7 +79,7 @@ require("lazy").setup({
       opts = {},
     },
     -- Nice plugins
-    { "echasnovski/mini.nvim",        version = false },
+    { "echasnovski/mini.nvim", version = false },
     -- Document outline for markdown
     {
       "stevearc/aerial.nvim",
@@ -287,7 +294,7 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "tokyonight" } },
   -- do not automatically check for plugin updates
   checker = { enabled = false },
 })
@@ -303,7 +310,6 @@ vim.cmd.colorscheme("tokyonight")
 
 -- Options
 vim.g.mapleader = " "
-vim.g.suda_smart_edit = 1          -- suda.nvim smart write
 vim.opt.hlsearch = false           -- turn off search highlighting
 vim.opt.clipboard = "unnamedplus"  -- use system clipboard for copy and paste
 vim.opt.ignorecase = true          -- enable case-insensitive searching by default
@@ -409,6 +415,48 @@ dap.adapters.codelldb = {
     -- detached = false,
   },
 }
+
+-- lualine
+require("lualine").setup({
+  options = {
+    icons_enabled = true,
+    theme = "auto",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    },
+  },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_c = { "filename" },
+    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {},
+})
 
 -- nvim-notify
 vim.notify = require("notify")
@@ -966,45 +1014,4 @@ wk.add({
     mode = { "o" },
     { "<CR>", "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<CR>" },
   },
-})
-
-require("lualine").setup({
-  options = {
-    icons_enabled = true,
-    theme = "auto",
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    },
-  },
-  sections = {
-    lualine_a = { "mode" },
-    lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { "filename" },
-    lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_y = { "progress" },
-    lualine_z = { "location" },
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { "filename" },
-    lualine_x = { "location" },
-    lualine_y = {},
-    lualine_z = {},
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {},
 })
