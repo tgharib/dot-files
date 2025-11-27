@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=tab to twitch
-Terminal=false
-Exec=/home/owner/personal-only/misc/scripts/streamlink-tab.sh
-Hidden=false

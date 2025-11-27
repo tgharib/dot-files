@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=tab to youtube
-Terminal=false
-Exec=/home/owner/personal-only/misc/scripts/ytdlp-tab.sh
-Hidden=false

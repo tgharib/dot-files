@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=sync
-Terminal=false
-Exec=wezterm-start /home/owner/personal-only/misc/scripts/sync.sh
-Hidden=false

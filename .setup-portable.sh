@@ -25,12 +25,6 @@ EOF
 run git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 run ~/.fzf/install
 
-# Install nodejs
-run curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-## restart terminal
-run nvm install node
-run nvm use node
-
 # Install nvim
 run mkdir ~/bin
 run cd ~/bin
