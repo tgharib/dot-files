@@ -78,9 +78,11 @@ EOF
 
 # Laptop only below
 
-cd .kanata
-run wget https://github.com/jtroo/kanata/releases/download/v1.8.0/kanata
-cd ..
+run wget https://github.com/jtroo/kanata/releases/download/v1.10.0/linux-binaries-x64-v1.10.0.zip
+run unzip linux-binaries-x64-v1.10.0.zip
+run rm linux-binaries-x64-v1.10.0.zip
+run rm kanata_linux_cmd_allowed_x64
+run sudo mv kanata_linux_x64 /usr/bin/kanata
 run sudo tee /etc/systemd/system/kanata.service <<EOF
 [Unit]
 Description=Kanata keyboard remapper
@@ -88,7 +90,7 @@ Documentation=https://github.com/jtroo/kanata
 
 [Service]
 Type=simple
-ExecStart=/home/owner/.kanata/kanata --cfg /home/owner/.kanata/kanata.kbd
+ExecStart=/usr/bin/kanata --cfg /home/owner/.config/kanata/kanata.kbd
 Restart=never
 
 [Install]
