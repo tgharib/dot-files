@@ -1,0 +1,6 @@
+name: blog_os
+root: ~/scratch/blog_os/
+
+windows:
+  - editor: nvim
+  - compile:

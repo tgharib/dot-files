@@ -18,7 +18,7 @@ arch=$1
 run cat << EOF >> ~/.bashrc
 
 # Source bashrc files and add nvim to path
-export PATH="\${PATH:+\${PATH}:}~/bin:~/bin/nvim-linux-$arch/bin"
+export PATH="\${PATH:+\${PATH}:}~/bin:~/bin/nvim-linux-$arch/bin:~/go/bin"
 source ~/.bashrc-portable
 
 EOF
@@ -28,7 +28,7 @@ run ~/.fzf/install
 run cargo install ripgrep sd fd-find du-dust hexyl zoxide
 run cargo install -f --git https://github.com/jez/as-tree
 run go install github.com/joshmedeski/sesh/v2@latest
-run sudo apt install btop
+run sudo apt install btop tmuxinator
 
 # Install lazygit
 

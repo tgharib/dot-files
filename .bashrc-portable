@@ -4,6 +4,7 @@ shopt -s dotglob
 
 alias ls='ls --group-directories-first --color --human-readable'
 alias s='kitten ssh'
+alias x='sesh connect $(sesh list -i | fzf --ansi)'
 alias list-wifi='nmcli dev wifi'
 alias scan-wifi='nmcli dev wifi list --rescan yes'
 
