@@ -15,7 +15,7 @@ source ~/.bashrc-portable
 
 EOF
 
-run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard cliphist sway xdg-desktop-portal-wlr build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing keepassxc light slurp grim kolourpaint imv zathura zathura-djvu nodejs npm mako-notifier pandoc texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science rubber pdftk entr wireguard-tools ufw mpv restic gparted
+run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard cliphist sway xdg-desktop-portal-wlr build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing keepassxc light slurp grim kolourpaint imv zathura zathura-djvu nodejs npm mako-notifier pandoc texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science rubber pdftk entr wireguard-tools ufw mpv restic gparted hexyl
 # entr for triggering commands on file changes
 # install nvim appimage to /usr/bin/nvim and edit `/etc/environment` to set $EDITOR and follow https://askubuntu.com/a/1390401
 run cargo install pazi

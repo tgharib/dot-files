@@ -3,6 +3,8 @@ set -o vi
 shopt -s dotglob
 
 alias s='kitten ssh'
+alias list-wifi='nmcli dev wifi'
+alias scan-wifi='nmcli dev wifi list --rescan yes'
 cheat() {
   curl cheat.sh/"$1"
 }

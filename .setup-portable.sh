@@ -33,7 +33,7 @@ run tar xvf nvim-linux-$arch.tar.gz
 run rm nvim-linux-$arch.tar.gz
 
 # Install rustup
-run cargo install ripgrep sd fd-find du-dust pazi
+run cargo install ripgrep sd fd-find du-dust pazi hexyl
 run cargo install -f --git https://github.com/jez/as-tree
 
 run sudo apt install btop
