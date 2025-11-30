@@ -15,15 +15,22 @@ fi
 
 arch=$1
 
-# Add to bashrc
 run cat << EOF >> ~/.bashrc
 
-export PATH="\${PATH:+\${PATH}:}~/bin:~/.cargo/bin:~/bin/nvim-linux-$arch/bin"
+# Source bashrc files and add nvim to path
+export PATH="\${PATH:+\${PATH}:}~/bin:~/bin/nvim-linux-$arch/bin"
 source ~/.bashrc-portable
+
 EOF
 
 run git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 run ~/.fzf/install
+run cargo install ripgrep sd fd-find du-dust hexyl zoxide
+run cargo install -f --git https://github.com/jez/as-tree
+run go install github.com/joshmedeski/sesh/v2@latest
+run sudo apt install btop
+
+# Install lazygit
 
 # Install nvim
 run mkdir ~/bin
@@ -31,10 +38,3 @@ run cd ~/bin
 run wget https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-$arch.tar.gz
 run tar xvf nvim-linux-$arch.tar.gz
 run rm nvim-linux-$arch.tar.gz
-
-# Install rustup
-run cargo install ripgrep sd fd-find du-dust pazi hexyl
-run cargo install -f --git https://github.com/jez/as-tree
-
-run sudo apt install btop
-# Install lazygit

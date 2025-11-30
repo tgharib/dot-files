@@ -15,12 +15,12 @@ source ~/.bashrc-portable
 
 EOF
 
-run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard cliphist sway xdg-desktop-portal-wlr build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing keepassxc light slurp grim kolourpaint imv zathura zathura-djvu nodejs npm mako-notifier pandoc texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science rubber pdftk entr wireguard-tools ufw mpv restic gparted hexyl
+run sudo apt install curl bat kitty dex fd-find ripgrep fzf sd wl-clipboard cliphist sway xdg-desktop-portal-wlr build-essential btop i3status wlr-randr pulsemixer gammastep swayidle lxqt-policykit remind buku syncthing keepassxc light slurp grim kolourpaint imv zathura zathura-djvu nodejs npm mako-notifier pandoc texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science rubber pdftk entr wireguard-tools ufw mpv restic gparted hexyl zoxide
 # entr for triggering commands on file changes
 # install nvim appimage to /usr/bin/nvim and edit `/etc/environment` to set $EDITOR and follow https://askubuntu.com/a/1390401
-run cargo install pazi
 run cargo install du-dust
 run cargo install -f --git https://github.com/jez/as-tree
+run go install github.com/joshmedeski/sesh/v2@latest
 run sudo adduser owner video
 run sudo ln -s /usr/bin/fdfind /usr/bin/fd
 run sudo ln -s /usr/bin/batcat /usr/bin/bat
