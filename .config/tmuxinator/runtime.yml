@@ -1,0 +1,10 @@
+name: runtime
+root: ~/scratch/source/EAI_Runtime_tgharib
+on_project_start: rt-container-up
+
+startup_window: compile
+windows:
+  - run:
+  # https://stackoverflow.com/q/7120426
+  - edit: devcontainer exec --workspace-folder ~/scratch/source/EAI_Runtime_tgharib/ /bin/bash -c "nvim; bash"
+  - compile: rt-container-enter
