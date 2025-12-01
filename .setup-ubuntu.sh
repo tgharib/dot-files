@@ -11,7 +11,7 @@ run() {
 run cat << 'EOF' >> ~/.bashrc
 
 # Source bashrc files and add nvim to path
-export PATH="\${PATH:+\${PATH}:}~/bin:~/bin/nvim-linux-$arch/bin:~/go/bin"
+export PATH="\${PATH:+\${PATH}:}~/bin:~/go/bin"
 source ~/.bashrc-portable
 
 EOF
