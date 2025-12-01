@@ -1,6 +1,7 @@
 name: blog_os
 root: ~/scratch/blog_os/
 
+startup_window: compile
 windows:
   - editor: nvim
   - compile: git pull
