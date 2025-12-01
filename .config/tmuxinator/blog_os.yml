@@ -3,4 +3,4 @@ root: ~/scratch/blog_os/
 
 windows:
   - editor: nvim
-  - compile:
+  - compile: git pull
