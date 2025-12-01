@@ -3,5 +3,5 @@ root: ~/scratch/blog_os/
 
 startup_window: compile
 windows:
-  - editor: nvim
+  - edit: nvim
   - compile: git pull

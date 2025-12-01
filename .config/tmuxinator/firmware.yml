@@ -2,7 +2,8 @@ name: firmware
 root: ~/scratch/source/EAI_Firmware
 
 on_project_start: fw-container-up
-pre_window: fw-container-enter
 
+startup_window: compile
 windows:
-  - compile:
+  - upload:
+  - compile: fw-container-enter
