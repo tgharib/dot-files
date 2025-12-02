@@ -6,5 +6,5 @@ startup_window: compile
 windows:
   - run:
   # https://stackoverflow.com/q/7120426
-  - edit: devcontainer exec --workspace-folder ~/scratch/source/EAI_Runtime_tgharib/ /bin/bash -c "nvim; bash"
+  - edit: rt-container-enter
   - compile: rt-container-enter
