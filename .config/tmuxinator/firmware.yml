@@ -1,6 +1,6 @@
 name: firmware
 root: ~/scratch/source/EAI_Firmware
-on_project_start: fw-container-up
+on_project_start: devcontainer up --workspace-folder /Users/tahagharib/scratch/source/EAI_Firmware/
 
 startup_window: compile
 windows:
