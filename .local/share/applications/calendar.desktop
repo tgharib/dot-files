@@ -2,5 +2,5 @@
 Type=Application
 Name=calendar
 Terminal=false
-Exec=kitty /home/owner/personal-only/misc/remint.sh /home/owner/personal-only/misc/.remind/.calendar
+Exec=kitty /home/owner/personal-only/misc/remint.sh /home/owner/personal-only/misc/reminders/calendar.rem
 Hidden=false

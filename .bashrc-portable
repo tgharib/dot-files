@@ -8,6 +8,9 @@ alias x='sesh connect $(sesh list -i | fzf --ansi)'
 alias list-wifi='nmcli dev wifi'
 alias scan-wifi='nmcli dev wifi list --rescan yes'
 
+alias remind-week='reset && remind -cu+ -@2 ~/personal-only/misc/reminders/calendar.rem'
+alias remind-month='reset && remind -cu -@2 ~/personal-only/misc/reminders/calendar.rem'
+
 cheat() {
   curl cheat.sh/"$1"
 }
